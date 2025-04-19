@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- IMPORTANT: Make sure your text editor saves this file with UTF-8 Encoding! -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorical Propositions Quiz</title> <!-- Changed Title -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="password"] { width: 100%; padding: 8px; box-sizing: border-box; }
+        input[type="radio"] { margin-right: 5px; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; margin-right: 10px; border-radius: 5px; }
+        button:hover { background-color: #0056b3; }
+        .hidden { display: none; }
+        #error-message, #password-error, #login-error { color: red; font-size: 1.2em; text-align: center; }
+        #success-message { color: green; font-size: 1.2em; text-align: center; }
+        #results, #review-section, #submission-copy { margin-top: 20px; text-align: left; border: 1px solid #ccc; padding: 15px; border-radius: 5px; background-color: #f9f9f9;}
+        #password-section, #login-section { text-align: center; max-width: 400px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;}
+        #password-section input[type="password"], #login-section input[type="text"], #login-section input[type="password"] { width: calc(100% - 18px); }
+        .question-result { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        #download-pdf, #download-response { margin-top: 10px; }
+        #score { font-weight: bold; text-align: center; color: green; font-size: 1.4em; margin-top: 20px; }
+        #review-section h2, #submission-copy h2, #results h1 { margin-bottom: 15px; text-align: center; color: #007bff;}
+        #review-section button, #submission-copy button, #password-section button, #login-section button, #results button { margin-top: 15px; }
+        .choices p { margin: 2px 0 2px 20px; }
+    </style>
+</head>
+<body>
+    <div id="login-section">
+        <h1>Login to Access Quiz</h1>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" placeholder="Enter password" required>
+        </div>
+        <button onclick="checkLogin()">Login</button>
+        <p id="login-error" class="hidden">Incorrect username or password. Please try again.</p>
+    </div>
+
+    <div id="quiz-form" class="hidden">
+        <h1>Categorical Propositions Quiz - Chapter 6</h1> <!-- Changed Title -->
+        <form id="mcie-quiz"> <!-- ID Kept, content changed -->
+            <!-- Student Information -->
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="id_number">ID Number:</label>
+                <input type="text" id="id_number" name="id_number" required>
+            </div>
+            <div class="form-group">
+                <label for="section">Section:</label>
+                <input type="text" id="section" name="section" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <!-- Categorical Propositions Multiple-Choice Questions -->
+            <div class="form-group">
+                <label>1. A categorical proposition is defined as a proposition that relates:</label>
+                <input type="radio" name="q1" value="A" required> A) Two individual facts.<br>
+                <input type="radio" name="q1" value="B"> B) Two classes or categories.<br>
+                <input type="radio" name="q1" value="C"> C) A premise and a conclusion.<br>
+                <input type="radio" name="q1" value="D"> D) An argument and its form.
+            </div>
+            <div class="form-group">
+                <label>2. In a categorical proposition, the terms that denote the classes being related are the:</label>
+                <input type="radio" name="q2" value="A" required> A) Quantifier and Copula.<br>
+                <input type="radio" name="q2" value="B"> B) Subject term and Predicate term.<br>
+                <input type="radio" name="q2" value="C"> C) Quality and Quantity.<br>
+                <input type="radio" name="q2" value="D"> D) Major term and Minor term.
+            </div>
+            <div class="form-group">
+                <label>3. The four types of categorical propositions assert that the subject class is included in or excluded from the predicate class, either:</label>
+                <input type="radio" name="q3" value="A" required> A) Logically or illogically.<br>
+                <input type="radio" name="q3" value="B"> B) Truly or falsely.<br>
+                <input type="radio" name="q3" value="C"> C) Directly or indirectly.<br>
+                <input type="radio" name="q3" value="D"> D) Wholly or partially.
+            </div>
+            <div class="form-group">
+                <label>4. Which of the following is NOT a component of a standard-form categorical proposition?</label>
+                <input type="radio" name="q4" value="A" required> A) Quantifier<br>
+                <input type="radio" name="q4" value="B"> B) Subject term<br>
+                <input type="radio" name="q4" value="C"> C) Argument<br>
+                <input type="radio" name="q4" value="D"> D) Copula
+            </div>
+            <div class="form-group">
+                <label>5. The words 'All', 'No', and 'Some' function as the ________ in a standard-form categorical proposition.</label>
+                <input type="radio" name="q5" value="A" required> A) Copula<br>
+                <input type="radio" name="q5" value="B"> B) Predicate term<br>
+                <input type="radio" name="q5" value="C"> C) Subject term<br>
+                <input type="radio" name="q5" value="D"> D) Quantifier
+            </div>
+            <div class="form-group">
+                <label>6. The function of the copula ('are' or 'are not') is to:</label>
+                <input type="radio" name="q6" value="A" required> A) Indicate the quantity of the proposition.<br>
+                <input type="radio" name="q6" value="B"> B) Link or couple the subject term with the predicate term.<br>
+                <input type="radio" name="q6" value="C"> C) Denote the classes involved.<br>
+                <input type="radio" name="q6" value="D"> D) Determine the truth value of the proposition.
+            </div>
+            <div class="form-group">
+                <label>7. A proposition asserting that the *whole* subject class is *included* in the predicate class is which standard form?</label>
+                <input type="radio" name="q7" value="A" required> A) All S are P (A)<br>
+                <input type="radio" name="q7" value="B"> B) No S are P (E)<br>
+                <input type="radio" name="q7" value="C"> C) Some S are P (I)<br>
+                <input type="radio" name="q7" value="D"> D) Some S are not P (O)
+            </div>
+            <div class="form-group">
+                <label>8. A proposition asserting that the *whole* subject class is *excluded* from the predicate class is which standard form?</label>
+                <input type="radio" name="q8" value="A" required> A) All S are P (A)<br>
+                <input type="radio" name="q8" value="B"> B) No S are P (E)<br>
+                <input type="radio" name="q8" value="C"> C) Some S are P (I)<br>
+                <input type="radio" name="q8" value="D"> D) Some S are not P (O)
+            </div>
+            <div class="form-group">
+                <label>9. A proposition asserting that *part* of the subject class is *included* in the predicate class is which standard form?</label>
+                <input type="radio" name="q9" value="A" required> A) All S are P (A)<br>
+                <input type="radio" name="q9" value="B"> B) No S are P (E)<br>
+                <input type="radio" name="q9" value="C"> C) Some S are P (I)<br>
+                <input type="radio" name="q9" value="D"> D) Some S are not P (O)
+            </div>
+            <div class="form-group">
+                <label>10. A proposition asserting that *part* of the subject class is *excluded* from the predicate class is which standard form?</label>
+                <input type="radio" name="q10" value="A" required> A) All S are P (A)<br>
+                <input type="radio" name="q10" value="B"> B) No S are P (E)<br>
+                <input type="radio" name="q10" value="C"> C) Some S are P (I)<br>
+                <input type="radio" name="q10" value="D"> D) Some S are not P (O)
+            </div>
+            <div class="form-group">
+                <label>11. The "quality" of a categorical proposition refers to whether it is:</label>
+                <input type="radio" name="q11" value="A" required> A) Universal or Particular.<br>
+                <input type="radio" name="q11" value="B"> B) True or False.<br>
+                <input type="radio" name="q11" value="C"> C) Affirmative or Negative.<br>
+                <input type="radio" name="q11" value="D"> D) Distributed or Undistributed.
+            </div>
+            <div class="form-group">
+                <label>12. Which two standard forms have affirmative quality?</label>
+                <input type="radio" name="q12" value="A" required> A) A and E<br>
+                <input type="radio" name="q12" value="B"> B) E and I<br>
+                <input type="radio" name="q12" value="C"> C) I and O<br>
+                <input type="radio" name="q12" value="D"> D) A and I
+            </div>
+            <div class="form-group">
+                <label>13. Which two standard forms have negative quality?</label>
+                <input type="radio" name="q13" value="A" required> A) A and E<br>
+                <input type="radio" name="q13" value="B"> B) E and O<br>
+                <input type="radio" name="q13" value="C"> C) I and O<br>
+                <input type="radio" name="q13" value="D"> D) A and I
+            </div>
+            <div class="form-group">
+                <label>14. The "quantity" of a categorical proposition refers to whether it is:</label>
+                <input type="radio" name="q14" value="A" required> A) Universal or Particular.<br>
+                <input type="radio" name="q14" value="B"> B) True or False.<br>
+                <input type="radio" name="q14" value="C"> C) Affirmative or Negative.<br>
+                <input type="radio" name="q14" value="D"> D) Distributed or Undistributed.
+            </div>
+            <div class="form-group">
+                <label>15. Which two standard forms have universal quantity?</label>
+                <input type="radio" name="q15" value="A" required> A) A and E<br>
+                <input type="radio" name="q15" value="B"> B) E and I<br>
+                <input type="radio" name="q15" value="C"> C) I and O<br>
+                <input type="radio" name="q15" value="D"> D) A and I
+            </div>
+            <div class="form-group">
+                <label>16. Which two standard forms have particular quantity?</label>
+                <input type="radio" name="q16" value="A" required> A) A and E<br>
+                <input type="radio" name="q16" value="B"> B) E and O<br>
+                <input type="radio" name="q16" value="C"> C) I and O<br>
+                <input type="radio" name="q16" value="D"> D) A and I
+            </div>
+            <div class="form-group">
+                <label>17. The letter name assigned to the standard form "All S are P" is:</label>
+                <input type="radio" name="q17" value="A" required> A) A<br>
+                <input type="radio" name="q17" value="B"> B) E<br>
+                <input type="radio" name="q17" value="C"> C) I<br>
+                <input type="radio" name="q17" value="D"> D) O
+            </div>
+            <div class="form-group">
+                <label>18. The letter name assigned to the standard form "No S are P" is:</label>
+                <input type="radio" name="q18" value="A" required> A) A<br>
+                <input type="radio" name="q18" value="B"> B) E<br>
+                <input type="radio" name="q18" value="C"> C) I<br>
+                <input type="radio" name="q18" value="D"> D) O
+            </div>
+            <div class="form-group">
+                <label>19. The letter name assigned to the standard form "Some S are P" is:</label>
+                <input type="radio" name="q19" value="A" required> A) A<br>
+                <input type="radio" name="q19" value="B"> B) E<br>
+                <input type="radio" name="q19" value="C"> C) I<br>
+                <input type="radio" name="q19" value="D"> D) O
+            </div>
+            <div class="form-group">
+                <label>20. The letter name assigned to the standard form "Some S are not P" is:</label>
+                <input type="radio" name="q20" value="A" required> A) A<br>
+                <input type="radio" name="q20" value="B"> B) E<br>
+                <input type="radio" name="q20" value="C"> C) I<br>
+                <input type="radio" name="q20" value="D"> D) O
+            </div>
+            <div class="form-group">
+                <label>21. "Distribution" refers to whether a term designates:</label>
+                <input type="radio" name="q21" value="A" required> A) Some members of the class it denotes.<br>
+                <input type="radio" name="q21" value="B"> B) The class as a whole.<br>
+                <input type="radio" name="q21" value="C"> C) All members of the class it denotes.<br>
+                <input type="radio" name="q21" value="D"> D) The quality of the proposition.
+            </div>
+            <div class="form-group">
+                <label>22. In an A proposition ("All S are P"), which term(s) are distributed?</label>
+                <input type="radio" name="q22" value="A" required> A) S only<br>
+                <input type="radio" name="q22" value="B"> B) P only<br>
+                <input type="radio" name="q22" value="C"> C) Both S and P<br>
+                <input type="radio" name="q22" value="D"> D) Neither S nor P
+            </div>
+            <div class="form-group">
+                <label>23. In an E proposition ("No S are P"), which term(s) are distributed?</label>
+                <input type="radio" name="q23" value="A" required> A) S only<br>
+                <input type="radio" name="q23" value="B"> B) P only<br>
+                <input type="radio" name="q23" value="C"> C) Both S and P<br>
+                <input type="radio" name="q23" value="D"> D) Neither S nor P
+            </div>
+            <div class="form-group">
+                <label>24. In an I proposition ("Some S are P"), which term(s) are distributed?</label>
+                <input type="radio" name="q24" value="A" required> A) S only<br>
+                <input type="radio" name="q24" value="B"> B) P only<br>
+                <input type="radio" name="q24" value="C"> C) Both S and P<br>
+                <input type="radio" name="q24" value="D"> D) Neither S nor P
+            </div>
+            <div class="form-group">
+                <label>25. In an O proposition ("Some S are not P"), which term(s) are distributed?</label>
+                <input type="radio" name="q25" value="A" required> A) S only<br>
+                <input type="radio" name="q25" value="B"> B) P only<br>
+                <input type="radio" name="q25" value="C"> C) Both S and P<br>
+                <input type="radio" name="q25" value="D"> D) Neither S nor P
+            </div>
+            <div class="form-group">
+                <label>26. In a Venn diagram for a categorical proposition, shading an area indicates that the area:</label>
+                <input type="radio" name="q26" value="A" required> A) Contains at least one member.<br>
+                <input type="radio" name="q26" value="B"> B) Is null or empty (contains no members).<br>
+                <input type="radio" name="q26" value="C"> C) Is irrelevant to the proposition.<br>
+                <input type="radio" name="q26" value="D"> D) Represents the predicate term.
+            </div>
+            <div class="form-group">
+                <label>27. In a Venn diagram, placing an 'X' in an area indicates that the area:</label>
+                <input type="radio" name="q27" value="A" required> A) Is empty.<br>
+                <input type="radio" name="q27" value="B"> B) Represents the subject term.<br>
+                <input type="radio" name="q27" value="C"> C) Contains at least one member.<br>
+                <input type="radio" name="q27" value="D"> D) Is distributed.
+            </div>
+            <div class="form-group">
+                <label>28. How is an A proposition ("All S are P") represented in a Venn diagram?</label>
+                <input type="radio" name="q28" value="A" required> A) An 'X' is placed in the overlap area.<br>
+                <input type="radio" name="q28" value="B"> B) The overlap area is shaded.<br>
+                <input type="radio" name="q28" value="C"> C) An 'X' is placed in the part of the S circle outside the P circle.<br>
+                <input type="radio" name="q28" value="D"> D) The part of the S circle outside the P circle is shaded.
+            </div>
+            <div class="form-group">
+                <label>29. How is an E proposition ("No S are P") represented in a Venn diagram?</label>
+                <input type="radio" name="q29" value="A" required> A) The part of the S circle outside the P circle is shaded.<br>
+                <input type="radio" name="q29" value="B"> B) An 'X' is placed in the overlap area.<br>
+                <input type="radio" name="q29" value="C"> C) The overlap area is shaded.<br>
+                <input type="radio" name="q29" value="D"> D) An 'X' is placed in the part of the P circle outside the S circle.
+            </div>
+            <div class="form-group">
+                <label>30. How is an I proposition ("Some S are P") represented in a Venn diagram?</label>
+                <input type="radio" name="q30" value="A" required> A) An 'X' is placed in the overlap area.<br>
+                <input type="radio" name="q30" value="B"> B) The overlap area is shaded.<br>
+                <input type="radio" name="q30" value="C"> C) An 'X' is placed in the part of the S circle outside the P circle.<br>
+                <input type="radio" name="q30" value="D"> D) The part of the P circle outside the S circle is shaded.
+            </div>
+            <div class="form-group">
+                <label>31. How is an O proposition ("Some S are not P") represented in a Venn diagram?</label>
+                <input type="radio" name="q31" value="A" required> A) The overlap area is shaded.<br>
+                <input type="radio" name="q31" value="B"> B) An 'X' is placed in the overlap area.<br>
+                <input type="radio" name="q31" value="C"> C) The part of the S circle outside the P circle is shaded.<br>
+                <input type="radio" name="q31" value="D"> D) An 'X' is placed in the part of the S circle outside the P circle.
+            </div>
+            <div class="form-group">
+                <label>32. In the modern (Boolean) square of opposition, propositions that are directly across from each other (A and O; E and I) have which relationship?</label>
+                <input type="radio" name="q32" value="A" required> A) Contrary<br>
+                <input type="radio" name="q32" value="B"> B) Subcontrary<br>
+                <input type="radio" name="q32" value="C"> C) Subalternation<br>
+                <input type="radio" name="q32" value="D"> D) Contradictory
+            </div>
+            <div class="form-group">
+                <label>33. Contradictory propositions necessarily have:</label>
+                <input type="radio" name="q33" value="A" required> A) The same truth value.<br>
+                <input type="radio" name="q33" value="B"> B) Opposite truth values.<br>
+                <input type="radio" name="q33" value="C"> C) Logically undetermined truth values relative to each other.<br>
+                <input type="radio" name="q33" value="D"> D) The same quality.
+            </div>
+            <div class="form-group">
+                <label>34. In the traditional (Aristotelian) square of opposition, the relationship between A and E propositions is:</label>
+                <input type="radio" name="q34" value="A" required> A) Contradictory<br>
+                <input type="radio" name="q34" value="B"> B) Contrary<br>
+                <input type="radio" name="q34" value="C"> C) Subcontrary<br>
+                <input type="radio" name="q34" value="D"> D) Subalternation
+            </div>
+            <div class="form-group">
+                <label>35. Contrary propositions (A and E in the traditional square) cannot both be true, but:</label>
+                <input type="radio" name="q35" value="A" required> A) Can both be false.<br>
+                <input type="radio" name="q35" value="B"> B) Must both be false.<br>
+                <input type="radio" name="q35" value="C"> C) Must have opposite truth values.<br>
+                <input type="radio" name="q35" value="D"> D) Must have the same truth value.
+            </div>
+            <div class="form-group">
+                <label>36. In the traditional square, the relationship between I and O propositions is:</label>
+                <input type="radio" name="q36" value="A" required> A) Contradictory<br>
+                <input type="radio" name="q36" value="B"> B) Contrary<br>
+                <input type="radio" name="q36" value="C"> C) Subcontrary<br>
+                <input type="radio" name="q36" value="D"> D) Subalternation
+            </div>
+            <div class="form-group">
+                <label>37. Subcontrary propositions (I and O in the traditional square) cannot both be false, but:</label>
+                <input type="radio" name="q37" value="A" required> A) Can both be true.<br>
+                <input type="radio" name="q37" value="B"> B) Must both be true.<br>
+                <input type="radio" name="q37" value="C"> C) Must have opposite truth values.<br>
+                <input type="radio" name="q37" value="D"> D) Must have the same truth value.
+            </div>
+            <div class="form-group">
+                <label>38. In the traditional square, the relationship between A and I (and E and O) is:</label>
+                <input type="radio" name="q38" value="A" required> A) Contradictory<br>
+                <input type="radio" name="q38" value="B"> B) Contrary<br>
+                <input type="radio" name="q38" value="C"> C) Subcontrary<br>
+                <input type="radio" name="q38" value="D"> D) Subalternation
+            </div>
+            <div class="form-group">
+                <label>39. According to subalternation, if a universal proposition (A or E) is true, the corresponding particular proposition (I or O) is:</label>
+                <input type="radio" name="q39" value="A" required> A) False.<br>
+                <input type="radio" name="q39" value="B"> B) True.<br>
+                <input type="radio" name="q39" value="C"> C) Logically undetermined.<br>
+                <input type="radio" name="q39" value="D"> D) Contradictory.
+            </div>
+            <div class="form-group">
+                <label>40. According to subalternation, if a particular proposition (I or O) is false, the corresponding universal proposition (A or E) is:</label>
+                <input type="radio" name="q40" value="A" required> A) False.<br>
+                <input type="radio" name="q40" value="B"> B) True.<br>
+                <input type="radio" name="q40" value="C"> C) Logically undetermined.<br>
+                <input type="radio" name="q40" value="D"> D) Contrary.
+            </div>
+            <div class="form-group">
+                <label>41. Arguments with one premise and one conclusion derived using the square of opposition or logical operations are called:</label>
+                <input type="radio" name="q41" value="A" required> A) Syllogisms.<br>
+                <input type="radio" name="q41" value="B"> B) Immediate inferences.<br>
+                <input type="radio" name="q41" value="C"> C) Fallacies.<br>
+                <input type="radio" name="q41" value="D"> D) Inductive arguments.
+            </div>
+            <div class="form-group">
+                <label>42. The "existential fallacy" from the Boolean standpoint occurs when:</label>
+                <input type="radio" name="q42" value="A" required> A) A conclusion with existential import is derived validly from a premise with existential import.<br>
+                <input type="radio" name="q42" value="B"> B) An argument is invalid merely because a universal premise lacks existential import while the particular conclusion has it.<br>
+                <input type="radio" name="q42" value="C"> C) Both premise and conclusion are universal.<br>
+                <input type="radio" name="q42" value="D"> D) Both premise and conclusion are particular.
+            </div>
+            <div class="form-group">
+                <label>43. The logical operation of "conversion" involves:</label>
+                <input type="radio" name="q43" value="A" required> A) Changing the quality and replacing the predicate with its complement.<br>
+                <input type="radio" name="q43" value="B"> B) Switching the subject and predicate terms.<br>
+                <input type="radio" name="q43" value="C"> C) Replacing both terms with their complements.<br>
+                <input type="radio" name="q43" value="D"> D) Switching the subject and predicate and replacing both with their complements.
+            </div>
+            <div class="form-group">
+                <label>44. Conversion is valid (produces an equivalent proposition) for which standard forms?</label>
+                <input type="radio" name="q44" value="A" required> A) A and O<br>
+                <input type="radio" name="q44" value="B"> B) A and I<br>
+                <input type="radio" name="q44" value="C"> C) E and I<br>
+                <input type="radio" name="q44" value="D"> D) E and O
+            </div>
+            <div class="form-group">
+                <label>45. Applying conversion to A or O propositions commits the fallacy of:</label>
+                <input type="radio" name="q45" value="A" required> A) Illicit obversion.<br>
+                <input type="radio" name="q45" value="B"> B) Illicit contraposition.<br>
+                <input type="radio" name="q45" value="C"> C) Existential fallacy.<br>
+                <input type="radio" name="q45" value="D"> D) Illicit conversion.
+            </div>
+            <div class="form-group">
+                <label>46. The logical operation of "obversion" involves changing the quality and:</label>
+                <input type="radio" name="q46" value="A" required> A) Switching the subject and predicate terms.<br>
+                <input type="radio" name="q46" value="B"> B) Replacing the subject term with its complement.<br>
+                <input type="radio" name="q46" value="C"> C) Replacing the predicate term with its term complement.<br>
+                <input type="radio" name="q46" value="D"> D) Replacing both terms with their complements.
+            </div>
+            <div class="form-group">
+                <label>47. Obversion is valid (produces an equivalent proposition) for which standard forms?</label>
+                <input type="radio" name="q47" value="A" required> A) A and E only<br>
+                <input type="radio" name="q47" value="B"> B) I and O only<br>
+                <input type="radio" name="q47" value="C"> C) E and I only<br>
+                <input type="radio" name="q47" value="D"> D) All four (A, E, I, O)
+            </div>
+            <div class="form-group">
+                <label>48. The logical operation of "contraposition" involves switching the subject and predicate terms and:</label>
+                <input type="radio" name="q48" value="A" required> A) Changing the quality.<br>
+                <input type="radio" name="q48" value="B"> B) Replacing the original subject term with its complement.<br>
+                <input type="radio" name="q48" value="C"> C) Replacing the original predicate term with its complement.<br>
+                <input type="radio" name="q48" value="D"> D) Replacing both the original subject and predicate terms with their term complements.
+            </div>
+            <div class="form-group">
+                <label>49. Contraposition is valid (produces an equivalent proposition) for which standard forms?</label>
+                <input type="radio" name="q49" value="A" required> A) A and O<br>
+                <input type="radio" name="q49" value="B"> B) A and I<br>
+                <input type="radio" name="q49" value="C"> C) E and I<br>
+                <input type="radio" name="q49" value="D"> D) E and O
+            </div>
+            <div class="form-group">
+                <label>50. Applying contraposition to E or I propositions commits the fallacy of:</label>
+                <input type="radio" name="q50" value="A" required> A) Illicit conversion.<br>
+                <input type="radio" name="q50" value="B"> B) Illicit obversion.<br>
+                <input type="radio" name="q50" value="C"> C) Illicit contraposition.<br>
+                <input type="radio" name="q50" value="D"> D) Existential fallacy.
+            </div>
+
+            <button type="button" onclick="showReview()">Submit</button>
+        </form>
+        <div id="error-message" class="hidden">
+            <p>Something went wrong. Please try again.</p>
+        </div>
+    </div>
+
+    <div id="review-section" class="hidden">
+        <h2>Review Your Answers</h2>
+        <div id="review-content"></div>
+        <button onclick="editForm()">Edit</button>
+        <button onclick="downloadResponse()" id="download-response">Download My Response</button>
+        <button onclick="confirmSubmission()">Confirm Submission</button>
+    </div>
+
+    <div id="submission-copy" class="hidden">
+        <h2>Your Submitted Answers</h2>
+        <div id="submission-content"></div>
+        <button onclick="proceedToPassword()">Proceed</button>
+    </div>
+
+    <div id="password-section" class="hidden">
+        <h1 id="success-message">Your response has been submitted</h1>
+        <p>You can view your result (score) by entering the password.</p>
+        <input type="password" id="password" placeholder="Enter password">
+        <button onclick="checkPassword()">Submit</button>
+        <p id="password-error" class="hidden">Incorrect password. Please try again.</p>
+    </div>
+
+    <div id="results" class="hidden">
+        <h1>Quiz Results</h1>
+        <p id="student-info"></p>
+        <div id="answers"></div>
+        <p id="score"></p>
+        <button id="download-pdf" onclick="downloadPDF()">Download Results PDF</button>
+    </div>
+
+    <script>
+        let quizData = null;
+        let formData = null;
+        const { jsPDF } = window.jspdf;
+        const TOTAL_QUESTIONS = 50; // Total number of questions
+
+        // Valid login credentials
+        const validCredentials = [
+            { username: 'section19', password: '123' },
+            { username: 'section20', password: '123' },
+            { username: 'muzemuza', password: 'moh' },
+            { username: 'section21', password: '123' }
+            // Add more valid credentials as needed
+        ];
+
+        // Structure holding question texts and choices (NEW SET: CATEGORICAL PROPOSITIONS Ch6)
+        const allQuestionsData = {
+             q1: { text: 'A categorical proposition is defined as a proposition that relates:', choices: { A: 'Two individual facts.', B: 'Two classes or categories.', C: 'A premise and a conclusion.', D: 'An argument and its form.' } },
+             q2: { text: 'In a categorical proposition, the terms that denote the classes being related are the:', choices: { A: 'Quantifier and Copula.', B: 'Subject term and Predicate term.', C: 'Quality and Quantity.', D: 'Major term and Minor term.' } },
+             q3: { text: 'The four types of categorical propositions assert that the subject class is included in or excluded from the predicate class, either:', choices: { A: 'Logically or illogically.', B: 'Truly or falsely.', C: 'Directly or indirectly.', D: 'Wholly or partially.' } },
+             q4: { text: 'Which of the following is NOT a component of a standard-form categorical proposition?', choices: { A: 'Quantifier', B: 'Subject term', C: 'Argument', D: 'Copula' } },
+             q5: { text: 'The words \'All\', \'No\', and \'Some\' function as the ________ in a standard-form categorical proposition.', choices: { A: 'Copula', B: 'Predicate term', C: 'Subject term', D: 'Quantifier' } },
+             q6: { text: 'The function of the copula (\'are\' or \'are not\') is to:', choices: { A: 'Indicate the quantity of the proposition.', B: 'Link or couple the subject term with the predicate term.', C: 'Denote the classes involved.', D: 'Determine the truth value of the proposition.' } },
+             q7: { text: 'A proposition asserting that the *whole* subject class is *included* in the predicate class is which standard form?', choices: { A: 'All S are P (A)', B: 'No S are P (E)', C: 'Some S are P (I)', D: 'Some S are not P (O)' } },
+             q8: { text: 'A proposition asserting that the *whole* subject class is *excluded* from the predicate class is which standard form?', choices: { A: 'All S are P (A)', B: 'No S are P (E)', C: 'Some S are P (I)', D: 'Some S are not P (O)' } },
+             q9: { text: 'A proposition asserting that *part* of the subject class is *included* in the predicate class is which standard form?', choices: { A: 'All S are P (A)', B: 'No S are P (E)', C: 'Some S are P (I)', D: 'Some S are not P (O)' } },
+             q10: { text: 'A proposition asserting that *part* of the subject class is *excluded* from the predicate class is which standard form?', choices: { A: 'All S are P (A)', B: 'No S are P (E)', C: 'Some S are P (I)', D: 'Some S are not P (O)' } },
+             q11: { text: 'The "quality" of a categorical proposition refers to whether it is:', choices: { A: 'Universal or Particular.', B: 'True or False.', C: 'Affirmative or Negative.', D: 'Distributed or Undistributed.' } },
+             q12: { text: 'Which two standard forms have affirmative quality?', choices: { A: 'A and E', B: 'E and I', C: 'I and O', D: 'A and I' } },
+             q13: { text: 'Which two standard forms have negative quality?', choices: { A: 'A and E', B: 'E and O', C: 'I and O', D: 'A and I' } },
+             q14: { text: 'The "quantity" of a categorical proposition refers to whether it is:', choices: { A: 'Universal or Particular.', B: 'True or False.', C: 'Affirmative or Negative.', D: 'Distributed or Undistributed.' } },
+             q15: { text: 'Which two standard forms have universal quantity?', choices: { A: 'A and E', B: 'E and I', C: 'I and O', D: 'A and I' } },
+             q16: { text: 'Which two standard forms have particular quantity?', choices: { A: 'A and E', B: 'E and O', C: 'I and O', D: 'A and I' } },
+             q17: { text: 'The letter name assigned to the standard form "All S are P" is:', choices: { A: 'A', B: 'E', C: 'I', D: 'O' } },
+             q18: { text: 'The letter name assigned to the standard form "No S are P" is:', choices: { A: 'A', B: 'E', C: 'I', D: 'O' } },
+             q19: { text: 'The letter name assigned to the standard form "Some S are P" is:', choices: { A: 'A', B: 'E', C: 'I', D: 'O' } },
+             q20: { text: 'The letter name assigned to the standard form "Some S are not P" is:', choices: { A: 'A', B: 'E', C: 'I', D: 'O' } },
+             q21: { text: '"Distribution" refers to whether a term designates:', choices: { A: 'Some members of the class it denotes.', B: 'The class as a whole.', C: 'All members of the class it denotes.', D: 'The quality of the proposition.' } },
+             q22: { text: 'In an A proposition ("All S are P"), which term(s) are distributed?', choices: { A: 'S only', B: 'P only', C: 'Both S and P', D: 'Neither S nor P' } },
+             q23: { text: 'In an E proposition ("No S are P"), which term(s) are distributed?', choices: { A: 'S only', B: 'P only', C: 'Both S and P', D: 'Neither S nor P' } },
+             q24: { text: 'In an I proposition ("Some S are P"), which term(s) are distributed?', choices: { A: 'S only', B: 'P only', C: 'Both S and P', D: 'Neither S nor P' } },
+             q25: { text: 'In an O proposition ("Some S are not P"), which term(s) are distributed?', choices: { A: 'S only', B: 'P only', C: 'Both S and P', D: 'Neither S nor P' } },
+             q26: { text: 'In a Venn diagram for a categorical proposition, shading an area indicates that the area:', choices: { A: 'Contains at least one member.', B: 'Is null or empty (contains no members).', C: 'Is irrelevant to the proposition.', D: 'Represents the predicate term.' } },
+             q27: { text: 'In a Venn diagram, placing an \'X\' in an area indicates that the area:', choices: { A: 'Is empty.', B: 'Represents the subject term.', C: 'Contains at least one member.', D: 'Is distributed.' } },
+             q28: { text: 'How is an A proposition ("All S are P") represented in a Venn diagram?', choices: { A: 'An \'X\' is placed in the overlap area.', B: 'The overlap area is shaded.', C: 'An \'X\' is placed in the part of the S circle outside the P circle.', D: 'The part of the S circle outside the P circle is shaded.' } },
+             q29: { text: 'How is an E proposition ("No S are P") represented in a Venn diagram?', choices: { A: 'The part of the S circle outside the P circle is shaded.', B: 'An \'X\' is placed in the overlap area.', C: 'The overlap area is shaded.', D: 'An \'X\' is placed in the part of the P circle outside the S circle.' } },
+             q30: { text: 'How is an I proposition ("Some S are P") represented in a Venn diagram?', choices: { A: 'An \'X\' is placed in the overlap area.', B: 'The overlap area is shaded.', C: 'An \'X\' is placed in the part of the S circle outside the P circle.', D: 'The part of the P circle outside the S circle is shaded.' } },
+             q31: { text: 'How is an O proposition ("Some S are not P") represented in a Venn diagram?', choices: { A: 'The overlap area is shaded.', B: 'An \'X\' is placed in the overlap area.', C: 'The part of the S circle outside the P circle is shaded.', D: 'An \'X\' is placed in the part of the S circle outside the P circle.' } },
+             q32: { text: 'In the modern (Boolean) square of opposition, propositions that are directly across from each other (A and O; E and I) have which relationship?', choices: { A: 'Contrary', B: 'Subcontrary', C: 'Subalternation', D: 'Contradictory' } },
+             q33: { text: 'Contradictory propositions necessarily have:', choices: { A: 'The same truth value.', B: 'Opposite truth values.', C: 'Logically undetermined truth values relative to each other.', D: 'The same quality.' } },
+             q34: { text: 'In the traditional (Aristotelian) square of opposition, the relationship between A and E propositions is:', choices: { A: 'Contradictory', B: 'Contrary', C: 'Subcontrary', D: 'Subalternation' } },
+             q35: { text: 'Contrary propositions (A and E in the traditional square) cannot both be true, but:', choices: { A: 'Can both be false.', B: 'Must both be false.', C: 'Must have opposite truth values.', D: 'Must have the same truth value.' } },
+             q36: { text: 'In the traditional square, the relationship between I and O propositions is:', choices: { A: 'Contradictory', B: 'Contrary', C: 'Subcontrary', D: 'Subalternation' } },
+             q37: { text: 'Subcontrary propositions (I and O in the traditional square) cannot both be false, but:', choices: { A: 'Can both be true.', B: 'Must both be true.', C: 'Must have opposite truth values.', D: 'Must have the same truth value.' } },
+             q38: { text: 'In the traditional square, the relationship between A and I (and E and O) is:', choices: { A: 'Contradictory', B: 'Contrary', C: 'Subcontrary', D: 'Subalternation' } },
+             q39: { text: 'According to subalternation, if a universal proposition (A or E) is true, the corresponding particular proposition (I or O) is:', choices: { A: 'False.', B: 'True.', C: 'Logically undetermined.', D: 'Contradictory.' } },
+             q40: { text: 'According to subalternation, if a particular proposition (I or O) is false, the corresponding universal proposition (A or E) is:', choices: { A: 'False.', B: 'True.', C: 'Logically undetermined.', D: 'Contrary.' } },
+             q41: { text: 'Arguments with one premise and one conclusion derived using the square of opposition or logical operations are called:', choices: { A: 'Syllogisms.', B: 'Immediate inferences.', C: 'Fallacies.', D: 'Inductive arguments.' } },
+             q42: { text: 'The "existential fallacy" from the Boolean standpoint occurs when:', choices: { A: 'A conclusion with existential import is derived validly from a premise with existential import.', B: 'An argument is invalid merely because a universal premise lacks existential import while the particular conclusion has it.', C: 'Both premise and conclusion are universal.', D: 'Both premise and conclusion are particular.' } },
+             q43: { text: 'The logical operation of "conversion" involves:', choices: { A: 'Changing the quality and replacing the predicate with its complement.', B: 'Switching the subject and predicate terms.', C: 'Replacing both terms with their complements.', D: 'Switching the subject and predicate and replacing both with their complements.' } },
+             q44: { text: 'Conversion is valid (produces an equivalent proposition) for which standard forms?', choices: { A: 'A and O', B: 'A and I', C: 'E and I', D: 'E and O' } },
+             q45: { text: 'Applying conversion to A or O propositions commits the fallacy of:', choices: { A: 'Illicit obversion.', B: 'Illicit contraposition.', C: 'Existential fallacy.', D: 'Illicit conversion.' } },
+             q46: { text: 'The logical operation of "obversion" involves changing the quality and:', choices: { A: 'Switching the subject and predicate terms.', B: 'Replacing the subject term with its complement.', C: 'Replacing the predicate term with its term complement.', D: 'Replacing both terms with their complements.' } },
+             q47: { text: 'Obversion is valid (produces an equivalent proposition) for which standard forms?', choices: { A: 'A and E only', B: 'I and O only', C: 'E and I only', D: 'All four (A, E, I, O)' } },
+             q48: { text: 'The logical operation of "contraposition" involves switching the subject and predicate terms and:', choices: { A: 'Changing the quality.', B: 'Replacing the original subject term with its complement.', C: 'Replacing the original predicate term with its complement.', D: 'Replacing both the original subject and predicate terms with their term complements.' } },
+             q49: { text: 'Contraposition is valid (produces an equivalent proposition) for which standard forms?', choices: { A: 'A and O', B: 'A and I', C: 'E and I', D: 'E and O' } },
+             q50: { text: 'Applying contraposition to E or I propositions commits the fallacy of:', choices: { A: 'Illicit conversion.', B: 'Illicit obversion.', C: 'Illicit contraposition.', D: 'Existential fallacy.' } }
+        };
+
+
+        // Correct answers mapped to letters (NEW SET: CATEGORICAL PROPOSITIONS Ch6)
+        const correctAnswersMap = {
+             q1: 'B', q2: 'B', q3: 'D', q4: 'C', q5: 'D',
+             q6: 'B', q7: 'A', q8: 'B', q9: 'C', q10: 'D',
+             q11: 'C', q12: 'D', q13: 'B', q14: 'A', q15: 'A',
+             q16: 'C', q17: 'A', q18: 'B', q19: 'C', q20: 'D',
+             q21: 'C', q22: 'A', q23: 'C', q24: 'D', q25: 'B',
+             q26: 'B', q27: 'C', q28: 'D', q29: 'C', q30: 'A',
+             q31: 'D', q32: 'D', q33: 'B', q34: 'B', q35: 'A',
+             q36: 'C', q37: 'A', q38: 'D', q39: 'B', q40: 'A',
+             q41: 'B', q42: 'B', q43: 'B', q44: 'C', q45: 'D',
+             q46: 'C', q47: 'D', q48: 'D', q49: 'A', q50: 'C'
+        };
+
+        function checkLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            const errorMessage = document.getElementById('login-error');
+            const loginSection = document.getElementById('login-section');
+            const quizForm = document.getElementById('quiz-form');
+
+            const isValid = validCredentials.some(cred =>
+                cred.username === username && cred.password === password
+            );
+
+            if (isValid) {
+                errorMessage.classList.add('hidden');
+                loginSection.classList.add('hidden');
+                quizForm.classList.remove('hidden');
+            } else {
+                errorMessage.classList.remove('hidden');
+            }
+        }
+
+        function showReview() {
+            const form = document.getElementById('mcie-quiz');
+            formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+             // Check if all questions are answered
+             let allAnswered = true;
+             for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 if (!data[`q${i}`]) {
+                     allAnswered = false;
+                     break;
+                 }
+             }
+
+             if (!data.name || !data.id_number || !data.section || !data.email || !data.phone || !allAnswered) {
+                 alert('Please fill in all personal information and answer all questions before submitting.');
+                 return; // Stop the function if validation fails
+             }
+
+            // Store quiz data temporarily
+            quizData = {
+                name: data.name,
+                id_number: data.id_number,
+                section: data.section,
+                email: data.email,
+                phone: data.phone,
+                answers: {},
+                questions: allQuestionsData // Use the predefined structure
+            };
+
+            // Populate answers dynamically
+            let reviewHTML = `
+                <p><strong>Name:</strong> ${data.name}</p>
+                <p><strong>ID Number:</strong> ${data.id_number}</p>
+                <p><strong>Section:</strong> ${data.section}</p>
+                <p><strong>Email:</strong> ${data.email}</p>
+                <p><strong>Phone Number:</strong> ${data.phone}</p>
+                <hr>
+                <h3>Your Answers:</h3>
+            `;
+
+            for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                const qKey = `q${i}`;
+                const userAnswer = data[qKey];
+                quizData.answers[qKey] = userAnswer; // Store answer
+                const questionInfo = allQuestionsData[qKey];
+                const answerText = questionInfo.choices[userAnswer] || 'Not Answered';
+                reviewHTML += `<p><strong>Question ${i}:</strong> ${questionInfo.text}<br>Your answer: ${userAnswer}) ${answerText}</p>`;
+            }
+
+            // Display review content
+            const reviewContent = document.getElementById('review-content');
+            reviewContent.innerHTML = reviewHTML;
+
+            // Show review section
+            document.getElementById('quiz-form').classList.add('hidden');
+            document.getElementById('review-section').classList.remove('hidden');
+        }
+
+        function editForm() {
+            document.getElementById('review-section').classList.add('hidden');
+            document.getElementById('quiz-form').classList.remove('hidden');
+        }
+
+        function downloadResponse() {
+            if (!quizData) return;
+
+            const doc = new jsPDF();
+            let y = 10;
+            const pageHeight = doc.internal.pageSize.height;
+            const pageWidth = doc.internal.pageSize.width;
+            const margin = 10;
+            const effectiveWidth = pageWidth - margin * 2;
+
+
+            doc.setFontSize(16);
+            doc.text('Categorical Propositions Quiz Response', pageWidth / 2, y, { align: 'center' }); // Updated Title
+            y += 10;
+
+            doc.setFontSize(12);
+            doc.text(`Name: ${quizData.name}`, margin, y); y += 7;
+            doc.text(`ID: ${quizData.id_number}`, margin, y); y += 7;
+            doc.text(`Section: ${quizData.section}`, margin, y); y += 7;
+            doc.text(`Email: ${quizData.email}`, margin, y); y += 7;
+            doc.text(`Phone: ${quizData.phone}`, margin, y); y += 10;
+
+            for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const question = quizData.questions[qKey];
+                 const userAnswer = quizData.answers[qKey];
+                 const answerText = question.choices[userAnswer] || 'Not Answered';
+                 const questionText = question.text;
+
+                 // Estimate space needed for the question + answer
+                 const questionLines = doc.splitTextToSize(`Question ${i}: ${questionText}`, effectiveWidth);
+                 const answerLines = doc.splitTextToSize(`Your answer: ${userAnswer}) ${answerText}`, effectiveWidth);
+                 const spaceNeeded = (questionLines.length * 5) + 2 + (answerLines.length * 5) + 5; // Estimate lines * line height + spacing
+
+                 if (y + spaceNeeded > pageHeight - margin) { // Check if content fits
+                    doc.addPage();
+                    y = margin;
+                 }
+
+                doc.setFont('helvetica', 'bold');
+                doc.text(questionLines, margin, y);
+                y += (questionLines.length * 5) + 2; // Adjust spacing based on lines
+                doc.setFont('helvetica', 'normal');
+
+                if (y > pageHeight - margin) { doc.addPage(); y = margin; } // Re-check just for answer part
+
+                doc.text(answerLines, margin, y);
+                y += (answerLines.length * 5) + 5; // Add space after the answer
+
+            }
+
+            doc.save(`cat_prop_quiz_response_${quizData.id_number}.pdf`); // Updated filename
+        }
+
+        // --- MODIFIED: Sends data to your backend ---
+        async function confirmSubmission() {
+            if (confirm('Are you sure you want to submit your answers?')) {
+                if (!quizData || !formData) {
+                     console.error("Quiz data or form data is missing.");
+                     alert("Error: Cannot submit. Please try filling the form again.");
+                     editForm(); // Go back to edit
+                     return;
+                }
+
+                const data = Object.fromEntries(formData); // Use the stored formData
+
+                // Calculate score
+                let score = 0;
+                for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                    const qKey = `q${i}`;
+                    if (data[qKey] === correctAnswersMap[qKey]) {
+                        score++;
+                    }
+                }
+
+                // Update quizData with score
+                quizData.score = score;
+
+                // Prepare data for YOUR backend
+                const submissionData = {
+                    name: data.name,
+                    id_number: data.id_number,
+                    section: data.section,
+                    email: data.email,
+                    phone: data.phone,
+                    score: score,
+                    totalQuestions: TOTAL_QUESTIONS,
+                    quizTitle: "Categorical Propositions Quiz - Chapter 6", // Added title
+                    submittedAt: new Date().toISOString()
+                    // Add individual answers if needed by backend
+                    // answers: quizData.answers
+                };
+
+                try {
+                    // Show "Submitting..." message or spinner here if desired
+
+                    // --- MODIFIED FETCH CALL ---
+                    const response = await fetch('/submit-quiz', { // Point to your backend endpoint
+                        method: 'POST',
+                        body: JSON.stringify(submissionData), // Send the data as JSON
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json' // Important Header!
+                        }
+                    });
+                    // --- END MODIFIED FETCH CALL ---
+
+                    if (response.ok) {
+                        // --- SUCCESS HANDLING (From YOUR backend) ---
+                        const result = await response.json(); // Assuming your backend sends JSON back
+                        console.log("Submission successful:", result);
+
+                        // Show submission copy (Same as before)
+                        const submissionContent = document.getElementById('submission-content');
+                         let submissionHTML = `
+                            <p><strong>Name:</strong> ${quizData.name}</p>
+                            <p><strong>ID Number:</strong> ${quizData.id_number}</p>
+                            <p><strong>Section:</strong> ${quizData.section}</p>
+                            <p><strong>Email:</strong> ${quizData.email}</p>
+                            <p><strong>Phone Number:</strong> ${quizData.phone}</p>
+                            <hr>
+                            <h3>Submitted Answers:</h3>
+                        `;
+                         for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                             const qKey = `q${i}`;
+                             const questionInfo = quizData.questions[qKey];
+                             const userAnswer = quizData.answers[qKey];
+                             const answerText = questionInfo.choices[userAnswer] || 'Not Answered';
+                             submissionHTML += `<p><strong>Question ${i}:</strong> ${questionInfo.text}<br>Your answer: ${userAnswer}) ${answerText}</p>`;
+                         }
+                        submissionContent.innerHTML = submissionHTML;
+
+                        document.getElementById('review-section').classList.add('hidden');
+                        document.getElementById('submission-copy').classList.remove('hidden');
+                        // --- END SUCCESS HANDLING ---
+
+                    } else {
+                        // --- ERROR HANDLING (From YOUR backend) ---
+                        let errorMsg = `Submission failed with status: ${response.status}`;
+                        try {
+                            const errorData = await response.json();
+                            errorMsg = errorData.error || errorData.message || errorMsg;
+                        } catch(e) { /* Ignore if response isn't JSON */ }
+
+                        console.error('Backend submission error:', errorMsg);
+                        document.getElementById('error-message').innerHTML = `<p>Submission failed: ${errorMsg}. Please try again.</p>`;
+                        document.getElementById('error-message').classList.remove('hidden');
+                        document.getElementById('review-section').classList.add('hidden');
+                        // editForm(); // Optionally go back to edit
+                        // --- END ERROR HANDLING ---
+                    }
+                } catch (error) {
+                     // --- NETWORK/OTHER ERROR HANDLING ---
+                    console.error('Network/Fetch error:', error);
+                    document.getElementById('error-message').innerHTML = `<p>An network error occurred during submission. Please check your connection and try again.</p>`;
+                    document.getElementById('error-message').classList.remove('hidden');
+                    document.getElementById('review-section').classList.add('hidden');
+                    // editForm(); // Optionally go back to edit
+                    // --- END NETWORK ERROR HANDLING ---
+                } finally {
+                     // Hide "Submitting..." message or spinner here
+                }
+            }
+        }
+
+
+        function proceedToPassword() {
+            document.getElementById('submission-copy').classList.add('hidden');
+            document.getElementById('password-section').classList.remove('hidden');
+        }
+
+        function checkPassword() {
+            const passwordInput = document.getElementById('password').value;
+            const correctPassword = 'password'; // Keep the simple password
+            const errorMessage = document.getElementById('password-error');
+            const passwordSection = document.getElementById('password-section');
+            const results = document.getElementById('results');
+
+            if (passwordInput === correctPassword) {
+                errorMessage.classList.add('hidden');
+                passwordSection.classList.add('hidden');
+                results.classList.remove('hidden');
+                displayResults();
+            } else {
+                errorMessage.classList.remove('hidden');
+            }
+        }
+
+        function displayResults() {
+            if (!quizData) {
+                document.getElementById('results').innerHTML = '<p>Error: No quiz data found. Please complete the quiz first.</p>';
+                return;
+            }
+
+             // Combine correct answer letter with full text for display
+             const displayCorrectAnswers = {};
+             for(let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const correctLetter = correctAnswersMap[qKey];
+                 const correctText = allQuestionsData[qKey].choices[correctLetter];
+                 displayCorrectAnswers[qKey] = `${correctLetter}) ${correctText}`; // Changed format slightly
+             }
+
+
+            document.getElementById('student-info').innerHTML = `<strong>Name:</strong> ${quizData.name}<br><strong>ID:</strong> ${quizData.id_number}<br><strong>Section:</strong> ${quizData.section}<br><strong>Email:</strong> ${quizData.email}<br><strong>Phone:</strong> ${quizData.phone}`;
+
+            const answersDiv = document.getElementById('answers');
+            let answersHTML = '<h3>Detailed Results:</h3>';
+
+            for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const question = quizData.questions[qKey];
+                 const userAnswer = quizData.answers[qKey];
+                 const userAnswerText = question.choices[userAnswer] || 'Not Answered';
+                 const isCorrect = userAnswer === correctAnswersMap[qKey];
+
+                 answersHTML += `
+                    <div class="question-result">
+                        <p><strong>Question ${i}:</strong> ${question.text}</p>
+                        <div class="choices" style="font-size:0.9em; margin-left: 15px;">
+                            <p>A) ${question.choices.A}</p>
+                            <p>B) ${question.choices.B}</p>
+                            <p>C) ${question.choices.C}</p>
+                            <p>D) ${question.choices.D}</p>
+                        </div>
+                        <p>Your answer: ${userAnswer}) ${userAnswerText} ${isCorrect ? '<span style="color:green; font-weight:bold;">(Correct)</span>' : '<span style="color:red; font-weight:bold;">(Incorrect)</span>'}</p>
+                        ${!isCorrect ? `<p style="color:blue;">Correct answer: ${displayCorrectAnswers[qKey]}</p>` : ''}
+                    </div>
+                `;
+            }
+            answersDiv.innerHTML = answersHTML;
+
+
+            document.getElementById('score').textContent = `Final Score: ${quizData.score} / ${TOTAL_QUESTIONS}`;
+        }
+
+        function downloadPDF() {
+            if (!quizData) return;
+
+            const doc = new jsPDF();
+            let y = 10;
+            const pageHeight = doc.internal.pageSize.height;
+            const pageWidth = doc.internal.pageSize.width;
+            const margin = 10;
+            const effectiveWidth = pageWidth - margin * 2;
+
+             // Combine correct answer letter with full text for display
+             const displayCorrectAnswers = {};
+             for(let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const correctLetter = correctAnswersMap[qKey];
+                 const correctText = allQuestionsData[qKey].choices[correctLetter];
+                 displayCorrectAnswers[qKey] = `${correctLetter}) ${correctText}`;
+             }
+
+            doc.setFontSize(16);
+            doc.text('Categorical Propositions Quiz Results', pageWidth / 2, y, { align: 'center' }); // Updated Title
+            y += 10;
+
+            doc.setFontSize(12);
+            doc.text(`Name: ${quizData.name}`, margin, y); y += 7;
+            doc.text(`ID: ${quizData.id_number}`, margin, y); y += 7;
+            doc.text(`Section: ${quizData.section}`, margin, y); y += 7;
+            doc.text(`Email: ${quizData.email}`, margin, y); y += 7;
+            doc.text(`Phone: ${quizData.phone}`, margin, y); y += 10;
+
+            doc.setFont('helvetica', 'bold');
+            doc.text(`Final Score: ${quizData.score} / ${TOTAL_QUESTIONS}`, pageWidth / 2, y, { align: 'center' });
+            y += 10;
+            doc.setFont('helvetica', 'normal');
+
+
+            for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const question = quizData.questions[qKey];
+                 const userAnswer = quizData.answers[qKey];
+                 const userAnswerText = question.choices[userAnswer] || 'Not Answered';
+                 const isCorrect = userAnswer === correctAnswersMap[qKey];
+                 const questionText = question.text;
+                 const correctAnswerFull = displayCorrectAnswers[qKey];
+
+                 // Estimate space needed
+                 const qLines = doc.splitTextToSize(`Question ${i}: ${questionText}`, effectiveWidth);
+                 const choicesLines = 4 * 5; // Estimate for 4 choices
+                 const yourAnsLines = doc.splitTextToSize(`Your answer: ${userAnswer}) ${userAnswerText} ${isCorrect ? '(Correct)' : '(Incorrect)'}`, effectiveWidth);
+                 const correctAnsLines = isCorrect ? 0 : doc.splitTextToSize(`Correct answer: ${correctAnswerFull}`, effectiveWidth).length * 5;
+                 const spaceNeeded = (qLines.length * 5) + 2 + choicesLines + 7 + (yourAnsLines.length * 5) + 7 + correctAnsLines + 5;
+
+                 if (y + spaceNeeded > pageHeight - margin) { // Check if content fits
+                    doc.addPage();
+                    y = margin;
+                }
+
+                doc.setFont('helvetica', 'bold');
+                doc.text(qLines, margin, y);
+                y += (qLines.length * 5) + 2; // Adjust spacing
+                doc.setFont('helvetica', 'normal');
+
+                if (y > pageHeight - margin * 3) { doc.addPage(); y = margin; } // Check space for choices/answers
+
+                doc.setFontSize(10); // Slightly smaller for choices if needed
+                doc.text(`  A) ${question.choices.A}`, margin + 5, y); y += 5;
+                doc.text(`  B) ${question.choices.B}`, margin + 5, y); y += 5;
+                doc.text(`  C) ${question.choices.C}`, margin + 5, y); y += 5;
+                doc.text(`  D) ${question.choices.D}`, margin + 5, y); y += 7;
+                doc.setFontSize(12); // Reset font size
+
+                if (y > pageHeight - margin * 2) { doc.addPage(); y = margin; } // Check space for answers
+
+                doc.text(`Your answer: ${userAnswer}) ${userAnswerText} ${isCorrect ? '(Correct)' : '(Incorrect)'}`, margin, y); y += 7;
+
+                if (!isCorrect) {
+                    doc.setTextColor(0, 0, 255); // Blue for correct answer when user was wrong
+                    doc.text(`Correct answer: ${correctAnswerFull}`, margin, y); y += 7;
+                    doc.setTextColor(0, 0, 0); // Reset color
+                }
+                y += 5; // Add space between questions
+
+            }
+
+            // Add score again at the end if needed, especially if it spans pages
+            if (y > pageHeight - margin) { doc.addPage(); y = margin; }
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(14);
+            doc.text(`Final Score: ${quizData.score} / ${TOTAL_QUESTIONS}`, pageWidth / 2, y, { align: 'center' });
+
+            doc.save(`cat_prop_quiz_results_${quizData.id_number}.pdf`); // Updated filename
+        }
+    </script>
+</body>
+</html>

@@ -4,7 +4,7 @@
     <!-- IMPORTANT: Make sure your text editor saves this file with UTF-8 Encoding! -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moral and Citizenship Education Quiz</title>
+    <title>Logic Quiz</title> <!-- Changed Title -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
@@ -44,8 +44,8 @@
     </div>
 
     <div id="quiz-form" class="hidden">
-        <h1>Moral and Citizenship Education Quiz - Chapter 1</h1>
-        <form id="mcie-quiz"> <!-- Removed method="POST" as submission is handled by JS -->
+        <h1>Logic and critical thinking Quiz - Chapter 1</h1> <!-- Changed Title -->
+        <form id="mcie-quiz"> <!-- ID Kept, but content changed -->
             <!-- Student Information -->
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -68,357 +68,358 @@
                 <input type="tel" id="phone" name="phone" required>
             </div>
 
-            <!-- MCIE Multiple-Choice Questions (NEW SET) -->
+            <!-- Philosophy/Logic Multiple-Choice Questions -->
             <div class="form-group">
-                <label>1. The introductory quote by Louis Gottschalk implies that for development (like a seed becoming a flower), certain essentials like ______ are needed.</label>
-                <input type="radio" name="q1" value="A" required> A) Only soil and fertilizer<br>
-                <input type="radio" name="q1" value="B"> B) Only time and patience<br>
-                <input type="radio" name="q1" value="C"> C) Sun and water<br>
-                <input type="radio" name="q1" value="D"> D) Genetic modification
-            </div>
-            <div class="form-group">
-                <label>2. A progressive and peaceful society, as viewed by J.S. Mill (1972), depends on:</label>
-                <input type="radio" name="q2" value="A" required> A) Strict laws and enforcement<br>
-                <input type="radio" name="q2" value="B"> B) Developing the qualities of its members and generating good citizens<br>
-                <input type="radio" name="q2" value="C"> C) A strong military presence<br>
-                <input type="radio" name="q2" value="D"> D) Economic prosperity alone
+                 <label>1. How is Logic often treated simultaneously?</label>
+                 <input type="radio" name="q1" value="A" required> A) As a science and an art<br>
+                 <input type="radio" name="q1" value="B"> B) As a field of study and an instrument<br>
+                 <input type="radio" name="q1" value="C"> C) As a theoretical and a practical discipline<br>
+                 <input type="radio" name="q1" value="D"> D) As a branch of mathematics and linguistics
             </div>
             <div class="form-group">
-                <label>3. Aristotle (1955) believed that citizens of a State should primarily be educated to:</label>
-                <input type="radio" name="q3" value="A" required> A) Maximize personal wealth<br>
-                <input type="radio" name="q3" value="B"> B) Suit the constitution of the State<br>
-                <input type="radio" name="q3" value="C"> C) Achieve military dominance<br>
-                <input type="radio" name="q3" value="D"> D) Pursue philosophical inquiry exclusively
+                 <label>2. As an instrument, Logic primarily allows us to:</label>
+                 <input type="radio" name="q2" value="A" required> A) Discover new scientific facts<br>
+                 <input type="radio" name="q2" value="B"> B) Formulate rational arguments and evaluate others' arguments<br>
+                 <input type="radio" name="q2" value="C"> C) Understand the nature of beauty and art<br>
+                 <input type="radio" name="q2" value="D"> D) Achieve emotional well-being
             </div>
             <div class="form-group">
-                <label>4. Which term is used in South Africa for an educational experience similar to Civics and Ethical Education in Ethiopia?</label>
-                <input type="radio" name="q4" value="A" required> A) Citizenship Education<br>
-                <input type="radio" name="q4" value="B"> B) Citizenship and Character Education<br>
-                <input type="radio" name="q4" value="C"> C) Right Education<br>
-                <input type="radio" name="q4" value="D"> D) Ethical Studies
+                 <label>3. What is the etymological meaning of "philosophy"?</label>
+                 <input type="radio" name="q3" value="A" required> A) Study of existence<br>
+                 <input type="radio" name="q3" value="B"> B) Love of wisdom<br>
+                 <input type="radio" name="q3" value="C"> C) Pursuit of truth<br>
+                 <input type="radio" name="q3" value="D"> D) Knowledge of the good
             </div>
             <div class="form-group">
-                <label>5. Patrick (1986) defines civic education primarily as knowledge of:</label>
-                <input type="radio" name="q5" value="A" required> A) International relations and diplomacy<br>
-                <input type="radio" name="q5" value="B"> B) The constitutions, principles, values, history, and their contemporary application<br>
-                <input type="radio" name="q5" value="C"> C) Economic theories and market principles<br>
-                <input type="radio" name="q5" value="D"> D) Social etiquette and cultural norms
+                 <label>4. Pythagoras first used the term "philosopher" to describe someone demonstrating:</label>
+                 <input type="radio" name="q4" value="A" required> A) Great technical skill<br>
+                 <input type="radio" name="q4" value="B"> B) Political leadership<br>
+                 <input type="radio" name="q4" value="C"> C) Marked curiosity in experiences<br>
+                 <input type="radio" name="q4" value="D"> D) Reverence for religious dogma
             </div>
             <div class="form-group">
-                <label>6. The UNDP (2004) defines civic education as learning for:</label>
-                <input type="radio" name="q6" value="A" required> A) Personal development and self-discovery<br>
-                <input type="radio" name="q6" value="B"> B) Effective participation in a democratic and development process<br>
-                <input type="radio" name="q6" value="C"> C) Professional skills acquisition<br>
-                <input type="radio" name="q6" value="D"> D) Religious and spiritual enlightenment
+                 <label>5. The Socratic understanding of wisdom emphasizes:</label>
+                 <input type="radio" name="q5" value="A" required> A) Accumulating vast amounts of information<br>
+                 <input type="radio" name="q5" value="B"> B) Mastering specific professional skills<br>
+                 <input type="radio" name="q5" value="C"> C) A critical habit, vigilance, and reverence for truth<br>
+                 <input type="radio" name="q5" value="D"> D) Accepting the apparent without question
             </div>
             <div class="form-group">
-                <label>7. Civic education, according to Aggarwal (1982), contributes to developing which of the following in an individual?</label>
-                <input type="radio" name="q7" value="A" required> A) Physical fitness and athletic prowess<br>
-                <input type="radio" name="q7" value="B"> B) Artistic and creative talents<br>
-                <input type="radio" name="q7" value="C"> C) Ideas, habits, behaviors, and useful attitudes for societal membership<br>
-                <input type="radio" name="q7" value="D"> D) Advanced scientific knowledge
+                 <label>6. What does "questioning the apparent" in philosophy entail?</label>
+                 <input type="radio" name="q6" value="A" required> A) Denying the existence of the physical world<br>
+                 <input type="radio" name="q6" value="B"> B) Rejecting all common sense beliefs<br>
+                 <input type="radio" name="q6" value="C"> C) Dealing creatively with the phenomenal world and going beyond common understanding<br>
+                 <input type="radio" name="q6" value="D"> D) Focusing only on abstract, non-practical issues
             </div>
             <div class="form-group">
-                <label>8. Minimalist civic education primarily involves:</label>
-                <input type="radio" name="q8" value="A" required> A) Interactive teaching and community projects<br>
-                <input type="radio" name="q8" value="B"> B) Content-led, teacher-based instruction and examination-based assessment<br>
-                <input type="radio" name="q8" value="C"> C) Focus on values and skills for active participation<br>
-                <input type="radio" name="q8" value="D"> D) Learning activities extending outside the school
+                 <label>7. Philosophy, as a rational and critical enterprise, primarily relies on:</label>
+                 <input type="radio" name="q7" value="A" required> A) Emotional intuition<br>
+                 <input type="radio" name="q7" value="B"> B) Historical precedent<br>
+                 <input type="radio" name="q7" value="C"> C) Intensive application of reason (analysis, comparison, evaluation)<br>
+                 <input type="radio" name="q7" value="D"> D) Empirical scientific experimentation
             </div>
             <div class="form-group">
-                <label>9. Maximalist civic education focuses on:</label>
-                <input type="radio" name="q9" value="A" required> A) Rote memorization of constitutional articles<br>
-                <input type="radio" name="q9" value="B"> B) Knowledge, values, skills, and preparation for active, responsible participation<br>
-                <input type="radio" name="q9" value="C"> C) Solely examination-based assessment<br>
-                <input type="radio" name="q9" value="D"> D) Teacher-centered lectures without discussion
+                 <label>8. Philosophy's "constructive side" primarily involves:</label>
+                 <input type="radio" name="q8" value="A" required> A) Only criticizing the arguments of others<br>
+                 <input type="radio" name="q8" value="B"> B) Formulating rationally defensible answers to fundamental questions<br>
+                 <input type="radio" name="q8" value="C"> C) Analyzing the grammatical structure of language<br>
+                 <input type="radio" name="q8" value="D"> D) Cataloging different philosophical theories
             </div>
             <div class="form-group">
-                <label>10. Ethics, as a branch of philosophy, attempts to understand:</label>
-                <input type="radio" name="q10" value="A" required> A) The physical laws of the universe<br>
-                <input type="radio" name="q10" value="B"> B) People's moral beliefs and actions<br>
-                <input type="radio" name="q10" value="C"> C) The history of political institutions<br>
-                <input type="radio" name="q10" value="D"> D) The psychological basis of emotions
-            </div>
-             <div class="form-group">
-                <label>11. Ethics, or moral philosophy, considers:</label>
-                <input type="radio" name="q11" value="A" required> A) What human beings actually do in specific situations<br>
-                <input type="radio" name="q11" value="B"> B) Theories about human capabilities and what they ought to do for a good life<br>
-                <input type="radio" name="q11" value="C"> C) Popular opinions and cultural trends<br>
-                <input type="radio" name="q11" value="D"> D) The effectiveness of legal systems
+                 <label>9. The formal sense of "doing" philosophy, as opposed to informally "having" one, involves:</label>
+                 <input type="radio" name="q9" value="A" required> A) Holding a set of uncritical beliefs about life<br>
+                 <input type="radio" name="q9" value="B"> B) A process of reflecting on and criticizing deeply held conceptions<br>
+                 <input type="radio" name="q9" value="C"> C) Agreeing with famous philosophers<br>
+                 <input type="radio" name="q9" value="D"> D) Expressing personal opinions without justification
             </div>
             <div class="form-group">
-                <label>12. Ethical questions are primarily concerned with:</label>
-                <input type="radio" name="q12" value="A" required> A) What one would do (psychological concern)<br>
-                <input type="radio" name="q12" value="B"> B) What one ought to do (moral obligation)<br>
-                <input type="radio" name="q12" value="C"> C) What is legally permissible<br>
-                <input type="radio" name="q12" value="D"> D) What is most popular or widely accepted
+                 <label>10. Which statement best reflects the relationship between "having" and "doing" philosophy?</label>
+                 <input type="radio" name="q10" value="A" required> A) They are entirely independent activities.<br>
+                 <input type="radio" name="q10" value="B"> B) Doing philosophy requires first having some informal beliefs to reflect upon.<br>
+                 <input type="radio" name="q10" value="C"> C) Having a philosophy is sufficient for doing philosophy well.<br>
+                 <input type="radio" name="q10" value="D"> D) One must do philosophy before they can have a philosophy.
             </div>
             <div class="form-group">
-                <label>13. In precise usage, 'morality' is associated with:</label>
-                <input type="radio" name="q13" value="A" required> A) The philosophical study of values<br>
-                <input type="radio" name="q13" value="B"> B) The code one follows<br>
-                <input type="radio" name="q13" value="C"> C) The conduct itself (the act)<br>
-                <input type="radio" name="q13" value="D"> D) The theoretical framework
-            </div>
-             <div class="form-group">
-                <label>14. In precise usage, 'ethics' involves:</label>
-                <input type="radio" name="q14" value="A" required> A) The specific act of telling the truth or lying<br>
-                <input type="radio" name="q14" value="B"> B) The degree to which an action conforms to a standard<br>
-                <input type="radio" name="q14" value="C"> C) The philosophical study of moral conduct or the code one follows<br>
-                <input type="radio" name="q14" value="D"> D) Socially approved habits
+                 <label>11. Philosophizing, as an activity, implies being:</label>
+                 <input type="radio" name="q11" value="A" required> A) Dogmatic and closed-minded<br>
+                 <input type="radio" name="q11" value="B"> B) Content with surface-level understanding<br>
+                 <input type="radio" name="q11" value="C"> C) Searching, critical, open-minded, and tolerant<br>
+                 <input type="radio" name="q11" value="D"> D) Focused solely on historical texts
             </div>
             <div class="form-group">
-                <label>15. The question "Is stealing always wrong?" is an example of a:</label>
-                <input type="radio" name="q15" value="A" required> A) Non-moral question<br>
-                <input type="radio" name="q15" value="B"> B) Legal question<br>
-                <input type="radio" name="q15" value="C"> C) Moral problem<br>
-                <input type="radio" name="q15" value="D"> D) Ethical problem (in the broader, theoretical sense)
+                 <label>12. One reason philosophers often disagree is that they:</label>
+                 <input type="radio" name="q12" value="A" required> A) Refuse to use logic<br>
+                 <input type="radio" name="q12" value="B"> B) View things from different perspectives and assumptions<br>
+                 <input type="radio" name="q12" value="C"> C) Live in a static, unchanging universe<br>
+                 <input type="radio" name="q12" value="D"> D) Have access to complete and final evidence
             </div>
             <div class="form-group">
-                <label>16. The question "What makes any act, such as lying or stealing, right or wrong?" is an example of an:</label>
-                <input type="radio" name="q16" value="A" required> A) Ethical problem<br>
-                <input type="radio" name="q16" value="B"> B) Aesthetic question<br>
-                <input type="radio" name="q16" value="C"> C) Empirical question<br>
-                <input type="radio" name="q16" value="D"> D) Psychological question
+                 <label>13. Philosophy's attempt to "look at the world as a whole" involves:</label>
+                 <input type="radio" name="q13" value="A" required> A) Focusing intensely on one scientific discipline<br>
+                 <input type="radio" name="q13" value="B"> B) Ignoring human experience in favor of pure logic<br>
+                 <input type="radio" name="q13" value="C"> C) Integrating knowledge from various sciences and experiences into a consistent worldview<br>
+                 <input type="radio" name="q13" value="D"> D) Accepting fragmented views of reality as sufficient
             </div>
             <div class="form-group">
-                <label>17. Ethics can be divided into which two general fields?</label>
-                <input type="radio" name="q17" value="A" required> A) Applied Ethics and Theoretical Ethics<br>
-                <input type="radio" name="q17" value="B"> B) Personal Ethics and Social Ethics<br>
-                <input type="radio" name="q17" value="C"> C) Normative Ethics and Non-normative Ethics<br>
-                <input type="radio" name="q17" value="D"> D) Religious Ethics and Secular Ethics
+                 <label>14. The function of philosophy involving the logical analysis of language aims to:</label>
+                 <input type="radio" name="q14" value="A" required> A) Create new languages<br>
+                 <input type="radio" name="q14" value="B"> B) Prove the existence of God through grammar<br>
+                 <input type="radio" name="q14" value="C"> C) Clarify the meaning of words and concepts, exposing confusion<br>
+                 <input type="radio" name="q14" value="D"> D) Translate ancient philosophical texts
             </div>
             <div class="form-group">
-                <label>18. Morality, derived from the Latin 'moralitas', pertains to human action concerning matters of:</label>
-                <input type="radio" name="q18" value="A" required> A) Efficiency and productivity<br>
-                <input type="radio" name="q18" value="B"> B) Right and wrong (or good and evil)<br>
-                <input type="radio" name="q18" value="C"> C) Beauty and aesthetics<br>
-                <input type="radio" name="q18" value="D"> D) Political power and influence
+                 <label>15. Which of the following is presented as a typically philosophical question?</label>
+                 <input type="radio" name="q15" value="A" required> A) What is the boiling point of water?<br>
+                 <input type="radio" name="q15" value="B"> B) Did Ram file his income tax return correctly?<br>
+                 <input type="radio" name="q15" value="C"> C) What is the nature of truth and the distinction between right and wrong?<br>
+                 <input type="radio" name="q15" value="D"> D) How many planets are in the solar system?
             </div>
             <div class="form-group">
-                <label>19. Socrates stated that the discussion of morality concerns:</label>
-                <input type="radio" name="q19" value="A" required> A) A minor philosophical puzzle<br>
-                <input type="radio" name="q19" value="B"> B) How we ought to live<br>
-                <input type="radio" name="q19" value="C"> C) Understanding historical customs<br>
-                <input type="radio" name="q19" value="D"> D) Achieving personal happiness above all else
+                 <label>16. Metaphysics is the branch of philosophy primarily concerned with:</label>
+                 <input type="radio" name="q16" value="A" required> A) The principles of right reasoning<br>
+                 <input type="radio" name="q16" value="B"> B) The nature of beauty and art<br>
+                 <input type="radio" name="q16" value="C"> C) The ultimate nature of reality and existence<br>
+                 <input type="radio" name="q16" value="D"> D) The sources and limits of knowledge
             </div>
             <div class="form-group">
-                <label>20. Morality involves guiding conduct by:</label>
-                <input type="radio" name="q20" value="A" required> A) Popular opinion and tradition<br>
-                <input type="radio" name="q20" value="B"> B) Personal feelings and intuition alone<br>
-                <input type="radio" name="q20" value="C"> C) Reason, giving equal weight to the interests of affected individuals<br>
-                <input type="radio" name="q20" value="D"> D) Religious dogma exclusively
-            </div>
-             <div class="form-group">
-                <label>21. While 'ethics' often relates to professional conduct, 'morality' more broadly refers to:</label>
-                <input type="radio" name="q21" value="A" required> A) Legal codes and statutes<br>
-                <input type="radio" name="q21" value="B"> B) Philosophical theories only<br>
-                <input type="radio" name="q21" value="C"> C) The character of individuals and community<br>
-                <input type="radio" name="q21" value="D"> D) The consequences of actions
+                 <label>17. Which of these questions falls under the domain of Metaphysics?</label>
+                 <input type="radio" name="q17" value="A" required> A) How can we know if a statement is true?<br>
+                 <input type="radio" name="q17" value="B"> B) What makes an action morally right?<br>
+                 <input type="radio" name="q17" value="C"> C) Is reality ultimately composed of matter, spirit, or both?<br>
+                 <input type="radio" name="q17" value="D"> D) What constitutes a valid argument?
             </div>
             <div class="form-group">
-                <label>22. In terms of theory and practice, how are ethics and morality differentiated?</label>
-                <input type="radio" name="q22" value="A" required> A) Ethics is praxis, morality is theory<br>
-                <input type="radio" name="q22" value="B"> B) Ethics is theory, morality is related to praxis (conduct)<br>
-                <input type="radio" name="q22" value="C"> C) Both are purely theoretical<br>
-                <input type="radio" name="q22" value="D"> D) Both are purely practical
+                 <label>18. The term "metaphysics" originated from:</label>
+                 <input type="radio" name="q18" value="A" required> A) Plato's dialogues on ideal forms<br>
+                 <input type="radio" name="q18" value="B"> B) The title given to Aristotle's works that came after his writings on physics<br>
+                 <input type="radio" name="q18" value="C"> C) Pre-Socratic speculations about the cosmos<br>
+                 <input type="radio" name="q18" value="D"> D) Medieval debates about the nature of God
             </div>
             <div class="form-group">
-                <label>23. Laws are norms formally approved by:</label>
-                <input type="radio" name="q23" value="A" required> A) Philosophical consensus<br>
-                <input type="radio" name="q23" value="B"> B) Religious leaders<br>
-                <input type="radio" name="q23" value="C"> C) State power or political bodies<br>
-                <input type="radio" name="q23" value="D"> D) Public opinion polls
+                 <label>19. The cosmological aspect of metaphysics deals with questions about:</label>
+                 <input type="radio" name="q19" value="A" required> A) The nature and attributes of God<br>
+                 <input type="radio" name="q19" value="B"> B) The origin, nature, and development of the universe<br>
+                 <input type="radio" name="q19" value="C"> C) The relationship between mind and body<br>
+                 <input type="radio" name="q19" value="D"> D) The meaning of existence itself
             </div>
             <div class="form-group">
-                <label>24. What is the relationship between ethics and law?</label>
-                <input type="radio" name="q24" value="A" required> A) All illegal actions are unethical.<br>
-                <input type="radio" name="q24" value="B"> B) All unethical actions are illegal.<br>
-                <input type="radio" name="q24" value="C"> C) Laws can sometimes be unethical or immoral.<br>
-                <input type="radio" name="q24" value="D"> D) Ethics and law are identical concepts.
+                 <label>20. The theological aspect of metaphysics focuses on:</label>
+                 <input type="radio" name="q20" value="A" required> A) The study of human beings<br>
+                 <input type="radio" name="q20" value="B"> B) Conceptions of and about God<br>
+                 <input type="radio" name="q20" value="C"> C) The fundamental nature of matter<br>
+                 <input type="radio" name="q20" value="D"> D) The structure of space and time
             </div>
             <div class="form-group">
-                <label>25. An example of an illegal act that might be ethically permissible is:</label>
-                <input type="radio" name="q25" value="A" required> A) Lying on an income tax return<br>
-                <input type="radio" name="q25" value="B"> B) Transporting someone to a hospital in an emergency<br>
-                <input type="radio" name="q25" value="C"> C) Giving sworn testimony falsely<br>
-                <input type="radio" name="q25" value="D"> D) Violating a professional code of conduct
+                 <label>21. The anthropological aspect of metaphysics asks questions such as:</label>
+                 <input type="radio" name="q21" value="A" required> A) Is the universe designed or accidental?<br>
+                 <input type="radio" name="q21" value="B"> B) What is the relationship between mind and body, and do humans have free will?<br>
+                 <input type="radio" name="q21" value="C"> C) Is basic reality composed of one or many elements?<br>
+                 <input type="radio" name="q21" value="D"> D) Can we prove God's existence?
             </div>
             <div class="form-group">
-                <label>26. How does the enforcement of laws typically differ from the enforcement of ethical standards (that are not laws)?</label>
-                <input type="radio" name="q26" value="A" required> A) Both are enforced only by social disapproval.<br>
-                <input type="radio" name="q26" value="B"> B) Ethics are enforced by government coercion; laws rely on social pressure.<br>
-                <input type="radio" name="q26" value="C"> C) Laws are enforced by the coercive power of government (fines, prison); ethics often by disapproval or condemnation.<br>
-                <input type="radio" name="q26" value="D"> D) Both are primarily enforced through religious sanctions.
-            </div>
-             <div class="form-group">
-                <label>27. A primary goal of Moral and Civic Education in Ethiopia is educating students about:</label>
-                <input type="radio" name="q27" value="A" required> A) Advanced scientific principles<br>
-                <input type="radio" name="q27" value="B"> B) International trade agreements<br>
-                <input type="radio" name="q27" value="C"> C) Democratic culture, ethical values, constitutional supremacy, and rule of law<br>
-                <input type="radio" name="q27" value="D"> D) Military strategy and tactics
+                 <label>22. Ontology, as a subset of metaphysics, specifically studies:</label>
+                 <input type="radio" name="q22" value="A" required> A) The origins of the cosmos<br>
+                 <input type="radio" name="q22" value="B"> B) The nature of existence and what it means for something to exist<br>
+                 <input type="radio" name="q22" value="C"> C) The problem of evil<br>
+                 <input type="radio" name="q22" value="D"> D) Human social structures
             </div>
             <div class="form-group">
-                <label>28. Ethics is considered important in education because:</label>
-                <input type="radio" name="q28" value="A" required> A) Technology has eliminated all ethical problems.<br>
-                <input type="radio" name="q28" value="B"> B) Education is a fundamental process of human life and faces ethical issues like plagiarism.<br>
-                <input type="radio" name="q28" value="C"> C) Ethics guarantees higher grades.<br>
-                <input type="radio" name="q28" value="D"> D) Education is solely about technical skills.
+                 <label>23. Epistemology is primarily concerned with the study of:</label>
+                 <input type="radio" name="q23" value="A" required> A) Moral values<br>
+                 <input type="radio" name="q23" value="B"> B) Ultimate reality<br>
+                 <input type="radio" name="q23" value="C"> C) Beauty and art<br>
+                 <input type="radio" name="q23" value="D"> D) Knowledge (its nature, scope, sources, and validity)
             </div>
             <div class="form-group">
-                <label>29. A balanced understanding of rights and duties is necessary for citizens primarily because:</label>
-                <input type="radio" name="q29" value="A" required> A) Rights exist without any corresponding duties.<br>
-                <input type="radio" name="q29" value="B"> B) It helps ensure the state can function effectively and meet societal needs (e.g., health, environment).<br>
-                <input type="radio" name="q29" value="C"> C) Duties are more important than rights.<br>
-                <input type="radio" name="q29" value="D"> D) It eliminates the need for laws.
+                 <label>24. Which two fundamental questions does epistemology seek to answer?</label>
+                 <input type="radio" name="q24" value="A" required> A) What is real? and What is good?<br>
+                 <input type="radio" name="q24" value="B"> B) What is true? and How do we know?<br>
+                 <input type="radio" name="q24" value="C"> C) What is beauty? and What is justice?<br>
+                 <input type="radio" name="q24" value="D"> D) Does God exist? and Do we have free will?
             </div>
             <div class="form-group">
-                <label>30. An individual's right, according to Sastry et al. (2011), implies:</label>
-                <input type="radio" name="q30" value="A" required> A) The right to ignore others' rights<br>
-                <input type="radio" name="q30" value="B"> B) The duty of others not to interfere (with exceptions)<br>
-                <input type="radio" name="q30" value="C"> C) No obligations for anyone else<br>
-                <input type="radio" name="q30" value="D"> D) The superiority of that right over all duties
+                 <label>25. Skepticism, in its narrow epistemological sense, is the position that:</label>
+                 <input type="radio" name="q25" value="A" required> A) All knowledge comes from sense experience<br>
+                 <input type="radio" name="q25" value="B"> B) Humans cannot acquire reliable knowledge<br>
+                 <input type="radio" name="q25" value="C"> C) Reason is the primary source of knowledge<br>
+                 <input type="radio" name="q25" value="D"> D) Truth is relative to the individual
             </div>
             <div class="form-group">
-                <label>31. Which concept from Sastry et al. relates to the idea that exercising rights involves limitations concerning others' similar rights?</label>
-                <input type="radio" name="q31" value="A" required> A) One's right implies the other's duty.<br>
-                <input type="radio" name="q31" value="B"> B) One's right implies one's duty to recognize similar rights of others.<br>
-                <input type="radio" name="q31" value="C"> C) One should exercise rights for social good.<br>
-                <input type="radio" name="q31" value="D"> D) The State has duties towards citizens.
+                 <label>26. Agnosticism is specifically a profession of ignorance regarding:</label>
+                 <input type="radio" name="q26" value="A" required> A) The nature of reality<br>
+                 <input type="radio" name="q26" value="B"> B) The existence or nonexistence of God<br>
+                 <input type="radio" name="q26" value="C"> C) The possibility of achieving moral certainty<br>
+                 <input type="radio" name="q26" value="D"> D) The reliability of sense perception
             </div>
             <div class="form-group">
-                <label>32. Why, according to Sastry et al., should citizens support the State?</label>
-                <input type="radio" name="q32" value="A" required> A) Because the State has absolute power.<br>
-                <input type="radio" name="q32" value="B"> B) Because the State guarantees and protects the rights of everybody.<br>
-                <input type="radio" name="q32" value="C"> C) Because citizens have no duties towards the State.<br>
-                <input type="radio" name="q32" value="D"> D) Because the State primarily serves its own interests.
+                 <label>27. The epistemological view that knowledge is primarily obtained through the senses is called:</label>
+                 <input type="radio" name="q27" value="A" required> A) Rationalism<br>
+                 <input type="radio" name="q27" value="B"> B) Skepticism<br>
+                 <input type="radio" name="q27" value="C"> C) Empiricism<br>
+                 <input type="radio" name="q27" value="D"> D) Intuitionism
             </div>
             <div class="form-group">
-                <label>33. Political culture, according to the International Encyclopedia of the Social Sciences, refers to:</label>
-                <input type="radio" name="q33" value="A" required> A) The artistic expressions of a political regime<br>
-                <input type="radio" name="q33" value="B"> B) The set of attitudes, beliefs, and sentiments that give order and meaning to a political process<br>
-                <input type="radio" name="q33" value="C"> C) The formal structure of government institutions<br>
-                <input type="radio" name="q33" value="D"> D) The economic policies of a state
+                 <label>28. A key challenge or limitation associated with empiricism is that:</label>
+                 <input type="radio" name="q28" value="A" required> A) It relies too heavily on abstract logic<br>
+                 <input type="radio" name="q28" value="B"> B) Sense data can be incomplete, undependable, and subject to distortion<br>
+                 <input type="radio" name="q28" value="C"> C) It ignores the role of observation<br>
+                 <input type="radio" name="q28" value="D"> D) It cannot account for scientific progress
             </div>
             <div class="form-group">
-                <label>34. According to Almond and Verba, which political culture type features low cognitive, affective, and evaluative orientation towards the political system?</label>
-                <input type="radio" name="q34" value="A" required> A) Participant cultures<br>
-                <input type="radio" name="q34" value="B"> B) Subject cultures<br>
-                <input type="radio" name="q34" value="C"> C) Parochial cultures<br>
-                <input type="radio" name="q34" value="D"> D) Democratic cultures
+                 <label>29. Rationalism emphasizes the role of _______ in acquiring knowledge.</label>
+                 <input type="radio" name="q29" value="A" required> A) Sense experience<br>
+                 <input type="radio" name="q29" value="B"> B) Divine revelation<br>
+                 <input type="radio" name="q29" value="C"> C) Reasoning, thought, or logic<br>
+                 <input type="radio" name="q29" value="D"> D) Authoritative testimony
             </div>
             <div class="form-group">
-                <label>35. Which political culture type, identified by Almond and Verba, involves high orientation to system outputs but low orientation to inputs and active participation?</label>
-                <input type="radio" name="q35" value="A" required> A) Participant cultures<br>
-                <input type="radio" name="q35" value="B"> B) Subject cultures<br>
-                <input type="radio" name="q35" value="C"> C) Parochial cultures<br>
-                <input type="radio" name="q35" value="D"> D) Authoritarian cultures
+                 <label>30. A potential weakness of systems of thought based solely on logic (rationalism) is that they might:</label>
+                 <input type="radio" name="q30" value="A" required> A) Be too reliant on empirical verification<br>
+                 <input type="radio" name="q30" value="B"> B) Lack internal consistency<br>
+                 <input type="radio" name="q30" value="C"> C) Become disconnected from the external world<br>
+                 <input type="radio" name="q30" value="D"> D) Fail to organize sense data meaningfully
             </div>
             <div class="form-group">
-                <label>36. Participant political cultures are considered most compatible with:</label>
-                <input type="radio" name="q36" value="A" required> A) Centralized, authoritarian structures<br>
-                <input type="radio" name="q36" value="B"> B) Monarchies<br>
-                <input type="radio" name="q36" value="C"> C) Democratic political structures<br>
-                <input type="radio" name="q36" value="D"> D) Anarchist societies
+                 <label>31. Intuition, as a source of knowledge, refers to:</label>
+                 <input type="radio" name="q31" value="A" required> A) Knowledge gained through logical deduction<br>
+                 <input type="radio" name="q31" value="B"> B) Direct apprehension of knowledge without conscious reasoning or sense perception<br>
+                 <input type="radio" name="q31" value="C"> C) Knowledge accepted from experts<br>
+                 <input type="radio" name="q31" value="D"> D) Information received through divine communication
             </div>
             <div class="form-group">
-                <label>37. Participant political culture supports democracy because:</label>
-                <input type="radio" name="q37" value="A" required> A) It ensures citizens remain passive recipients of government services.<br>
-                <input type="radio" name="q37" value="B"> B) It encourages citizens to focus solely on their families' advantage.<br>
-                <input type="radio" name="q37" value="C"> C) Democracy thrives when citizens understand and actively participate in civic and political life.<br>
-                <input type="radio" name="q37" value="D"> D) It centralizes power within a knowledgeable elite.
+                 <label>32. A primary advantage claimed for revealed knowledge is that it:</label>
+                 <input type="radio" name="q32" value="A" required> A) Can be empirically verified by anyone<br>
+                 <input type="radio" name="q32" value="B"> B) Originates from an omniscient, transcendent source<br>
+                 <input type="radio" name="q32" value="C"> C) Is derived through logical proof<br>
+                 <input type="radio" name="q32" value="D"> D) Avoids any issues of interpretation
             </div>
             <div class="form-group">
-                <label>38. A significant challenge for democratization can be:</label>
-                <input type="radio" name="q38" value="A" required> A) Too much political participation by citizens<br>
-                <input type="radio" name="q38" value="B"> B) Citizens' self-understanding as active participants rather than recipients/consumers<br>
-                <input type="radio" name="q38" value="C"> C) The dominance of individual interests over socially centered norms<br>
-                <input type="radio" name="q38" value="D"> D) The absence of any available modes of political participation
+                 <label>33. Relying on authority as a source of knowledge involves accepting something as true because:</label>
+                 <input type="radio" name="q33" value="A" required> A) It has been personally experienced<br>
+                 <input type="radio" name="q33" value="B"> B) It logically follows from accepted premises<br>
+                 <input type="radio" name="q33" value="C"> C) It comes from experts or tradition<br>
+                 <input type="radio" name="q33" value="D"> D) It was arrived at through intuition
             </div>
             <div class="form-group">
-                <label>39. Active citizenship entails participation in:</label>
-                <input type="radio" name="q39" value="A" required> A) Only formal political activities like voting<br>
-                <input type="radio" name="q39" value="B"> B) Only socio-cultural activities<br>
-                <input type="radio" name="q39" value="C"> C) Political, socio-cultural, and environmental activities<br>
-                <input type="radio" name="q39" value="D"> D) Only activities that benefit oneself directly
+                 <label>34. A significant danger of relying solely on authoritative knowledge is that:</label>
+                 <input type="radio" name="q34" value="A" required> A) It discourages personal verification<br>
+                 <input type="radio" name="q34" value="B"> B) It can be based on incorrect assumptions and perpetuate distortions<br>
+                 <input type="radio" name="q34" value="C"> C) Civilization requires rejecting all authority<br>
+                 <input type="radio" name="q34" value="D"> D) Experts are always infallible
             </div>
             <div class="form-group">
-                <label>40. 'Relevant knowledge' for Moral and Civic Education goals is best understood as:</label>
-                <input type="radio" name="q40" value="A" required> A) Knowledge useful for dealing with specific problems at a given time<br>
-                <input type="radio" name="q40" value="B"> B) Abstract philosophical knowledge only<br>
-                <input type="radio" name="q40" value="C"> C) Knowledge that remains inert and unused<br>
-                <input type="radio" name="q40" value="D"> D) Knowledge disconnected from skills and attitudes
-            </div>
-             <div class="form-group">
-                <label>41. According to the perspective presented, skillful manpower lacking positive attitudes may result in:</label>
-                <input type="radio" name="q41" value="A" required> A) Increased national development<br>
-                <input type="radio" name="q41" value="B"> B) Counter-production due to vices like corruption and bribery<br>
-                <input type="radio" name="q41" value="C"> C) Greater social harmony<br>
-                <input type="radio" name="q41" value="D"> D) Enhanced patriotism
+                 <label>35. Axiology is the philosophical study of:</label>
+                 <input type="radio" name="q35" value="A" required> A) Arguments and reasoning<br>
+                 <input type="radio" name="q35" value="B"> B) Reality and existence<br>
+                 <input type="radio" name="q35" value="C"> C) Knowledge and belief<br>
+                 <input type="radio" name="q35" value="D"> D) Value (including ethics, aesthetics, and social/political values)
             </div>
             <div class="form-group">
-                <label>42. The 'youth deficit' (Osler and Starkey) signifies:</label>
-                <input type="radio" name="q42" value="A" required> A) A lack of young people in the population<br>
-                <input type="radio" name="q42" value="B"> B) Tendencies for anti-social behavior and political apathy among young people<br>
-                <input type="radio" name="q42" value="C"> C) The superior moral character of youth compared to adults<br>
-                <input type="radio" name="q42" value="D"> D) Insufficient funding for youth programs
+                 <label>36. Ethics, or Moral Philosophy, is primarily concerned with:</label>
+                 <input type="radio" name="q36" value="A" required> A) The nature of beauty<br>
+                 <input type="radio" name="q36" value="B"> B) Principles of right and wrong human conduct<br>
+                 <input type="radio" name="q36" value="C"> C) The validity of arguments<br>
+                 <input type="radio" name="q36" value="D"> D) The structure of society
             </div>
             <div class="form-group">
-                <label>43. Promoting intercultural societies requires moving beyond mere tolerance towards:</label>
-                <input type="radio" name="q43" value="A" required> A) Assimilation of all cultures into one<br>
-                <input type="radio" name="q43" value="B"> B) Nurturing dynamic exchanges based on interaction, openness, and solidarity<br>
-                <input type="radio" name="q43" value="C"> C) Complete separation of cultural groups<br>
-                <input type="radio" name="q43" value="D"> D) Ignoring cultural diversity altogether
+                 <label>37. Which of these questions is central to Ethics?</label>
+                 <input type="radio" name="q37" value="A" required> A) What constitutes a valid inference?<br>
+                 <input type="radio" name="q37" value="B"> B) What is the nature of time?<br>
+                 <input type="radio" name="q37" value="C"> C) Are moral principles universal or relative?<br>
+                 <input type="radio" name="q37" value="D"> D) Can we know the external world?
             </div>
             <div class="form-group">
-                <label>44. Ensuring inclusiveness in civics and ethics involves:</label>
-                <input type="radio" name="q44" value="A" required> A) Focusing only on male subjects and the public sphere<br>
-                <input type="radio" name="q44" value="B"> B) Recognizing gender differences and ensuring equity in both public and private spaces<br>
-                <input type="radio" name="q44" value="C"> C) Implementing quotas for women without changing underlying structures<br>
-                <input type="radio" name="q44" value="D"> D) Ignoring gender dimensions in citizenship
+                 <label>38. Normative Ethics aims to:</label>
+                 <input type="radio" name="q38" value="A" required> A) Analyze the meaning of ethical terms like "good"<br>
+                 <input type="radio" name="q38" value="B"> B) Apply ethical principles to specific moral problems<br>
+                 <input type="radio" name="q38" value="C"> C) Study and determine the moral rules and principles for evaluating actions<br>
+                 <input type="radio" name="q38" value="D"> D) Investigate the historical development of moral codes
             </div>
             <div class="form-group">
-                <label>45. Peace-oriented citizenship education contributes to peace-building through:</label>
-                <input type="radio" name="q45" value="A" required> A) Promoting militarization and conflict<br>
-                <input type="radio" name="q45" value="B"> B) Fostering values, attitudes, and skills for cooperation, dialogue, and reconciliation<br>
-                <input type="radio" name="q45" value="C"> C) Ignoring issues of conflict resolution<br>
-                <input type="radio" name="q45" value="D"> D) Focusing only on personal inner peace
+                 <label>39. Meta-ethics focuses on:</label>
+                 <input type="radio" name="q39" value="A" required> A) Determining which actions are right or wrong<br>
+                 <input type="radio" name="q39" value="B"> B) Investigating the meaning of ethical terms and the verification of ethical statements<br>
+                 <input type="radio" name="q39" value="C"> C) Developing codes of conduct for specific professions<br>
+                 <input type="radio" name="q39" value="D"> D) Studying comparative ethics across different cultures
             </div>
             <div class="form-group">
-                <label>46. Aristotle's statement, ''Educating the mind without educating the heart is no education at all,'' highlights the need for:</label>
-                <input type="radio" name="q46" value="A" required> A) Purely intellectual development<br>
-                <input type="radio" name="q46" value="B"> B) Emotional suppression in education<br>
-                <input type="radio" name="q46" value="C"> C) Integrating ethical and moral development with intellectual learning<br>
-                <input type="radio" name="q46" value="D"> D) Focusing solely on vocational skills
-            </div>
-             <div class="form-group">
-                <label>47. Which of the following is a core value promoted by Moral and Civics Education?</label>
-                <input type="radio" name="q47" value="A" required> A) Disregard for the welfare of others<br>
-                <input type="radio" name="q47" value="B"> B) Intolerance of diversity<br>
-                <input type="radio" name="q47" value="C"> C) Respect for reasoning and fairness<br>
-                <input type="radio" name="q47" value="D"> D) Violent resolution of conflict
+                 <label>40. Applied Ethics involves:</label>
+                 <input type="radio" name="q40" value="A" required> A) Studying the history of ethical theories<br>
+                 <input type="radio" name="q40" value="B"> B) Analyzing the logic of moral language<br>
+                 <input type="radio" name="q40" value="C"> C) Attempting to resolve specific moral problems using ethical principles<br>
+                 <input type="radio" name="q40" value="D"> D) Questioning whether morality exists at all
             </div>
             <div class="form-group">
-                <label>48. To be active citizens, individuals need:</label>
-                <input type="radio" name="q48" value="A" required> A) Only knowledge<br>
-                <input type="radio" name="q48" value="B"> B) Only skills<br>
-                <input type="radio" name="q48" value="C"> C) Only positive attitudes<br>
-                <input type="radio" name="q48" value="D"> D) A combination of knowledge, skills, attitudes, and values
+                 <label>41. Aesthetics is the branch of axiology dealing with:</label>
+                 <input type="radio" name="q41" value="A" required> A) Political organization<br>
+                 <input type="radio" name="q41" value="B"> B) The nature of knowledge<br>
+                 <input type="radio" name="q41" value="C"> C) Principles of reasoning<br>
+                 <input type="radio" name="q41" value="D"> D) Beauty, art, and taste
             </div>
             <div class="form-group">
-                <label>49. Calls to 'revitalize' or 'reinvent' civic education arise partly from:</label>
-                <input type="radio" name="q49" value="A" required> A) The overwhelming success of previous civic education models<br>
-                <input type="radio" name="q49" value="B"> B) The perceived neglect and disregard in the field and the need for a more democratic focus<br>
-                <input type="radio" name="q49" value="C"> C) The idea that citizenship is unchanging and requires no updates<br>
-                <input type="radio" name="q49" value="D"> D) A desire to return to purely teacher-centered instruction
+                 <label>42. Which question belongs to the field of Aesthetics?</label>
+                 <input type="radio" name="q42" value="A" required> A) Is democracy the best form of government?<br>
+                 <input type="radio" name="q42" value="B"> B) Can the existence of God be proven?<br>
+                 <input type="radio" name="q42" value="C"> C) What is the relationship between art and truth?<br>
+                 <input type="radio" name="q42" value="D"> D) How do we justify moral judgments?
             </div>
             <div class="form-group">
-                <label>50. The ultimate aim of teaching civics and ethics is summarized as producing:</label>
-                <input type="radio" name="q50" value="A" required> A) Passive subjects who obey without question<br>
-                <input type="radio" name="q50" value="B"> B) Citizens focused solely on their own rights<br>
-                <input type="radio" name="q50" value="C"> C) Competent, high moral standard, responsible citizens who balance rights and obligations<br>
-                <input type="radio" name="q50" value="D"> D) Experts in philosophical debate
+                 <label>43. Social/Political Philosophy, as a part of Axiology, examines:</label>
+                 <input type="radio" name="q43" value="A" required> A) The nature of perception<br>
+                 <input type="radio" name="q43" value="B"> B) Value judgments operating within a civil society (e.g., justice, best form of government)<br>
+                 <input type="radio" name="q43" value="C"> C) The relationship between mind and body<br>
+                 <input type="radio" name="q43" value="D"> D) The rules of logical deduction
             </div>
+            <div class="form-group">
+                 <label>44. Logic, as a core field of philosophy, focuses on:</label>
+                 <input type="radio" name="q44" value="A" required> A) The study of value<br>
+                 <input type="radio" name="q44" value="B"> B) The nature of reality<br>
+                 <input type="radio" name="q44" value="C"> C) The principles and methods of right reasoning and argument evaluation<br>
+                 <input type="radio" name="q44" value="D"> D) The experience of beauty
+            </div>
+            <div class="form-group">
+                 <label>45. A central concern within the study of Logic is:</label>
+                 <input type="radio" name="q45" value="A" required> A) Determining the ultimate substance of the universe<br>
+                 <input type="radio" name="q45" value="B"> B) Defining the concept of justice<br>
+                 <input type="radio" name="q45" value="C"> C) Evaluating the validity and soundness of arguments<br>
+                 <input type="radio" name="q45" value="D"> D) Understanding the nature of consciousness
+            </div>
+            <div class="form-group">
+                 <label>46. Socrates' statement "The unexamined life is not worth living" highlights philosophy's role in promoting:</label>
+                 <input type="radio" name="q46" value="A" required> A) Material wealth<br>
+                 <input type="radio" name="q46" value="B"> B) Political power<br>
+                 <input type="radio" name="q46" value="C"> C) Critical self-examination and understanding<br>
+                 <input type="radio" name="q46" value="D"> D) Acceptance of tradition without question
+            </div>
+            <div class="form-group">
+                 <label>47. Developing "Intellectual and Behavioral Independence" through philosophy involves:</label>
+                 <input type="radio" name="q47" value="A" required> A) Agreeing with the majority opinion<br>
+                 <input type="radio" name="q47" value="B"> B) Forming one's own integrated and coherent worldview and acting upon it<br>
+                 <input type="radio" name="q47" value="C"> C) Rejecting all past philosophical ideas<br>
+                 <input type="radio" name="q47" value="D"> D) Focusing solely on practical skills
+            </div>
+            <div class="form-group">
+                 <label>48. Studying different philosophical perspectives primarily fosters which quality?</label>
+                 <input type="radio" name="q48" value="A" required> A) Dogmatism<br>
+                 <input type="radio" name="q48" value="B"> B) Narrow-mindedness<br>
+                 <input type="radio" name="q48" value="C"> C) Flexibility, Tolerance, and Open-Mindedness<br>
+                 <input type="radio" name="q48" value="D"> D) Apathy towards differing views
+            </div>
+            <div class="form-group">
+                 <label>49. Engaging with philosophy enhances "Creative and Critical Thinking" by developing abilities in:</label>
+                 <input type="radio" name="q49" value="A" required> A) Rote memorization<br>
+                 <input type="radio" name="q49" value="B"> B) Unquestioning acceptance of authority<br>
+                 <input type="radio" name="q49" value="C"> C) Analysis, reasoning, evaluation, theorizing, and justification<br>
+                 <input type="radio" name="q49" value="D"> D) Avoiding complex problems
+            </div>
+            <div class="form-group">
+                 <label>50. According to Bertrand Russell, the value of philosophy lies partly in its uncertainty because it:</label>
+                 <input type="radio" name="q50" value="A" required> A) Provides definite answers to all questions<br>
+                 <input type="radio" name="q50" value="B"> B) Confirms common sense prejudices<br>
+                 <input type="radio" name="q50" value="C"> C) Frees the mind from the "tyranny of custom" and enlarges thought by suggesting possibilities<br>
+                 <input type="radio" name="q50" value="D"> D) Makes people feel certain about the nature of things
+            </div>
+
 
             <button type="button" onclick="showReview()">Submit</button>
         </form>
@@ -461,7 +462,7 @@
         let quizData = null;
         let formData = null;
         const { jsPDF } = window.jspdf;
-        const TOTAL_QUESTIONS = 50; // Updated total number of questions
+        const TOTAL_QUESTIONS = 50; // Total number of questions
 
         // Valid login credentials
         const validCredentials = [
@@ -472,73 +473,74 @@
             // Add more valid credentials as needed
         ];
 
-        // Structure holding question texts and choices (NEW SET)
+        // Structure holding question texts and choices (NEW SET: PHILOSOPHY/LOGIC)
         const allQuestionsData = {
-            q1: { text: 'The introductory quote by Louis Gottschalk implies that for development (like a seed becoming a flower), certain essentials like ______ are needed.', choices: { A: 'Only soil and fertilizer', B: 'Only time and patience', C: 'Sun and water', D: 'Genetic modification' } },
-            q2: { text: 'A progressive and peaceful society, as viewed by J.S. Mill (1972), depends on:', choices: { A: 'Strict laws and enforcement', B: 'Developing the qualities of its members and generating good citizens', C: 'A strong military presence', D: 'Economic prosperity alone' } },
-            q3: { text: 'Aristotle (1955) believed that citizens of a State should primarily be educated to:', choices: { A: 'Maximize personal wealth', B: 'Suit the constitution of the State', C: 'Achieve military dominance', D: 'Pursue philosophical inquiry exclusively' } },
-            q4: { text: 'Which term is used in South Africa for an educational experience similar to Civics and Ethical Education in Ethiopia?', choices: { A: 'Citizenship Education', B: 'Citizenship and Character Education', C: 'Right Education', D: 'Ethical Studies' } },
-            q5: { text: 'Patrick (1986) defines civic education primarily as knowledge of:', choices: { A: 'International relations and diplomacy', B: 'The constitutions, principles, values, history, and their contemporary application', C: 'Economic theories and market principles', D: 'Social etiquette and cultural norms' } },
-            q6: { text: 'The UNDP (2004) defines civic education as learning for:', choices: { A: 'Personal development and self-discovery', B: 'Effective participation in a democratic and development process', C: 'Professional skills acquisition', D: 'Religious and spiritual enlightenment' } },
-            q7: { text: 'Civic education, according to Aggarwal (1982), contributes to developing which of the following in an individual?', choices: { A: 'Physical fitness and athletic prowess', B: 'Artistic and creative talents', C: 'Ideas, habits, behaviors, and useful attitudes for societal membership', D: 'Advanced scientific knowledge' } },
-            q8: { text: 'Minimalist civic education primarily involves:', choices: { A: 'Interactive teaching and community projects', B: 'Content-led, teacher-based instruction and examination-based assessment', C: 'Focus on values and skills for active participation', D: 'Learning activities extending outside the school' } },
-            q9: { text: 'Maximalist civic education focuses on:', choices: { A: 'Rote memorization of constitutional articles', B: 'Knowledge, values, skills, and preparation for active, responsible participation', C: 'Solely examination-based assessment', D: 'Teacher-centered lectures without discussion' } },
-            q10: { text: 'Ethics, as a branch of philosophy, attempts to understand:', choices: { A: 'The physical laws of the universe', B: 'People\'s moral beliefs and actions', C: 'The history of political institutions', D: 'The psychological basis of emotions' } },
-            q11: { text: 'Ethics, or moral philosophy, considers:', choices: { A: 'What human beings actually do in specific situations', B: 'Theories about human capabilities and what they ought to do for a good life', C: 'Popular opinions and cultural trends', D: 'The effectiveness of legal systems' } },
-            q12: { text: 'Ethical questions are primarily concerned with:', choices: { A: 'What one would do (psychological concern)', B: 'What one ought to do (moral obligation)', C: 'What is legally permissible', D: 'What is most popular or widely accepted' } },
-            q13: { text: 'In precise usage, \'morality\' is associated with:', choices: { A: 'The philosophical study of values', B: 'The code one follows', C: 'The conduct itself (the act)', D: 'The theoretical framework' } },
-            q14: { text: 'In precise usage, \'ethics\' involves:', choices: { A: 'The specific act of telling the truth or lying', B: 'The degree to which an action conforms to a standard', C: 'The philosophical study of moral conduct or the code one follows', D: 'Socially approved habits' } },
-            q15: { text: 'The question "Is stealing always wrong?" is an example of a:', choices: { A: 'Non-moral question', B: 'Legal question', C: 'Moral problem', D: 'Ethical problem (in the broader, theoretical sense)' } },
-            q16: { text: 'The question "What makes any act, such as lying or stealing, right or wrong?" is an example of an:', choices: { A: 'Ethical problem', B: 'Aesthetic question', C: 'Empirical question', D: 'Psychological question' } },
-            q17: { text: 'Ethics can be divided into which two general fields?', choices: { A: 'Applied Ethics and Theoretical Ethics', B: 'Personal Ethics and Social Ethics', C: 'Normative Ethics and Non-normative Ethics', D: 'Religious Ethics and Secular Ethics' } },
-            q18: { text: 'Morality, derived from the Latin \'moralitas\', pertains to human action concerning matters of:', choices: { A: 'Efficiency and productivity', B: 'Right and wrong (or good and evil)', C: 'Beauty and aesthetics', D: 'Political power and influence' } },
-            q19: { text: 'Socrates stated that the discussion of morality concerns:', choices: { A: 'A minor philosophical puzzle', B: 'How we ought to live', C: 'Understanding historical customs', D: 'Achieving personal happiness above all else' } },
-            q20: { text: 'Morality involves guiding conduct by:', choices: { A: 'Popular opinion and tradition', B: 'Personal feelings and intuition alone', C: 'Reason, giving equal weight to the interests of affected individuals', D: 'Religious dogma exclusively' } },
-            q21: { text: 'While \'ethics\' often relates to professional conduct, \'morality\' more broadly refers to:', choices: { A: 'Legal codes and statutes', B: 'Philosophical theories only', C: 'The character of individuals and community', D: 'The consequences of actions' } },
-            q22: { text: 'In terms of theory and practice, how are ethics and morality differentiated?', choices: { A: 'Ethics is praxis, morality is theory', B: 'Ethics is theory, morality is related to praxis (conduct)', C: 'Both are purely theoretical', D: 'Both are purely practical' } },
-            q23: { text: 'Laws are norms formally approved by:', choices: { A: 'Philosophical consensus', B: 'Religious leaders', C: 'State power or political bodies', D: 'Public opinion polls' } },
-            q24: { text: 'What is the relationship between ethics and law?', choices: { A: 'All illegal actions are unethical.', B: 'All unethical actions are illegal.', C: 'Laws can sometimes be unethical or immoral.', D: 'Ethics and law are identical concepts.' } },
-            q25: { text: 'An example of an illegal act that might be ethically permissible is:', choices: { A: 'Lying on an income tax return', B: 'Transporting someone to a hospital in an emergency', C: 'Giving sworn testimony falsely', D: 'Violating a professional code of conduct' } },
-            q26: { text: 'How does the enforcement of laws typically differ from the enforcement of ethical standards (that are not laws)?', choices: { A: 'Both are enforced only by social disapproval.', B: 'Ethics are enforced by government coercion; laws rely on social pressure.', C: 'Laws are enforced by the coercive power of government (fines, prison); ethics often by disapproval or condemnation.', D: 'Both are primarily enforced through religious sanctions.' } },
-            q27: { text: 'A primary goal of Moral and Civic Education in Ethiopia is educating students about:', choices: { A: 'Advanced scientific principles', B: 'International trade agreements', C: 'Democratic culture, ethical values, constitutional supremacy, and rule of law', D: 'Military strategy and tactics' } },
-            q28: { text: 'Ethics is considered important in education because:', choices: { A: 'Technology has eliminated all ethical problems.', B: 'Education is a fundamental process of human life and faces ethical issues like plagiarism.', C: 'Ethics guarantees higher grades.', D: 'Education is solely about technical skills.' } },
-            q29: { text: 'A balanced understanding of rights and duties is necessary for citizens primarily because:', choices: { A: 'Rights exist without any corresponding duties.', B: 'It helps ensure the state can function effectively and meet societal needs (e.g., health, environment).', C: 'Duties are more important than rights.', D: 'It eliminates the need for laws.' } },
-            q30: { text: 'An individual\'s right, according to Sastry et al. (2011), implies:', choices: { A: 'The right to ignore others\' rights', B: 'The duty of others not to interfere (with exceptions)', C: 'No obligations for anyone else', D: 'The superiority of that right over all duties' } },
-            q31: { text: 'Which concept from Sastry et al. relates to the idea that exercising rights involves limitations concerning others\' similar rights?', choices: { A: 'One\'s right implies the other\'s duty.', B: 'One\'s right implies one\'s duty to recognize similar rights of others.', C: 'One should exercise rights for social good.', D: 'The State has duties towards citizens.' } },
-            q32: { text: 'Why, according to Sastry et al., should citizens support the State?', choices: { A: 'Because the State has absolute power.', B: 'Because the State guarantees and protects the rights of everybody.', C: 'Because citizens have no duties towards the State.', D: 'Because the State primarily serves its own interests.' } },
-            q33: { text: 'Political culture, according to the International Encyclopedia of the Social Sciences, refers to:', choices: { A: 'The artistic expressions of a political regime', B: 'The set of attitudes, beliefs, and sentiments that give order and meaning to a political process', C: 'The formal structure of government institutions', D: 'The economic policies of a state' } },
-            q34: { text: 'According to Almond and Verba, which political culture type features low cognitive, affective, and evaluative orientation towards the political system?', choices: { A: 'Participant cultures', B: 'Subject cultures', C: 'Parochial cultures', D: 'Democratic cultures' } },
-            q35: { text: 'Which political culture type, identified by Almond and Verba, involves high orientation to system outputs but low orientation to inputs and active participation?', choices: { A: 'Participant cultures', B: 'Subject cultures', C: 'Parochial cultures', D: 'Authoritarian cultures' } },
-            q36: { text: 'Participant political cultures are considered most compatible with:', choices: { A: 'Centralized, authoritarian structures', B: 'Monarchies', C: 'Democratic political structures', D: 'Anarchist societies' } },
-            q37: { text: 'Participant political culture supports democracy because:', choices: { A: 'It ensures citizens remain passive recipients of government services.', B: 'It encourages citizens to focus solely on their families\' advantage.', C: 'Democracy thrives when citizens understand and actively participate in civic and political life.', D: 'It centralizes power within a knowledgeable elite.' } },
-            q38: { text: 'A significant challenge for democratization can be:', choices: { A: 'Too much political participation by citizens', B: 'Citizens\' self-understanding as active participants rather than recipients/consumers', C: 'The dominance of individual interests over socially centered norms', D: 'The absence of any available modes of political participation' } },
-            q39: { text: 'Active citizenship entails participation in:', choices: { A: 'Only formal political activities like voting', B: 'Only socio-cultural activities', C: 'Political, socio-cultural, and environmental activities', D: 'Only activities that benefit oneself directly' } },
-            q40: { text: '\'Relevant knowledge\' for Moral and Civic Education goals is best understood as:', choices: { A: 'Knowledge useful for dealing with specific problems at a given time', B: 'Abstract philosophical knowledge only', C: 'Knowledge that remains inert and unused', D: 'Knowledge disconnected from skills and attitudes' } },
-            q41: { text: 'According to the perspective presented, skillful manpower lacking positive attitudes may result in:', choices: { A: 'Increased national development', B: 'Counter-production due to vices like corruption and bribery', C: 'Greater social harmony', D: 'Enhanced patriotism' } },
-            q42: { text: 'The \'youth deficit\' (Osler and Starkey) signifies:', choices: { A: 'A lack of young people in the population', B: 'Tendencies for anti-social behavior and political apathy among young people', C: 'The superior moral character of youth compared to adults', D: 'Insufficient funding for youth programs' } },
-            q43: { text: 'Promoting intercultural societies requires moving beyond mere tolerance towards:', choices: { A: 'Assimilation of all cultures into one', B: 'Nurturing dynamic exchanges based on interaction, openness, and solidarity', C: 'Complete separation of cultural groups', D: 'Ignoring cultural diversity altogether' } },
-            q44: { text: 'Ensuring inclusiveness in civics and ethics involves:', choices: { A: 'Focusing only on male subjects and the public sphere', B: 'Recognizing gender differences and ensuring equity in both public and private spaces', C: 'Implementing quotas for women without changing underlying structures', D: 'Ignoring gender dimensions in citizenship' } },
-            q45: { text: 'Peace-oriented citizenship education contributes to peace-building through:', choices: { A: 'Promoting militarization and conflict', B: 'Fostering values, attitudes, and skills for cooperation, dialogue, and reconciliation', C: 'Ignoring issues of conflict resolution', D: 'Focusing only on personal inner peace' } },
-            q46: { text: 'Aristotle’s statement, “Educating the mind without educating the heart is no education at all,” highlights the need for:', choices: { A: 'Purely intellectual development', B: 'Emotional suppression in education', C: 'Integrating ethical and moral development with intellectual learning', D: 'Focusing solely on vocational skills' } },
-            q47: { text: 'Which of the following is a core value promoted by Moral and Civics Education?', choices: { A: 'Disregard for the welfare of others', B: 'Intolerance of diversity', C: 'Respect for reasoning and fairness', D: 'Violent resolution of conflict' } },
-            q48: { text: 'To be active citizens, individuals need:', choices: { A: 'Only knowledge', B: 'Only skills', C: 'Only positive attitudes', D: 'A combination of knowledge, skills, attitudes, and values' } },
-            q49: { text: 'Calls to \'revitalize\' or \'reinvent\' civic education arise partly from:', choices: { A: 'The overwhelming success of previous civic education models', B: 'The perceived neglect and disregard in the field and the need for a more democratic focus', C: 'The idea that citizenship is unchanging and requires no updates', D: 'A desire to return to purely teacher-centered instruction' } },
-            q50: { text: 'The ultimate aim of teaching civics and ethics is summarized as producing:', choices: { A: 'Passive subjects who obey without question', B: 'Citizens focused solely on their own rights', C: 'Competent, high moral standard, responsible citizens who balance rights and obligations', D: 'Experts in philosophical debate' } }
+            q1: { text: 'How is Logic often treated simultaneously?', choices: { A: 'As a science and an art', B: 'As a field of study and an instrument', C: 'As a theoretical and a practical discipline', D: 'As a branch of mathematics and linguistics' } },
+            q2: { text: 'As an instrument, Logic primarily allows us to:', choices: { A: 'Discover new scientific facts', B: 'Formulate rational arguments and evaluate others\' arguments', C: 'Understand the nature of beauty and art', D: 'Achieve emotional well-being' } },
+            q3: { text: 'What is the etymological meaning of "philosophy"?', choices: { A: 'Study of existence', B: 'Love of wisdom', C: 'Pursuit of truth', D: 'Knowledge of the good' } },
+            q4: { text: 'Pythagoras first used the term "philosopher" to describe someone demonstrating:', choices: { A: 'Great technical skill', B: 'Political leadership', C: 'Marked curiosity in experiences', D: 'Reverence for religious dogma' } },
+            q5: { text: 'The Socratic understanding of wisdom emphasizes:', choices: { A: 'Accumulating vast amounts of information', B: 'Mastering specific professional skills', C: 'A critical habit, vigilance, and reverence for truth', D: 'Accepting the apparent without question' } },
+            q6: { text: 'What does "questioning the apparent" in philosophy entail?', choices: { A: 'Denying the existence of the physical world', B: 'Rejecting all common sense beliefs', C: 'Dealing creatively with the phenomenal world and going beyond common understanding', D: 'Focusing only on abstract, non-practical issues' } },
+            q7: { text: 'Philosophy, as a rational and critical enterprise, primarily relies on:', choices: { A: 'Emotional intuition', B: 'Historical precedent', C: 'Intensive application of reason (analysis, comparison, evaluation)', D: 'Empirical scientific experimentation' } },
+            q8: { text: 'Philosophy\'s "constructive side" primarily involves:', choices: { A: 'Only criticizing the arguments of others', B: 'Formulating rationally defensible answers to fundamental questions', C: 'Analyzing the grammatical structure of language', D: 'Cataloging different philosophical theories' } },
+            q9: { text: 'The formal sense of "doing" philosophy, as opposed to informally "having" one, involves:', choices: { A: 'Holding a set of uncritical beliefs about life', B: 'A process of reflecting on and criticizing deeply held conceptions', C: 'Agreeing with famous philosophers', D: 'Expressing personal opinions without justification' } },
+            q10: { text: 'Which statement best reflects the relationship between "having" and "doing" philosophy?', choices: { A: 'They are entirely independent activities.', B: 'Doing philosophy requires first having some informal beliefs to reflect upon.', C: 'Having a philosophy is sufficient for doing philosophy well.', D: 'One must do philosophy before they can have a philosophy.' } },
+            q11: { text: 'Philosophizing, as an activity, implies being:', choices: { A: 'Dogmatic and closed-minded', B: 'Content with surface-level understanding', C: 'Searching, critical, open-minded, and tolerant', D: 'Focused solely on historical texts' } },
+            q12: { text: 'One reason philosophers often disagree is that they:', choices: { A: 'Refuse to use logic', B: 'View things from different perspectives and assumptions', C: 'Live in a static, unchanging universe', D: 'Have access to complete and final evidence' } },
+            q13: { text: 'Philosophy\'s attempt to "look at the world as a whole" involves:', choices: { A: 'Focusing intensely on one scientific discipline', B: 'Ignoring human experience in favor of pure logic', C: 'Integrating knowledge from various sciences and experiences into a consistent worldview', D: 'Accepting fragmented views of reality as sufficient' } },
+            q14: { text: 'The function of philosophy involving the logical analysis of language aims to:', choices: { A: 'Create new languages', B: 'Prove the existence of God through grammar', C: 'Clarify the meaning of words and concepts, exposing confusion', D: 'Translate ancient philosophical texts' } },
+            q15: { text: 'Which of the following is presented as a typically philosophical question?', choices: { A: 'What is the boiling point of water?', B: 'Did Ram file his income tax return correctly?', C: 'What is the nature of truth and the distinction between right and wrong?', D: 'How many planets are in the solar system?' } },
+            q16: { text: 'Metaphysics is the branch of philosophy primarily concerned with:', choices: { A: 'The principles of right reasoning', B: 'The nature of beauty and art', C: 'The ultimate nature of reality and existence', D: 'The sources and limits of knowledge' } },
+            q17: { text: 'Which of these questions falls under the domain of Metaphysics?', choices: { A: 'How can we know if a statement is true?', B: 'What makes an action morally right?', C: 'Is reality ultimately composed of matter, spirit, or both?', D: 'What constitutes a valid argument?' } },
+            q18: { text: 'The term "metaphysics" originated from:', choices: { A: 'Plato\'s dialogues on ideal forms', B: 'The title given to Aristotle\'s works that came after his writings on physics', C: 'Pre-Socratic speculations about the cosmos', D: 'Medieval debates about the nature of God' } },
+            q19: { text: 'The cosmological aspect of metaphysics deals with questions about:', choices: { A: 'The nature and attributes of God', B: 'The origin, nature, and development of the universe', C: 'The relationship between mind and body', D: 'The meaning of existence itself' } },
+            q20: { text: 'The theological aspect of metaphysics focuses on:', choices: { A: 'The study of human beings', B: 'Conceptions of and about God', C: 'The fundamental nature of matter', D: 'The structure of space and time' } },
+            q21: { text: 'The anthropological aspect of metaphysics asks questions such as:', choices: { A: 'Is the universe designed or accidental?', B: 'What is the relationship between mind and body, and do humans have free will?', C: 'Is basic reality composed of one or many elements?', D: 'Can we prove God\'s existence?' } },
+            q22: { text: 'Ontology, as a subset of metaphysics, specifically studies:', choices: { A: 'The origins of the cosmos', B: 'The nature of existence and what it means for something to exist', C: 'The problem of evil', D: 'Human social structures' } },
+            q23: { text: 'Epistemology is primarily concerned with the study of:', choices: { A: 'Moral values', B: 'Ultimate reality', C: 'Beauty and art', D: 'Knowledge (its nature, scope, sources, and validity)' } },
+            q24: { text: 'Which two fundamental questions does epistemology seek to answer?', choices: { A: 'What is real? and What is good?', B: 'What is true? and How do we know?', C: 'What is beauty? and What is justice?', D: 'Does God exist? and Do we have free will?' } },
+            q25: { text: 'Skepticism, in its narrow epistemological sense, is the position that:', choices: { A: 'All knowledge comes from sense experience', B: 'Humans cannot acquire reliable knowledge', C: 'Reason is the primary source of knowledge', D: 'Truth is relative to the individual' } },
+            q26: { text: 'Agnosticism is specifically a profession of ignorance regarding:', choices: { A: 'The nature of reality', B: 'The existence or nonexistence of God', C: 'The possibility of achieving moral certainty', D: 'The reliability of sense perception' } },
+            q27: { text: 'The epistemological view that knowledge is primarily obtained through the senses is called:', choices: { A: 'Rationalism', B: 'Skepticism', C: 'Empiricism', D: 'Intuitionism' } },
+            q28: { text: 'A key challenge or limitation associated with empiricism is that:', choices: { A: 'It relies too heavily on abstract logic', B: 'Sense data can be incomplete, undependable, and subject to distortion', C: 'It ignores the role of observation', D: 'It cannot account for scientific progress' } },
+            q29: { text: 'Rationalism emphasizes the role of _______ in acquiring knowledge.', choices: { A: 'Sense experience', B: 'Divine revelation', C: 'Reasoning, thought, or logic', D: 'Authoritative testimony' } },
+            q30: { text: 'A potential weakness of systems of thought based solely on logic (rationalism) is that they might:', choices: { A: 'Be too reliant on empirical verification', B: 'Lack internal consistency', C: 'Become disconnected from the external world', D: 'Fail to organize sense data meaningfully' } },
+            q31: { text: 'Intuition, as a source of knowledge, refers to:', choices: { A: 'Knowledge gained through logical deduction', B: 'Direct apprehension of knowledge without conscious reasoning or sense perception', C: 'Knowledge accepted from experts', D: 'Information received through divine communication' } },
+            q32: { text: 'A primary advantage claimed for revealed knowledge is that it:', choices: { A: 'Can be empirically verified by anyone', B: 'Originates from an omniscient, transcendent source', C: 'Is derived through logical proof', D: 'Avoids any issues of interpretation' } },
+            q33: { text: 'Relying on authority as a source of knowledge involves accepting something as true because:', choices: { A: 'It has been personally experienced', B: 'It logically follows from accepted premises', C: 'It comes from experts or tradition', D: 'It was arrived at through intuition' } },
+            q34: { text: 'A significant danger of relying solely on authoritative knowledge is that:', choices: { A: 'It discourages personal verification', B: 'It can be based on incorrect assumptions and perpetuate distortions', C: 'Civilization requires rejecting all authority', D: 'Experts are always infallible' } },
+            q35: { text: 'Axiology is the philosophical study of:', choices: { A: 'Arguments and reasoning', B: 'Reality and existence', C: 'Knowledge and belief', D: 'Value (including ethics, aesthetics, and social/political values)' } },
+            q36: { text: 'Ethics, or Moral Philosophy, is primarily concerned with:', choices: { A: 'The nature of beauty', B: 'Principles of right and wrong human conduct', C: 'The validity of arguments', D: 'The structure of society' } },
+            q37: { text: 'Which of these questions is central to Ethics?', choices: { A: 'What constitutes a valid inference?', B: 'What is the nature of time?', C: 'Are moral principles universal or relative?', D: 'Can we know the external world?' } },
+            q38: { text: 'Normative Ethics aims to:', choices: { A: 'Analyze the meaning of ethical terms like "good"', B: 'Apply ethical principles to specific moral problems', C: 'Study and determine the moral rules and principles for evaluating actions', D: 'Investigate the historical development of moral codes' } },
+            q39: { text: 'Meta-ethics focuses on:', choices: { A: 'Determining which actions are right or wrong', B: 'Investigating the meaning of ethical terms and the verification of ethical statements', C: 'Developing codes of conduct for specific professions', D: 'Studying comparative ethics across different cultures' } },
+            q40: { text: 'Applied Ethics involves:', choices: { A: 'Studying the history of ethical theories', B: 'Analyzing the logic of moral language', C: 'Attempting to resolve specific moral problems using ethical principles', D: 'Questioning whether morality exists at all' } },
+            q41: { text: 'Aesthetics is the branch of axiology dealing with:', choices: { A: 'Political organization', B: 'The nature of knowledge', C: 'Principles of reasoning', D: 'Beauty, art, and taste' } },
+            q42: { text: 'Which question belongs to the field of Aesthetics?', choices: { A: 'Is democracy the best form of government?', B: 'Can the existence of God be proven?', C: 'What is the relationship between art and truth?', D: 'How do we justify moral judgments?' } },
+            q43: { text: 'Social/Political Philosophy, as a part of Axiology, examines:', choices: { A: 'The nature of perception', B: 'Value judgments operating within a civil society (e.g., justice, best form of government)', C: 'The relationship between mind and body', D: 'The rules of logical deduction' } },
+            q44: { text: 'Logic, as a core field of philosophy, focuses on:', choices: { A: 'The study of value', B: 'The nature of reality', C: 'The principles and methods of right reasoning and argument evaluation', D: 'The experience of beauty' } },
+            q45: { text: 'A central concern within the study of Logic is:', choices: { A: 'Determining the ultimate substance of the universe', B: 'Defining the concept of justice', C: 'Evaluating the validity and soundness of arguments', D: 'Understanding the nature of consciousness' } },
+            q46: { text: 'Socrates\' statement "The unexamined life is not worth living" highlights philosophy\'s role in promoting:', choices: { A: 'Material wealth', B: 'Political power', C: 'Critical self-examination and understanding', D: 'Acceptance of tradition without question' } },
+            q47: { text: 'Developing "Intellectual and Behavioral Independence" through philosophy involves:', choices: { A: 'Agreeing with the majority opinion', B: 'Forming one\'s own integrated and coherent worldview and acting upon it', C: 'Rejecting all past philosophical ideas', D: 'Focusing solely on practical skills' } },
+            q48: { text: 'Studying different philosophical perspectives primarily fosters which quality?', choices: { A: 'Dogmatism', B: 'Narrow-mindedness', C: 'Flexibility, Tolerance, and Open-Mindedness', D: 'Apathy towards differing views' } },
+            q49: { text: 'Engaging with philosophy enhances "Creative and Critical Thinking" by developing abilities in:', choices: { A: 'Rote memorization', B: 'Unquestioning acceptance of authority', C: 'Analysis, reasoning, evaluation, theorizing, and justification', D: 'Avoiding complex problems' } },
+            q50: { text: 'According to Bertrand Russell, the value of philosophy lies partly in its uncertainty because it:', choices: { A: 'Provides definite answers to all questions', B: 'Confirms common sense prejudices', C: 'Frees the mind from the "tyranny of custom" and enlarges thought by suggesting possibilities', D: 'Makes people feel certain about the nature of things' } }
         };
 
-        // Correct answers mapped to letters (NEW SET)
+        // Correct answers mapped to letters (NEW SET: PHILOSOPHY/LOGIC)
         const correctAnswersMap = {
-            q1: 'C', q2: 'B', q3: 'B', q4: 'C', q5: 'B',
-            q6: 'B', q7: 'C', q8: 'B', q9: 'B', q10: 'B',
-            q11: 'B', q12: 'B', q13: 'C', q14: 'C', q15: 'C',
-            q16: 'A', q17: 'C', q18: 'B', q19: 'B', q20: 'C',
-            q21: 'C', q22: 'B', q23: 'C', q24: 'C', q25: 'B',
-            q26: 'C', q27: 'C', q28: 'B', q29: 'B', q30: 'B',
-            q31: 'B', q32: 'B', q33: 'B', q34: 'C', q35: 'B',
-            q36: 'C', q37: 'C', q38: 'C', q39: 'C', q40: 'A',
-            q41: 'B', q42: 'B', q43: 'B', q44: 'B', q45: 'B',
-            q46: 'C', q47: 'C', q48: 'D', q49: 'B', q50: 'C'
+            q1: 'B', q2: 'B', q3: 'B', q4: 'C', q5: 'C',
+            q6: 'C', q7: 'C', q8: 'B', q9: 'B', q10: 'B',
+            q11: 'C', q12: 'B', q13: 'C', q14: 'C', q15: 'C',
+            q16: 'C', q17: 'C', q18: 'B', q19: 'B', q20: 'B',
+            q21: 'B', q22: 'B', q23: 'D', q24: 'B', q25: 'B',
+            q26: 'B', q27: 'C', q28: 'B', q29: 'C', q30: 'C',
+            q31: 'B', q32: 'B', q33: 'C', q34: 'B', q35: 'D',
+            q36: 'B', q37: 'C', q38: 'C', q39: 'B', q40: 'C',
+            q41: 'D', q42: 'C', q43: 'B', q44: 'C', q45: 'C',
+            q46: 'C', q47: 'B', q48: 'C', q49: 'C', q50: 'C'
         };
+
 
         function checkLogin() {
             const username = document.getElementById('username').value.trim();
@@ -636,7 +638,7 @@
 
 
             doc.setFontSize(16);
-            doc.text('MCIE Quiz Response', pageWidth / 2, y, { align: 'center' });
+            doc.text('Philosophy/Logic Quiz Response', pageWidth / 2, y, { align: 'center' }); // Updated Title
             y += 10;
 
             doc.setFontSize(12);
@@ -675,7 +677,7 @@
 
             }
 
-            doc.save(`quiz_response_${quizData.id_number}.pdf`);
+            doc.save(`philosophy_quiz_response_${quizData.id_number}.pdf`); // Updated filename
         }
 
         // --- MODIFIED: Sends data to your backend ---
@@ -711,6 +713,7 @@
                     phone: data.phone,
                     score: score,
                     totalQuestions: TOTAL_QUESTIONS,
+                    quizTitle: " Logic and Critical Thinking Quiz - Chapter 1", // Added title
                     submittedAt: new Date().toISOString()
                     // Add individual answers if needed by backend
                     // answers: quizData.answers
@@ -879,7 +882,7 @@
              }
 
             doc.setFontSize(16);
-            doc.text('MCIE Quiz Results', pageWidth / 2, y, { align: 'center' });
+            doc.text('Philosophy/Logic Quiz Results', pageWidth / 2, y, { align: 'center' }); // Updated Title
             y += 10;
 
             doc.setFontSize(12);
@@ -949,7 +952,7 @@
             doc.setFontSize(14);
             doc.text(`Final Score: ${quizData.score} / ${TOTAL_QUESTIONS}`, pageWidth / 2, y, { align: 'center' });
 
-            doc.save(`quiz_results_${quizData.id_number}.pdf`);
+            doc.save(`philosophy_quiz_results_${quizData.id_number}.pdf`); // Updated filename
         }
     </script>
 </body>
