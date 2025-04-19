@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- IMPORTANT: Make sure your text editor saves this file with UTF-8 Encoding! -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moral and Citizenship Education Quiz - Chapter 3</title> <!-- Updated Title -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="password"] { width: 100%; padding: 8px; box-sizing: border-box; }
+        input[type="radio"] { margin-right: 5px; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; margin-right: 10px; border-radius: 5px; }
+        button:hover { background-color: #0056b3; }
+        .hidden { display: none; }
+        #error-message, #password-error, #login-error { color: red; font-size: 1.2em; text-align: center; }
+        #success-message { color: green; font-size: 1.2em; text-align: center; }
+        #results, #review-section, #submission-copy { margin-top: 20px; text-align: left; border: 1px solid #ccc; padding: 15px; border-radius: 5px; background-color: #f9f9f9;}
+        #password-section, #login-section { text-align: center; max-width: 400px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;}
+        #password-section input[type="password"], #login-section input[type="text"], #login-section input[type="password"] { width: calc(100% - 18px); }
+        .question-result { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        #download-pdf, #download-response { margin-top: 10px; }
+        #score { font-weight: bold; text-align: center; color: green; font-size: 1.4em; margin-top: 20px; }
+        #review-section h2, #submission-copy h2, #results h1 { margin-bottom: 15px; text-align: center; color: #007bff;}
+        #review-section button, #submission-copy button, #password-section button, #login-section button, #results button { margin-top: 15px; }
+        .choices p { margin: 2px 0 2px 20px; }
+    </style>
+</head>
+<body>
+    <div id="login-section">
+        <h1>Login to Access Quiz</h1>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" placeholder="Enter password" required>
+        </div>
+        <button onclick="checkLogin()">Login</button>
+        <p id="login-error" class="hidden">Incorrect username or password. Please try again.</p>
+    </div>
+
+    <div id="quiz-form" class="hidden">
+        <h1>Moral and Citizenship Education Quiz - Chapter 3</h1> <!-- Updated Title -->
+        <form id="mcie-quiz" method="POST">
+            <!-- Student Information -->
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="id_number">ID Number:</label>
+                <input type="text" id="id_number" name="id_number" required>
+            </div>
+            <div class="form-group">
+                <label for="section">Section:</label>
+                <input type="text" id="section" name="section" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <!-- MCIE Multiple-Choice Questions (Chapter 3 SET - 30 Questions) -->
+            <div class="form-group">
+                <label>1. A good considered valuable for what it leads to, rather than for its own sake, is known as:</label>
+                <input type="radio" name="q1" value="A" required> A) Intrinsic good<br>
+                <input type="radio" name="q1" value="B"> B) Instrumental good<br>
+                <input type="radio" name="q1" value="C"> C) Absolute good<br>
+                <input type="radio" name="q1" value="D"> D) Neutral good
+            </div>
+            <div class="form-group">
+                <label>2. Something valued for its own nature, not merely as a means to something else, is called:</label>
+                <input type="radio" name="q2" value="A" required> A) Instrumental good<br>
+                <input type="radio" name="q2" value="B"> B) Conditional good<br>
+                <input type="radio" name="q2" value="C"> C) Intrinsic good<br>
+                <input type="radio" name="q2" value="D"> D) Relative good
+            </div>
+            <div class="form-group">
+                <label>3. Evaluating the adequacy of reasons given for actions, based on evidence and logical argument, is a key task of:</label>
+                <input type="radio" name="q3" value="A" required> A) Emotional response<br>
+                <input type="radio" name="q3" value="B"> B) Ethical reasoning<br>
+                <input type="radio" name="q3" value="C"> C) Intuitive judgment<br>
+                <input type="radio" name="q3" value="D"> D) Traditional acceptance
+            </div>
+            <div class="form-group">
+                <label>4. Respecting someone’s preferences regarding their end-of-life care relates primarily to the ethical value of:</label>
+                <input type="radio" name="q4" value="A" required> A) Sanctity of life<br>
+                <input type="radio" name="q4" value="B"> B) Quality of life<br>
+                <input type="radio" name="q4" value="C"> C) Autonomy<br>
+                <input type="radio" name="q4" value="D"> D) Beneficence
+            </div>
+            <div class="form-group">
+                <label>5. Day-to-day rules like 'it is wrong to steal' or 'help people in need' function as:</label>
+                <input type="radio" name="q5" value="A" required> A) Systematic ethical frameworks<br>
+                <input type="radio" name="q5" value="B"> B) Philosophical certainties<br>
+                <input type="radio" name="q5" value="C"> C) Rules of thumb<br>
+                <input type="radio" name="q5" value="D"> D) Legal statutes
+            </div>
+            <div class="form-group">
+                <label>6. Moral sentiments, which provide a sense of what others are feeling, arise from:</label>
+                <input type="radio" name="q6" value="A" required> A) Rational calculation<br>
+                <input type="radio" name="q6" value="B"> B) Legal training<br>
+                <input type="radio" name="q6" value="C"> C) Empathy<br>
+                <input type="radio" name="q6" value="D"> D) Adherence to rules
+            </div>
+            <div class="form-group">
+                <label>7. Our moral conscience is described as an integration of:</label>
+                <input type="radio" name="q7" value="A" required> A) Legal principles and societal customs<br>
+                <input type="radio" name="q7" value="B"> B) Personal desires and ambitions<br>
+                <input type="radio" name="q7" value="C"> C) Moral sentiments (emotions) and moral principles (reason)<br>
+                <input type="radio" name="q7" value="D"> D) Religious dogma and political ideology
+            </div>
+            <div class="form-group">
+                <label>8. Presenting seemingly rational motives to cover up one's true (perhaps unconscious) motives is called:</label>
+                <input type="radio" name="q8" value="A" required> A) Deductive reasoning<br>
+                <input type="radio" name="q8" value="B"> B) Ethical deliberation<br>
+                <input type="radio" name="q8" value="C"> C) Rationalisation<br>
+                <input type="radio" name="q8" value="D"> D) Analogical thinking
+            </div>
+            <div class="form-group">
+                <label>9. Explaining one thing by comparing it to another similar, yet different, thing is which type of reasoning?</label>
+                <input type="radio" name="q9" value="A" required> A) Deductive<br>
+                <input type="radio" name="q9" value="B"> B) Inductive<br>
+                <input type="radio" name="q9" value="C"> C) Analogical<br>
+                <input type="radio" name="q9" value="D"> D) Intuitive
+            </div>
+            <div class="form-group">
+                <label>10. Applying a general principle to a specific situation ("All men are mortal; Socrates is a man; therefore, Socrates is mortal") is an example of:</label>
+                <input type="radio" name="q10" value="A" required> A) Inductive reasoning<br>
+                <input type="radio" name="q10" value="B"> B) Reasoning by analogy<br>
+                <input type="radio" name="q10" value="C"> C) Rationalisation<br>
+                <input type="radio" name="q10" value="D"> D) Deductive reasoning
+            </div>
+            <div class="form-group">
+                <label>11. Providing evidence to support a hypothesis ("Every swan I've seen is white; therefore, all swans are probably white") is an example of:</label>
+                <input type="radio" name="q11" value="A" required> A) Deductive reasoning<br>
+                <input type="radio" name="q11" value="B"> B) Inductive reasoning<br>
+                <input type="radio" name="q11" value="C"> C) Analogical reasoning<br>
+                <input type="radio" name="q11" value="D"> D) Divine command
+            </div>
+            <div class="form-group">
+                <label>12. The argument that one should not derive an 'ought' (a moral value) from an 'is' (a factual state) is associated with:</label>
+                <input type="radio" name="q12" value="A" required> A) Aristotle<br>
+                <input type="radio" name="q12" value="B"> B) Immanuel Kant<br>
+                <input type="radio" name="q12" value="C"> C) David Hume<br>
+                <input type="radio" name="q12" value="D"> D) John Rawls
+            </div>
+            <div class="form-group">
+                <label>13. Which is NOT one of the three main ways suggested for testing a moral argument?</label>
+                <input type="radio" name="q13" value="A" required> A) Factual accuracy<br>
+                <input type="radio" name="q13" value="B"> B) Consistency<br>
+                <input type="radio" name="q13" value="C"> C) Popularity of the conclusion<br>
+                <input type="radio" name="q13" value="D"> D) Demonstration of good will
+            </div>
+            <div class="form-group">
+                <label>14. The first, and often overlooked, step in analyzing moral issues within the suggested framework is:</label>
+                <input type="radio" name="q14" value="A" required> A) Appealing to values<br>
+                <input type="radio" name="q14" value="B"> B) Getting the facts<br>
+                <input type="radio" name="q14" value="C"> C) Consulting religious texts<br>
+                <input type="radio" name="q14" value="D"> D) Determining consequences
+            </div>
+            <div class="form-group">
+                <label>15. The approach to ethical decision-making rooted in Aristotle's idea that "equals should be treated equally and unequals unequally" is the:</label>
+                <input type="radio" name="q15" value="A" required> A) Utilitarian Approach<br>
+                <input type="radio" name="q15" value="B"> B) Rights Approach<br>
+                <input type="radio" name="q15" value="C"> C) Common Good Approach<br>
+                <input type="radio" name="q15" value="D"> D) Fairness and Justice Approach
+            </div>
+            <div class="form-group">
+                <label>16. Focusing on ensuring that social policies, systems, and environments are beneficial to all members of society relates to the:</label>
+                <input type="radio" name="q16" value="A" required> A) Fairness and Justice Approach<br>
+                <input type="radio" name="q16" value="B"> B) Rights Approach<br>
+                <input type="radio" name="q16" value="C"> C) Common Good Approach<br>
+                <input type="radio" name="q16" value="D"> D) Virtue Approach
+            </div>
+            <div class="form-group">
+                <label>17. The ethical approach emphasizing the individual's dignity and right to make choices about their own life is the:</label>
+                <input type="radio" name="q17" value="A" required> A) Common Good Approach<br>
+                <input type="radio" name="q17" value="B"> B) Rights Approach<br>
+                <input type="radio" name="q17" value="C"> C) Utilitarian Approach<br>
+                <input type="radio" name="q17" value="D"> D) Fairness Approach
+            </div>
+            <div class="form-group">
+                <label>18. The right to be told the truth and informed about matters significantly affecting one's choices falls under which specific right category within the Rights Approach?</label>
+                <input type="radio" name="q18" value="A" required> A) Right of Privacy<br>
+                <input type="radio" name="q18" value="B"> B) Right not to be injured<br>
+                <input type="radio" name="q18" value="C"> C) Right to the Truth<br>
+                <input type="radio" name="q18" value="D"> D) Right to what is agreed
+            </div>
+            <div class="form-group">
+                <label>19. Religious morality, such as the first three of the Ten Commandments, primarily concerns the relationship between:</label>
+                <input type="radio" name="q19" value="A" required> A) Individuals and society<br>
+                <input type="radio" name="q19" value="B"> B) Humans and nature<br>
+                <input type="radio" name="q19" value="C"> C) Human beings and supernatural beings<br>
+                <input type="radio" name="q19" value="D"> D) Individuals and the state
+            </div>
+            <div class="form-group">
+                <label>20. Morality concerning a human being's relationship to the natural world is termed:</label>
+                <input type="radio" name="q20" value="A" required> A) Social morality<br>
+                <input type="radio" name="q20" value="B"> B) Individual morality<br>
+                <input type="radio" name="q20" value="C"> C) Religious morality<br>
+                <input type="radio" name="q20" value="D"> D) Morality and nature
+            </div>
+            <div class="form-group">
+                <label>21. An individual's code of morality, based on personal conscience and possibly distinct from societal or religious norms, is known as:</label>
+                <input type="radio" name="q21" value="A" required> A) Social morality<br>
+                <input type="radio" name="q21" value="B"> B) Individual morality<br>
+                <input type="radio" name="q21" value="C"> C) Natural morality<br>
+                <input type="radio" name="q21" value="D"> D) Legal morality
+            </div>
+            <div class="form-group">
+                <label>22. Morality governing the relationships between human beings, considered the most important aspect cutting across others, is:</label>
+                <input type="radio" name="q22" value="A" required> A) Religious morality<br>
+                <input type="radio" name="q22" value="B"> B) Individual morality<br>
+                <input type="radio" name="q22" value="C"> C) Social morality<br>
+                <input type="radio" name="q22" value="D"> D) Natural morality
+            </div>
+            <div class="form-group">
+                <label>23. For an action to be considered moral (either good or bad), it typically requires:</label>
+                <input type="radio" name="q23" value="A" required> A) Only an agent performing the action<br>
+                <input type="radio" name="q23" value="B"> B) An agent, intention, and an effect on others<br>
+                <input type="radio" name="q23" value="C"> C) Only an effect on others<br>
+                <input type="radio" name="q23" value="D"> D) Only a good intention, regardless of agent or effect
+            </div>
+            <div class="form-group">
+                <label>24. Moral judgments are considered 'evaluative' because they:</label>
+                <input type="radio" name="q24" value="A" required> A) Are based on scientific facts<br>
+                <input type="radio" name="q24" value="B"> B) Place value (good/bad, right/wrong) on actions or things<br>
+                <input type="radio" name="q24" value="C"> C) Describe psychological states<br>
+                <input type="radio" name="q24" value="D"> D) Follow legal precedents
+            </div>
+            <div class="form-group">
+                <label>25. The intention or the 'why' behind an action, considered crucial by thinkers like Kant, refers to the:</label>
+                <input type="radio" name="q25" value="A" required> A) Means<br>
+                <input type="radio" name="q25" value="B"> B) Consequences<br>
+                <input type="radio" name="q25" value="C"> C) Motive<br>
+                <input type="radio" name="q25" value="D"> D) Situation
+            </div>
+            <div class="form-group">
+                <label>26. The agency, instrument, or method used to attain an end is known as the:</label>
+                <input type="radio" name="q26" value="A" required> A) Motive<br>
+                <input type="radio" name="q26" value="B"> B) Means<br>
+                <input type="radio" name="q26" value="C"> C) Consequence<br>
+                <input type="radio" name="q26" value="D"> D) Virtue
+            </div>
+            <div class="form-group">
+                <label>27. The effects or results of a moral decision or action are the:</label>
+                <input type="radio" name="q27" value="A" required> A) Motives<br>
+                <input type="radio" name="q27" value="B"> B) Means<br>
+                <input type="radio" name="q27" value="C"> C) Consequences<br>
+                <input type="radio" name="q27" value="D"> D) Intentions
+            </div>
+            <div class="form-group">
+                <label>28. The argument that people should be moral because it is generally better for everyone if people act morally, benefiting the individual in the long run, is the argument from:</label>
+                <input type="radio" name="q28" value="A" required> A) Tradition and Law<br>
+                <input type="radio" name="q28" value="B"> B) Divine Command<br>
+                <input type="radio" name="q28" value="C"> C) Common Human Needs<br>
+                <input type="radio" name="q28" value="D"> D) Enlightened Self-Interest
+            </div>
+            <div class="form-group">
+                <label>29. The argument that long-established societal rules and legal systems urging moral behavior provide good reason to be moral relates to:</label>
+                <input type="radio" name="q29" value="A" required> A) Enlightened Self-Interest<br>
+                <input type="radio" name="q29" value="B"> B) Tradition and Law<br>
+                <input type="radio" name="q29" value="C"> C) Common Human Needs<br>
+                <input type="radio" name="q29" value="D"> D) Existential Choice
+            </div>
+            <div class="form-group">
+                <label>30. The argument that morality is necessary to satisfy universal human requirements like friendship, love, freedom, and peace is based on:</label>
+                <input type="radio" name="q30" value="A" required> A) Enlightened Self-Interest<br>
+                <input type="radio" name="q30" value="B"> B) Tradition and Law<br>
+                <input type="radio" name="q30" value="C"> C) Common Human Needs<br>
+                <input type="radio" name="q30" value="D"> D) Utilitarian Calculus
+            </div>
+            <!-- End of Chapter 3 Questions -->
+
+            <button type="button" onclick="showReview()">Submit</button>
+        </form>
+        <div id="error-message" class="hidden">
+            <p>Something went wrong. Please try again.</p>
+        </div>
+    </div>
+
+    <div id="review-section" class="hidden">
+        <h2>Review Your Answers</h2>
+        <div id="review-content"></div>
+        <button onclick="editForm()">Edit</button>
+        <button onclick="downloadResponse()" id="download-response">Download My Response</button>
+        <button onclick="confirmSubmission()">Confirm Submission</button>
+    </div>
+
+    <div id="submission-copy" class="hidden">
+        <h2>Your Submitted Answers (Chapter 3)</h2> <!-- Updated Title -->
+        <div id="submission-content"></div>
+        <button onclick="proceedToPassword()">Proceed</button>
+    </div>
+
+    <div id="password-section" class="hidden">
+        <h1 id="success-message">Your response has been submitted</h1>
+        <p>You can view your result (score) by entering the password.</p>
+        <input type="password" id="password" placeholder="Enter password">
+        <button onclick="checkPassword()">Submit</button>
+        <p id="password-error" class="hidden">Incorrect password. Please try again.</p>
+    </div>
+
+    <div id="results" class="hidden">
+        <h1>Quiz Results - Chapter 3</h1> <!-- Updated Title -->
+        <p id="student-info"></p>
+        <div id="answers"></div>
+        <p id="score"></p>
+        <button id="download-pdf" onclick="downloadPDF()">Download Results PDF</button>
+    </div>
+
+    <script>
+        let quizData = null;
+        let formData = null;
+        const { jsPDF } = window.jspdf;
+        const TOTAL_QUESTIONS = 30; // *** UPDATED: Total number of questions to 30 ***
+
+        // Valid login credentials
+        const validCredentials = [
+            { username: 'section19', password: '123' },
+            { username: 'section20', password: '123' },
+            { username: 'muzemuza', password: 'moh' },
+            { username: 'section21', password: '123' }
+        ];
+
+        // *** UPDATED: Structure holding question texts and choices (CHAPTER 3 SET) ***
+        const allQuestionsData = {
+            q1: { text: 'A good considered valuable for what it leads to, rather than for its own sake, is known as:', choices: { A: 'Intrinsic good', B: 'Instrumental good', C: 'Absolute good', D: 'Neutral good' } },
+            q2: { text: 'Something valued for its own nature, not merely as a means to something else, is called:', choices: { A: 'Instrumental good', B: 'Conditional good', C: 'Intrinsic good', D: 'Relative good' } },
+            q3: { text: 'Evaluating the adequacy of reasons given for actions, based on evidence and logical argument, is a key task of:', choices: { A: 'Emotional response', B: 'Ethical reasoning', C: 'Intuitive judgment', D: 'Traditional acceptance' } },
+            q4: { text: 'Respecting someone’s preferences regarding their end-of-life care relates primarily to the ethical value of:', choices: { A: 'Sanctity of life', B: 'Quality of life', C: 'Autonomy', D: 'Beneficence' } },
+            q5: { text: 'Day-to-day rules like \'it is wrong to steal\' or \'help people in need\' function as:', choices: { A: 'Systematic ethical frameworks', B: 'Philosophical certainties', C: 'Rules of thumb', D: 'Legal statutes' } },
+            q6: { text: 'Moral sentiments, which provide a sense of what others are feeling, arise from:', choices: { A: 'Rational calculation', B: 'Legal training', C: 'Empathy', D: 'Adherence to rules' } },
+            q7: { text: 'Our moral conscience is described as an integration of:', choices: { A: 'Legal principles and societal customs', B: 'Personal desires and ambitions', C: 'Moral sentiments (emotions) and moral principles (reason)', D: 'Religious dogma and political ideology' } },
+            q8: { text: 'Presenting seemingly rational motives to cover up one\'s true (perhaps unconscious) motives is called:', choices: { A: 'Deductive reasoning', B: 'Ethical deliberation', C: 'Rationalisation', D: 'Analogical thinking' } },
+            q9: { text: 'Explaining one thing by comparing it to another similar, yet different, thing is which type of reasoning?', choices: { A: 'Deductive', B: 'Inductive', C: 'Analogical', D: 'Intuitive' } },
+            q10: { text: 'Applying a general principle to a specific situation ("All men are mortal; Socrates is a man; therefore, Socrates is mortal") is an example of:', choices: { A: 'Inductive reasoning', B: 'Reasoning by analogy', C: 'Rationalisation', D: 'Deductive reasoning' } },
+            q11: { text: 'Providing evidence to support a hypothesis ("Every swan I\'ve seen is white; therefore, all swans are probably white") is an example of:', choices: { A: 'Deductive reasoning', B: 'Inductive reasoning', C: 'Analogical reasoning', D: 'Divine command' } },
+            q12: { text: 'The argument that one should not derive an \'ought\' (a moral value) from an \'is\' (a factual state) is associated with:', choices: { A: 'Aristotle', B: 'Immanuel Kant', C: 'David Hume', D: 'John Rawls' } },
+            q13: { text: 'Which is NOT one of the three main ways suggested for testing a moral argument?', choices: { A: 'Factual accuracy', B: 'Consistency', C: 'Popularity of the conclusion', D: 'Demonstration of good will' } },
+            q14: { text: 'The first, and often overlooked, step in analyzing moral issues within the suggested framework is:', choices: { A: 'Appealing to values', B: 'Getting the facts', C: 'Consulting religious texts', D: 'Determining consequences' } },
+            q15: { text: 'The approach to ethical decision-making rooted in Aristotle\'s idea that "equals should be treated equally and unequals unequally" is the:', choices: { A: 'Utilitarian Approach', B: 'Rights Approach', C: 'Common Good Approach', D: 'Fairness and Justice Approach' } },
+            q16: { text: 'Focusing on ensuring that social policies, systems, and environments are beneficial to all members of society relates to the:', choices: { A: 'Fairness and Justice Approach', B: 'Rights Approach', C: 'Common Good Approach', D: 'Virtue Approach' } },
+            q17: { text: 'The ethical approach emphasizing the individual\'s dignity and right to make choices about their own life is the:', choices: { A: 'Common Good Approach', B: 'Rights Approach', C: 'Utilitarian Approach', D: 'Fairness Approach' } },
+            q18: { text: 'The right to be told the truth and informed about matters significantly affecting one\'s choices falls under which specific right category within the Rights Approach?', choices: { A: 'Right of Privacy', B: 'Right not to be injured', C: 'Right to the Truth', D: 'Right to what is agreed' } },
+            q19: { text: 'Religious morality, such as the first three of the Ten Commandments, primarily concerns the relationship between:', choices: { A: 'Individuals and society', B: 'Humans and nature', C: 'Human beings and supernatural beings', D: 'Individuals and the state' } },
+            q20: { text: 'Morality concerning a human being\'s relationship to the natural world is termed:', choices: { A: 'Social morality', B: 'Individual morality', C: 'Religious morality', D: 'Morality and nature' } },
+            q21: { text: 'An individual\'s code of morality, based on personal conscience and possibly distinct from societal or religious norms, is known as:', choices: { A: 'Social morality', B: 'Individual morality', C: 'Natural morality', D: 'Legal morality' } },
+            q22: { text: 'Morality governing the relationships between human beings, considered the most important aspect cutting across others, is:', choices: { A: 'Religious morality', B: 'Individual morality', C: 'Social morality', D: 'Natural morality' } },
+            q23: { text: 'For an action to be considered moral (either good or bad), it typically requires:', choices: { A: 'Only an agent performing the action', B: 'An agent, intention, and an effect on others', C: 'Only an effect on others', D: 'Only a good intention, regardless of agent or effect' } },
+            q24: { text: 'Moral judgments are considered \'evaluative\' because they:', choices: { A: 'Are based on scientific facts', B: 'Place value (good/bad, right/wrong) on actions or things', C: 'Describe psychological states', D: 'Follow legal precedents' } },
+            q25: { text: 'The intention or the \'why\' behind an action, considered crucial by thinkers like Kant, refers to the:', choices: { A: 'Means', B: 'Consequences', C: 'Motive', D: 'Situation' } },
+            q26: { text: 'The agency, instrument, or method used to attain an end is known as the:', choices: { A: 'Motive', B: 'Means', C: 'Consequence', D: 'Virtue' } },
+            q27: { text: 'The effects or results of a moral decision or action are the:', choices: { A: 'Motives', B: 'Means', C: 'Consequences', D: 'Intentions' } },
+            q28: { text: 'The argument that people should be moral because it is generally better for everyone if people act morally, benefiting the individual in the long run, is the argument from:', choices: { A: 'Tradition and Law', B: 'Divine Command', C: 'Common Human Needs', D: 'Enlightened Self-Interest' } },
+            q29: { text: 'The argument that long-established societal rules and legal systems urging moral behavior provide good reason to be moral relates to:', choices: { A: 'Enlightened Self-Interest', B: 'Tradition and Law', C: 'Common Human Needs', D: 'Existential Choice' } },
+            q30: { text: 'The argument that morality is necessary to satisfy universal human requirements like friendship, love, freedom, and peace is based on:', choices: { A: 'Enlightened Self-Interest', B: 'Tradition and Law', C: 'Common Human Needs', D: 'Utilitarian Calculus' } }
+        };
+
+        // *** UPDATED: Correct answers mapped to letters (CHAPTER 3 SET) ***
+        const correctAnswersMap = {
+            q1: 'B', q2: 'C', q3: 'B', q4: 'C', q5: 'C',
+            q6: 'C', q7: 'C', q8: 'C', q9: 'C', q10: 'D',
+            q11: 'B', q12: 'C', q13: 'C', q14: 'B', q15: 'D', // Note: Q13 answer was C based on the HTML provided
+            q16: 'C', q17: 'B', q18: 'C', q19: 'C', q20: 'D',
+            q21: 'B', q22: 'C', q23: 'B', q24: 'B', q25: 'C',
+            q26: 'B', q27: 'C', q28: 'D', q29: 'B', q30: 'C'
+        };
+
+        // --- Functions ---
+
+        function checkLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            const errorMessage = document.getElementById('login-error');
+            const loginSection = document.getElementById('login-section');
+            const quizForm = document.getElementById('quiz-form');
+
+            const isValid = validCredentials.some(cred =>
+                cred.username === username && cred.password === password
+            );
+
+            if (isValid) {
+                errorMessage.classList.add('hidden');
+                loginSection.classList.add('hidden');
+                quizForm.classList.remove('hidden');
+            } else {
+                errorMessage.classList.remove('hidden');
+            }
+        }
+
+        function showReview() {
+            const form = document.getElementById('mcie-quiz');
+            formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+             // Check if all questions are answered (Loops up to TOTAL_QUESTIONS = 30)
+             let allAnswered = true;
+             for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 if (!data[`q${i}`]) {
+                     allAnswered = false;
+                     break;
+                 }
+             }
+
+             if (!data.name || !data.id_number || !data.section || !data.email || !data.phone || !allAnswered) {
+                 alert('Please fill in all personal information and answer all questions before submitting.');
+                 return;
+             }
+
+            quizData = {
+                name: data.name,
+                id_number: data.id_number,
+                section: data.section,
+                email: data.email,
+                phone: data.phone,
+                answers: {},
+                questions: allQuestionsData
+            };
+
+            let reviewHTML = `
+                <p><strong>Name:</strong> ${data.name}</p>
+                <p><strong>ID Number:</strong> ${data.id_number}</p>
+                <p><strong>Section:</strong> ${data.section}</p>
+                <p><strong>Email:</strong> ${data.email}</p>
+                <p><strong>Phone Number:</strong> ${data.phone}</p>
+                <hr>
+                <h3>Your Answers:</h3>
+            `;
+
+            // Loop up to TOTAL_QUESTIONS = 30
+            for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                const qKey = `q${i}`;
+                const userAnswer = data[qKey];
+                quizData.answers[qKey] = userAnswer;
+                const questionInfo = allQuestionsData[qKey];
+                const answerText = questionInfo.choices[userAnswer] || 'Not Answered';
+                reviewHTML += `<p><strong>Question ${i}:</strong> ${questionInfo.text}<br>Your answer: ${userAnswer}) ${answerText}</p>`;
+            }
+
+            const reviewContent = document.getElementById('review-content');
+            reviewContent.innerHTML = reviewHTML;
+            document.getElementById('quiz-form').classList.add('hidden');
+            document.getElementById('review-section').classList.remove('hidden');
+        }
+
+        function editForm() {
+            document.getElementById('review-section').classList.add('hidden');
+            document.getElementById('quiz-form').classList.remove('hidden');
+        }
+
+        function downloadResponse() {
+            if (!quizData) return;
+            const doc = new jsPDF();
+            let y = 10;
+            const pageHeight = doc.internal.pageSize.height;
+            const pageWidth = doc.internal.pageSize.width;
+            const margin = 10;
+            const effectiveWidth = pageWidth - margin * 2;
+
+            doc.setFontSize(16);
+            doc.text('MCIE Quiz Response - Chapter 3', pageWidth / 2, y, { align: 'center' });
+            y += 10;
+
+            doc.setFontSize(12);
+            doc.text(`Name: ${quizData.name}`, margin, y); y += 7;
+            doc.text(`ID: ${quizData.id_number}`, margin, y); y += 7;
+            doc.text(`Section: ${quizData.section}`, margin, y); y += 7;
+            doc.text(`Email: ${quizData.email}`, margin, y); y += 7;
+            doc.text(`Phone: ${quizData.phone}`, margin, y); y += 10;
+
+             // Loop up to TOTAL_QUESTIONS = 30
+            for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const question = quizData.questions[qKey];
+                 const userAnswer = quizData.answers[qKey];
+                 const answerText = question.choices[userAnswer] || 'Not Answered';
+                 const questionText = question.text;
+
+                 const questionLines = doc.splitTextToSize(`Question ${i}: ${questionText}`, effectiveWidth);
+                 const answerLines = doc.splitTextToSize(`Your answer: ${userAnswer}) ${answerText}`, effectiveWidth);
+                 const spaceNeeded = (questionLines.length * 5) + 2 + (answerLines.length * 5) + 5;
+
+                 if (y + spaceNeeded > pageHeight - margin) {
+                    doc.addPage();
+                    y = margin;
+                 }
+                doc.setFont('helvetica', 'bold');
+                doc.text(questionLines, margin, y);
+                y += (questionLines.length * 5) + 2;
+                doc.setFont('helvetica', 'normal');
+                if (y > pageHeight - margin) { doc.addPage(); y = margin; }
+                doc.text(answerLines, margin, y);
+                y += (answerLines.length * 5) + 5;
+            }
+            doc.save(`quiz_response_${quizData.id_number}_ch3.pdf`); // Updated filename
+        }
+
+        async function confirmSubmission() {
+            if (confirm('Are you sure you want to submit your answers?')) {
+                if (!quizData || !formData) {
+                     console.error("Quiz data or form data is missing.");
+                     alert("Error: Cannot submit. Please try filling the form again.");
+                     editForm();
+                     return;
+                }
+                const data = Object.fromEntries(formData);
+                let score = 0;
+                // Loop up to TOTAL_QUESTIONS = 30
+                for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                    const qKey = `q${i}`;
+                    if (data[qKey] === correctAnswersMap[qKey]) {
+                        score++;
+                    }
+                }
+                quizData.score = score;
+
+                // Prepare data for YOUR backend (/submit-quiz)
+                const submissionData = {
+                    name: data.name,
+                    id_number: data.id_number,
+                    section: data.section,
+                    email: data.email,
+                    phone: data.phone,
+                    score: score,
+                    totalQuestions: TOTAL_QUESTIONS // Sends 30
+                    // quizChapter: 'Chapter 3' // Optional: Add if backend uses it
+                };
+
+                try {
+                    // *** FETCH URL points to YOUR server's backend endpoint ***
+                    const response = await fetch('/submit-quiz', {
+                        method: 'POST',
+                        body: JSON.stringify(submissionData),
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        console.log("Backend submission successful:", result);
+
+                        const submissionContent = document.getElementById('submission-content');
+                         let submissionHTML = `
+                            <p><strong>Name:</strong> ${quizData.name}</p>
+                            <p><strong>ID Number:</strong> ${quizData.id_number}</p>
+                            <p><strong>Section:</strong> ${quizData.section}</p>
+                            <p><strong>Email:</strong> ${quizData.email}</p>
+                            <p><strong>Phone Number:</strong> ${quizData.phone}</p>
+                            <hr>
+                            <h3>Submitted Answers (Chapter 3):</h3>
+                        `;
+                         // Loop up to TOTAL_QUESTIONS = 30
+                         for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                             const qKey = `q${i}`;
+                             const questionInfo = quizData.questions[qKey];
+                             const userAnswer = quizData.answers[qKey];
+                             const answerText = questionInfo.choices[userAnswer] || 'Not Answered';
+                             submissionHTML += `<p><strong>Question ${i}:</strong> ${questionInfo.text}<br>Your answer: ${userAnswer}) ${answerText}</p>`;
+                         }
+                        submissionContent.innerHTML = submissionHTML;
+
+                        document.getElementById('review-section').classList.add('hidden');
+                        document.getElementById('submission-copy').classList.remove('hidden');
+
+                    } else {
+                        // Handle ERROR response from your backend
+                        let errorMsg = `Submission failed with status: ${response.status}`;
+                        try {
+                            const errorData = await response.json();
+                            errorMsg = errorData.error || errorMsg;
+                        } catch(e) { /* Ignore if response isn't JSON */ }
+                        console.error('Backend submission error:', errorMsg);
+                        document.getElementById('error-message').innerHTML = `<p>Submission failed: ${errorMsg}. Please check server logs and try again.</p>`;
+                        document.getElementById('error-message').classList.remove('hidden');
+                        document.getElementById('review-section').classList.add('hidden');
+                    }
+                } catch (error) {
+                    // Handle NETWORK errors
+                    console.error('Network/Fetch error:', error);
+                    document.getElementById('error-message').innerHTML = `<p>An network error occurred during submission. Is the server running? Please check your connection and try again.</p>`;
+                    document.getElementById('error-message').classList.remove('hidden');
+                    document.getElementById('review-section').classList.add('hidden');
+                }
+            }
+        }
+
+        function proceedToPassword() {
+            document.getElementById('submission-copy').classList.add('hidden');
+            document.getElementById('password-section').classList.remove('hidden');
+        }
+
+        function checkPassword() {
+            const passwordInput = document.getElementById('password').value;
+            const correctPassword = 'password';
+            const errorMessage = document.getElementById('password-error');
+            const passwordSection = document.getElementById('password-section');
+            const results = document.getElementById('results');
+
+            if (passwordInput === correctPassword) {
+                errorMessage.classList.add('hidden');
+                passwordSection.classList.add('hidden');
+                results.classList.remove('hidden');
+                displayResults();
+            } else {
+                errorMessage.classList.remove('hidden');
+            }
+        }
+
+        function displayResults() {
+            if (!quizData) {
+                document.getElementById('results').innerHTML = '<p>Error: No quiz data found. Please complete the quiz first.</p>';
+                return;
+            }
+
+             const displayCorrectAnswers = {};
+              // Loop up to TOTAL_QUESTIONS = 30
+             for(let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const correctLetter = correctAnswersMap[qKey];
+                 const correctText = allQuestionsData[qKey].choices[correctLetter];
+                 displayCorrectAnswers[qKey] = `${correctLetter}) ${correctText}`;
+             }
+
+            document.getElementById('student-info').innerHTML = `<strong>Name:</strong> ${quizData.name}<br><strong>ID:</strong> ${quizData.id_number}<br><strong>Section:</strong> ${quizData.section}<br><strong>Email:</strong> ${quizData.email}<br><strong>Phone:</strong> ${quizData.phone}`;
+
+            const answersDiv = document.getElementById('answers');
+            let answersHTML = '<h3>Detailed Results (Chapter 3):</h3>'; // Updated heading
+
+             // Loop up to TOTAL_QUESTIONS = 30
+            for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const question = quizData.questions[qKey];
+                 const userAnswer = quizData.answers[qKey];
+                 const userAnswerText = question.choices[userAnswer] || 'Not Answered';
+                 const isCorrect = userAnswer === correctAnswersMap[qKey];
+
+                 answersHTML += `
+                    <div class="question-result">
+                        <p><strong>Question ${i}:</strong> ${question.text}</p>
+                        <div class="choices" style="font-size:0.9em; margin-left: 15px;">
+                            <p>A) ${question.choices.A}</p>
+                            <p>B) ${question.choices.B}</p>
+                            <p>C) ${question.choices.C}</p>
+                            <p>D) ${question.choices.D}</p>
+                        </div>
+                        <p>Your answer: ${userAnswer}) ${userAnswerText} ${isCorrect ? '<span style="color:green; font-weight:bold;">(Correct)</span>' : '<span style="color:red; font-weight:bold;">(Incorrect)</span>'}</p>
+                        ${!isCorrect ? `<p style="color:blue;">Correct answer: ${displayCorrectAnswers[qKey]}</p>` : ''}
+                    </div>
+                `;
+            }
+            answersDiv.innerHTML = answersHTML;
+
+            document.getElementById('score').textContent = `Final Score: ${quizData.score} / ${TOTAL_QUESTIONS}`;
+        }
+
+        function downloadPDF() {
+            if (!quizData) return;
+            const doc = new jsPDF();
+            let y = 10;
+            const pageHeight = doc.internal.pageSize.height;
+            const pageWidth = doc.internal.pageSize.width;
+            const margin = 10;
+            const effectiveWidth = pageWidth - margin * 2;
+
+             const displayCorrectAnswers = {};
+              // Loop up to TOTAL_QUESTIONS = 30
+             for(let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const correctLetter = correctAnswersMap[qKey];
+                 const correctText = allQuestionsData[qKey].choices[correctLetter];
+                 displayCorrectAnswers[qKey] = `${correctLetter}) ${correctText}`;
+             }
+
+            doc.setFontSize(16);
+            doc.text('MCIE Quiz Results - Chapter 3', pageWidth / 2, y, { align: 'center' }); // Updated Title
+            y += 10;
+
+            doc.setFontSize(12);
+            doc.text(`Name: ${quizData.name}`, margin, y); y += 7;
+            doc.text(`ID: ${quizData.id_number}`, margin, y); y += 7;
+            doc.text(`Section: ${quizData.section}`, margin, y); y += 7;
+            doc.text(`Email: ${quizData.email}`, margin, y); y += 7;
+            doc.text(`Phone: ${quizData.phone}`, margin, y); y += 10;
+
+            doc.setFont('helvetica', 'bold');
+            doc.text(`Final Score: ${quizData.score} / ${TOTAL_QUESTIONS}`, pageWidth / 2, y, { align: 'center' });
+            y += 10;
+            doc.setFont('helvetica', 'normal');
+
+             // Loop up to TOTAL_QUESTIONS = 30
+            for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const question = quizData.questions[qKey];
+                 const userAnswer = quizData.answers[qKey];
+                 const userAnswerText = question.choices[userAnswer] || 'Not Answered';
+                 const isCorrect = userAnswer === correctAnswersMap[qKey];
+                 const questionText = question.text;
+                 const correctAnswerFull = displayCorrectAnswers[qKey];
+
+                 const qLines = doc.splitTextToSize(`Question ${i}: ${questionText}`, effectiveWidth);
+                 const choicesLines = 4 * 5;
+                 const yourAnsLines = doc.splitTextToSize(`Your answer: ${userAnswer}) ${userAnswerText} ${isCorrect ? '(Correct)' : '(Incorrect)'}`, effectiveWidth);
+                 const correctAnsLines = isCorrect ? 0 : doc.splitTextToSize(`Correct answer: ${correctAnswerFull}`, effectiveWidth).length * 5;
+                 const spaceNeeded = (qLines.length * 5) + 2 + choicesLines + 7 + (yourAnsLines.length * 5) + 7 + correctAnsLines + 5;
+
+                 if (y + spaceNeeded > pageHeight - margin) {
+                    doc.addPage();
+                    y = margin;
+                }
+                doc.setFont('helvetica', 'bold');
+                doc.text(qLines, margin, y);
+                y += (qLines.length * 5) + 2;
+                doc.setFont('helvetica', 'normal');
+                if (y > pageHeight - margin * 3) { doc.addPage(); y = margin; }
+                doc.setFontSize(10);
+                doc.text(`  A) ${question.choices.A}`, margin + 5, y); y += 5;
+                doc.text(`  B) ${question.choices.B}`, margin + 5, y); y += 5;
+                doc.text(`  C) ${question.choices.C}`, margin + 5, y); y += 5;
+                doc.text(`  D) ${question.choices.D}`, margin + 5, y); y += 7;
+                doc.setFontSize(12);
+                if (y > pageHeight - margin * 2) { doc.addPage(); y = margin; }
+                doc.text(`Your answer: ${userAnswer}) ${userAnswerText} ${isCorrect ? '(Correct)' : '(Incorrect)'}`, margin, y); y += 7;
+                if (!isCorrect) {
+                    doc.setTextColor(0, 0, 255);
+                    doc.text(`Correct answer: ${correctAnswerFull}`, margin, y); y += 7;
+                    doc.setTextColor(0, 0, 0);
+                }
+                y += 5;
+            }
+
+            if (y > pageHeight - margin) { doc.addPage(); y = margin; }
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(14);
+            doc.text(`Final Score: ${quizData.score} / ${TOTAL_QUESTIONS}`, pageWidth / 2, y, { align: 'center' });
+
+            doc.save(`quiz_results_${quizData.id_number}_ch3.pdf`); // Updated filename
+        }
+
+    </script>
+</body>
+</html>

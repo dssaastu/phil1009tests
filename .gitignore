@@ -1,0 +1,7 @@
+node_modules/
+submissions.csv
+uploads/
+*.log
+
+# Environment variables (contains secrets!)
+.env

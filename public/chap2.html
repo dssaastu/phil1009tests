@@ -1,0 +1,937 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- IMPORTANT: Make sure your text editor saves this file with UTF-8 Encoding! -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moral and Citizenship Education Quiz - Chapter 2</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="password"] { width: 100%; padding: 8px; box-sizing: border-box; }
+        input[type="radio"] { margin-right: 5px; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; margin-right: 10px; border-radius: 5px; }
+        button:hover { background-color: #0056b3; }
+        .hidden { display: none; }
+        #error-message, #password-error, #login-error { color: red; font-size: 1.2em; text-align: center; }
+        #success-message { color: green; font-size: 1.2em; text-align: center; }
+        #results, #review-section, #submission-copy { margin-top: 20px; text-align: left; border: 1px solid #ccc; padding: 15px; border-radius: 5px; background-color: #f9f9f9;}
+        #password-section, #login-section { text-align: center; max-width: 400px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;}
+        #password-section input[type="password"], #login-section input[type="text"], #login-section input[type="password"] { width: calc(100% - 18px); }
+        .question-result { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        #download-pdf, #download-response { margin-top: 10px; }
+        #score { font-weight: bold; text-align: center; color: green; font-size: 1.4em; margin-top: 20px; }
+        #review-section h2, #submission-copy h2, #results h1 { margin-bottom: 15px; text-align: center; color: #007bff;}
+        #review-section button, #submission-copy button, #password-section button, #login-section button, #results button { margin-top: 15px; }
+        .choices p { margin: 2px 0 2px 20px; }
+    </style>
+</head>
+<body>
+    <div id="login-section">
+        <h1>Login to Access Quiz</h1>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" placeholder="Enter password" required>
+        </div>
+        <button onclick="checkLogin()">Login</button>
+        <p id="login-error" class="hidden">Incorrect username or password. Please try again.</p>
+    </div>
+
+    <div id="quiz-form" class="hidden">
+        <h1>Moral and Citizenship Education Quiz - Chapter 2</h1>
+        <form id="mcie-quiz" method="POST"> <!-- method="POST" isn't strictly needed due to JS handling, but harmless -->
+            <!-- Student Information -->
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="id_number">ID Number:</label>
+                <input type="text" id="id_number" name="id_number" required>
+            </div>
+            <div class="form-group">
+                <label for="section">Section:</label>
+                <input type="text" id="section" name="section" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <!-- MCIE Multiple-Choice Questions (Chapter 2 SET) -->
+            <div class="form-group">
+                 <label>1. Normative ethics primarily aims to:</label>
+                 <input type="radio" name="q1" value="A" required> A) Describe how people actually behave morally.<br>
+                 <input type="radio" name="q1" value="B"> B) Analyze the meaning of ethical terms.<br>
+                 <input type="radio" name="q1" value="C"> C) Offer theories or accounts of the best way to live and make moral decisions.<br>
+                 <input type="radio" name="q1" value="D"> D) Investigate the psychological origins of moral feelings.
+             </div>
+             <div class="form-group">
+                 <label>2. Teleological ethical theories determine the rightness or wrongness of an action based on its:</label>
+                 <input type="radio" name="q2" value="A" required> A) Adherence to universal rules.<br>
+                 <input type="radio" name="q2" value="B"> B) Consequences or outcomes.<br>
+                 <input type="radio" name="q2" value="C"> C) Agent's intentions.<br>
+                 <input type="radio" name="q2" value="D"> D) Conformity with virtue.
+             </div>
+             <div class="form-group">
+                 <label>3. A core principle of teleological ethics is that the moral quality of an action depends on:</label>
+                 <input type="radio" name="q3" value="A" required> A) The inherent nature of the act itself.<br>
+                 <input type="radio" name="q3" value="B"> B) The non-moral value it produces.<br>
+                 <input type="radio" name="q3" value="C"> C) Its consistency with past actions.<br>
+                 <input type="radio" name="q3" value="D"> D) Divine commands.
+             </div>
+             <div class="form-group">
+                 <label>4. Deontological ethical theories primarily emphasize:</label>
+                 <input type="radio" name="q4" value="A" required> A) The overall happiness produced.<br>
+                 <input type="radio" name="q4" value="B"> B) The character traits of the agent.<br>
+                 <input type="radio" name="q4" value="C"> C) Duties, rules, and the inherent nature of the act itself.<br>
+                 <input type="radio" name="q4" value="D"> D) The pursuit of self-interest.
+             </div>
+             <div class="form-group">
+                 <label>5. Ethical egoism proposes that an action is right if and only if it promotes the greatest good for:</label>
+                 <input type="radio" name="q5" value="A" required> A) Society as a whole.<br>
+                 <input type="radio" name="q5" value="B"> B) A specific group or nation.<br>
+                 <input type="radio" name="q5" value="C"> C) The individual agent performing the action.<br>
+                 <input type="radio" name="q5" value="D"> D) All sentient beings except the agent.
+             </div>
+             <div class="form-group">
+                 <label>6. Psychological egoism is the view that:</label>
+                 <input type="radio" name="q6" value="A" required> A) People ought to act in their own self-interest.<br>
+                 <input type="radio" name="q6" value="B"> B) People always act in ways they perceive to be in their own self-interest.<br>
+                 <input type="radio" name="q6" value="C"> C) Selfishness is morally virtuous.<br>
+                 <input type="radio" name="q6" value="D"> D) Altruism is the primary human motivation.
+             </div>
+             <div class="form-group">
+                 <label>7. A common argument for ethical egoism relies on the premise of:</label>
+                 <input type="radio" name="q7" value="A" required> A) Divine command theory.<br>
+                 <input type="radio" name="q7" value="B"> B) Psychological egoism.<br>
+                 <input type="radio" name="q7" value="C"> C) Kant's categorical imperative.<br>
+                 <input type="radio" name="q7" value="D"> D) Virtue ethics.
+             </div>
+             <div class="form-group">
+                 <label>8. Butler's critique of psychological egoism suggests that:</label>
+                 <input type="radio" name="q8" value="A" required> A) Self-love is the only human motivation.<br>
+                 <input type="radio" name="q8" value="B"> B) The desire for one's own good presupposes more basic desires for specific things (like food, fame).<br>
+                 <input type="radio" name="q8" value="C"> C) We always act altruistically.<br>
+                 <input type="radio" name="q8" value="D"> D) Satisfaction is the object of desire, not a consequence of achieving the object.
+             </div>
+             <div class="form-group">
+                 <label>9. Utilitarianism is best described as:</label>
+                 <input type="radio" name="q9" value="A" required> A) An egoistic teleological theory.<br>
+                 <input type="radio" name="q9" value="B"> B) A universal teleological theory.<br>
+                 <input type="radio" name="q9" value="C"> C) A deontological rights-based theory.<br>
+                 <input type="radio" name="q9" value="D"> D) A virtue-based character theory.
+             </div>
+             <div class="form-group">
+                 <label>10. The principle "the greatest happiness for the greatest number" is most closely associated with:</label>
+                 <input type="radio" name="q10" value="A" required> A) Ethical Egoism<br>
+                 <input type="radio" name="q10" value="B"> B) Kantian Deontology<br>
+                 <input type="radio" name="q10" value="C"> C) Utilitarianism<br>
+                 <input type="radio" name="q10" value="D"> D) Virtue Ethics
+             </div>
+             <div class="form-group">
+                 <label>11. Jeremy Bentham's version of utilitarianism emphasizes:</label>
+                 <input type="radio" name="q11" value="A" required> A) The quality of pleasure over quantity.<br>
+                 <input type="radio" name="q11" value="B"> B) The quantitative measurement of pleasure and pain (hedonic calculus).<br>
+                 <input type="radio" name="q11" value="C"> C) Prima facie duties.<br>
+                 <input type="radio" name="q11" value="D"> D) Natural rights.
+             </div>
+             <div class="form-group">
+                 <label>12. John Stuart Mill modified Bentham's utilitarianism by introducing a distinction between:</label>
+                 <input type="radio" name="q12" value="A" required> A) Act and rule utilitarianism.<br>
+                 <input type="radio" name="q12" value="B"> B) Perfect and imperfect duties.<br>
+                 <input type="radio" name="q12" value="C"> C) Higher and lower quality pleasures.<br>
+                 <input type="radio" name="q12" value="D"> D) Categorical and hypothetical imperatives.
+             </div>
+             <div class="form-group">
+                 <label>13. Mill's eudaimonistic utilitarianism defines happiness more broadly to include:</label>
+                 <input type="radio" name="q13" value="A" required> A) Only sensual gratification.<br>
+                 <input type="radio" name="q13" value="B"> B) Intellectual, aesthetic, and social enjoyments.<br>
+                 <input type="radio" name="q13" value="C"> C) Obedience to divine commands.<br>
+                 <input type="radio" name="q13" value="D"> D) The pursuit of power.
+             </div>
+             <div class="form-group">
+                 <label>14. Act-utilitarianism states that the right action is the one that:</label>
+                 <input type="radio" name="q14" value="A" required> A) Conforms to a set of utility-maximizing rules.<br>
+                 <input type="radio" name="q14" value="B"> B) Directly produces the greatest good in a specific situation.<br>
+                 <input type="radio" name="q14" value="C"> C) Follows divine commands.<br>
+                 <input type="radio" name="q14" value="D"> D) Aligns with the agent's self-interest.
+             </div>
+             <div class="form-group">
+                 <label>15. Rule-utilitarianism suggests that an act is right if:</label>
+                 <input type="radio" name="q15" value="A" required> A) It produces the best immediate consequences.<br>
+                 <input type="radio" name="q15" value="B"> B) It is required by a rule whose general acceptance leads to the greatest utility.<br>
+                 <input type="radio" name="q15" value="C"> C) It is performed out of a sense of duty for duty's sake.<br>
+                 <input type="radio" name="q15" value="D"> D) It cultivates virtuous character.
+             </div>
+             <div class="form-group">
+                 <label>16. A common criticism of utilitarianism is that it might justify actions that conflict with principles of:</label>
+                 <input type="radio" name="q16" value="A" required> A) Efficiency.<br>
+                 <input type="radio" name="q16" value="B"> B) Self-interest.<br>
+                 <input type="radio" name="q16" value="C"> C) Justice and rights.<br>
+                 <input type="radio" name="q16" value="D"> D) Pleasure maximization.
+             </div>
+             <div class="form-group">
+                 <label>17. The "No-Rest Objection" against utilitarianism argues that:</label>
+                 <input type="radio" name="q17" value="A" required> A) Utilitarianism is too relativistic.<br>
+                 <input type="radio" name="q17" value="B"> B) Utilitarianism might require constant calculation and self-sacrifice, leaving no room for personal pursuits.<br>
+                 <input type="radio" name="q17" value="C"> C) Utilitarian principles cannot be made public.<br>
+                 <input type="radio" name="q17" value="D"> D) It fails to account for future generations.
+             </div>
+             <div class="form-group">
+                 <label>18. Altruism, as an ethical theory, proposes that an action is right if its consequences are favorable to:</label>
+                 <input type="radio" name="q18" value="A" required> A) The agent performing the action.<br>
+                 <input type="radio" name="q18" value="B"> B) The majority of people.<br>
+                 <input type="radio" name="q18" value="C"> C) All affected parties except the agent.<br>
+                 <input type="radio" name="q18" value="D"> D) Those who follow divine laws.
+             </div>
+             <div class="form-group">
+                 <label>19. The Divine Command Theory (DCT) grounds morality in:</label>
+                 <input type="radio" name="q19" value="A" required> A) Human reason.<br>
+                 <input type="radio" name="q19" value="B"> B) The consequences of actions.<br>
+                 <input type="radio" name="q19" value="C"> C) The commands or will of God.<br>
+                 <input type="radio" name="q19" value="D"> D) Social contracts.
+             </div>
+             <div class="form-group">
+                 <label>20. A problem raised against the Divine Command Theory is that:</label>
+                 <input type="radio" name="q20" value="A" required> A) It leads to utilitarianism.<br>
+                 <input type="radio" name="q20" value="B"> B) It makes attributing "goodness" to God potentially redundant or morality arbitrary.<br>
+                 <input type="radio" name="q20" value="C"> C) It denies the existence of God.<br>
+                 <input type="radio" name="q20" value="D"> D) It relies too heavily on consequences.
+             </div>
+             <div class="form-group">
+                 <label>21. Rights theory primarily defines "right" in terms of:</label>
+                 <input type="radio" name="q21" value="A" required> A) Maximizing overall happiness.<br>
+                 <input type="radio" name="q21" value="B"> B) A justified claim against another person's behavior.<br>
+                 <input type="radio" name="q21" value="C"> C) Developing virtuous character traits.<br>
+                 <input type="radio" name="q21" value="D"> D) Following prima facie duties.
+             </div>
+             <div class="form-group">
+                 <label>22. John Locke is associated with the idea of natural rights, specifically:</label>
+                 <input type="radio" name="q22" value="A" required> A) Life, liberty, and the pursuit of happiness.<br>
+                 <input type="radio" name="q22" value="B"> B) Life, liberty, and property.<br>
+                 <input type="radio" name="q22" value="C"> C) Equality, fraternity, and liberty.<br>
+                 <input type="radio" name="q22" value="D"> D) Pleasure, power, and knowledge.
+             </div>
+             <div class="form-group">
+                 <label>23. Which of the following is NOT listed as a traditional feature of moral rights?</label>
+                 <input type="radio" name="q23" value="A" required> A) Natural<br>
+                 <input type="radio" name="q23" value="B"> B) Universal<br>
+                 <input type="radio" name="q23" value="C"> C) Equal<br>
+                 <input type="radio" name="q23" value="D"> D) Revocable (easily given up)
+             </div>
+             <div class="form-group">
+                 <label>24. Immanuel Kant's ethical theory is a form of:</label>
+                 <input type="radio" name="q24" value="A" required> A) Utilitarianism.<br>
+                 <input type="radio" name="q24" value="B"> B) Ethical Egoism.<br>
+                 <input type="radio" name="q24" value="C"> C) Deontology.<br>
+                 <input type="radio" name="q24" value="D"> D) Virtue Ethics.
+             </div>
+             <div class="form-group">
+                 <label>25. For Kant, the only thing good without qualification is:</label>
+                 <input type="radio" name="q25" value="A" required> A) Happiness.<br>
+                 <input type="radio" name="q25" value="B"> B) Pleasure.<br>
+                 <input type="radio" name="q25" value="C"> C) A good will.<br>
+                 <input type="radio" name="q25" value="D"> D) Intelligence.
+             </div>
+             <div class="form-group">
+                 <label>26. A categorical imperative, according to Kant, is a command that:</label>
+                 <input type="radio" name="q26" value="A" required> A) Depends on personal desires or goals (If you want X, do Y).<br>
+                 <input type="radio" name="q26" value="B"> B) Applies universally and unconditionally (Do Y).<br>
+                 <input type="radio" name="q26" value="C"> C) Aims to maximize happiness.<br>
+                 <input type="radio" name="q26" value="D"> D) Is derived from religious texts.
+             </div>
+             <div class="form-group">
+                 <label>27. Kant's first formulation of the Categorical Imperative is based on the principle of:</label>
+                 <input type="radio" name="q27" value="A" required> A) Utility.<br>
+                 <input type="radio" name="q27" value="B"> B) Self-interest.<br>
+                 <input type="radio" name="q27" value="C"> C) Universality (can the maxim of your action become a universal law?).<br>
+                 <input type="radio" name="q27" value="D"> D) Divine command.
+             </div>
+             <div class="form-group">
+                 <label>28. A "perfect duty" in Kantian ethics is one that:</label>
+                 <input type="radio" name="q28" value="A" required> A) Is optional but praiseworthy.<br>
+                 <input type="radio" name="q28" value="B"> B) Allows for exceptions based on circumstances.<br>
+                 <input type="radio" name="q28" value="C"> C) Must always be followed, as its universalization involves a logical contradiction.<br>
+                 <input type="radio" name="q28" value="D"> D) Aims to improve oneself or others.
+             </div>
+             <div class="form-group">
+                 <label>29. Kant's second formulation of the Categorical Imperative insists on treating humanity:</label>
+                 <input type="radio" name="q29" value="A" required> A) As a means to achieving the greatest good.<br>
+                 <input type="radio" name="q29" value="B"> B) Primarily based on social utility.<br>
+                 <input type="radio" name="q29" value="C"> C) Always as an end in itself, never merely as a means.<br>
+                 <input type="radio" name="q29" value="D"> D) According to majority opinion.
+             </div>
+             <div class="form-group">
+                 <label>30. Kant's concept of "autonomy" refers to:</label>
+                 <input type="radio" name="q30" value="A" required> A) Acting based on external influences or desires.<br>
+                 <input type="radio" name="q30" value="B"> B) The capacity of the will to legislate universal law for itself through reason.<br>
+                 <input type="radio" name="q30" value="C"> C) Maximizing personal freedom without constraints.<br>
+                 <input type="radio" name="q30" value="D"> D) Following the commands of a higher authority.
+             </div>
+             <div class="form-group">
+                 <label>31. A major criticism of Kant's ethical system is its perceived:</label>
+                 <input type="radio" name="q31" value="A" required> A) Flexibility.<br>
+                 <input type="radio" name="q31" value="B"> B) Lack of clear principles.<br>
+                 <input type="radio" name="q31" value="C"> C) Overemphasis on consequences.<br>
+                 <input type="radio" name="q31" value="D"> D) Rigidity in handling conflicting duties or extreme situations.
+             </div>
+             <div class="form-group">
+                 <label>32. W.D. Ross proposed a deontological theory based on:</label>
+                 <input type="radio" name="q32" value="A" required> A) A single categorical imperative.<br>
+                 <input type="radio" name="q32" value="B"> B) Maximizing utility.<br>
+                 <input type="radio" name="q32" value="C"> C) Prima facie duties.<br>
+                 <input type="radio" name="q32" value="D"> D) Natural rights alone.
+             </div>
+             <div class="form-group">
+                 <label>33. A "prima facie duty" according to Ross is a duty that:</label>
+                 <input type="radio" name="q33" value="A" required> A) Is absolute and can never be overridden.<br>
+                 <input type="radio" name="q33" value="B"> B) Is binding unless it conflicts with a stronger prima facie duty.<br>
+                 <input type="radio" name="q33" value="C"> C) Is based solely on consequences.<br>
+                 <input type="radio" name="q33" value="D"> D) Only applies to oneself.
+             </div>
+             <div class="form-group">
+                 <label>34. Which of the following is one of Ross's categories of prima facie duties?</label>
+                 <input type="radio" name="q34" value="A" required> A) Duty of maximizing pleasure<br>
+                 <input type="radio" name="q34" value="B"> B) Duty of self-preservation<br>
+                 <input type="radio" name="q34" value="C"> C) Duty of gratitude<br>
+                 <input type="radio" name="q34" value="D"> D) Duty of obeying the state
+             </div>
+             <div class="form-group">
+                 <label>35. Virtue ethics primarily focuses on:</label>
+                 <input type="radio" name="q35" value="A" required> A) Rules and obligations.<br>
+                 <input type="radio" name="q35" value="B"> B) The consequences of actions.<br>
+                 <input type="radio" name="q35" value="C"> C) The moral character and virtues of the agent.<br>
+                 <input type="radio" name="q35" value="D"> D) The maximization of rights.
+             </div>
+             <div class="form-group">
+                 <label>36. Aristotle's concept of eudaimonia is best translated as:</label>
+                 <input type="radio" name="q36" value="A" required> A) Pleasure or gratification.<br>
+                 <input type="radio" name="q36" value="B"> B) Duty or obligation.<br>
+                 <input type="radio" name="q36" value="C"> C) Flourishing or living well.<br>
+                 <input type="radio" name="q36" value="D"> D) Power or influence.
+             </div>
+             <div class="form-group">
+                 <label>37. According to Aristotle, virtue is typically found as:</label>
+                 <input type="radio" name="q37" value="A" required> A) An extreme point of behavior.<br>
+                 <input type="radio" name="q37" value="B"> B) A mean between two extremes (excess and defect).<br>
+                 <input type="radio" name="q37" value="C"> C) Whatever maximizes pleasure.<br>
+                 <input type="radio" name="q37" value="D"> D) Conformity to divine law.
+             </div>
+             <div class="form-group">
+                 <label>38. Phronesis, in Aristotelian ethics, refers to:</label>
+                 <input type="radio" name="q38" value="A" required> A) Theoretical wisdom.<br>
+                 <input type="radio" name="q38" value="B"> B) Practical wisdom or the ability to discern the right action in context.<br>
+                 <input type="radio" name="q38" value="C"> C) Scientific knowledge.<br>
+                 <input type="radio" name="q38" value="D"> D) Artistic skill.
+             </div>
+             <div class="form-group">
+                 <label>39. Meta-ethics is concerned with:</label>
+                 <input type="radio" name="q39" value="A" required> A) Determining which specific actions are right or wrong.<br>
+                 <input type="radio" name="q39" value="B"> B) Developing principles for moral conduct.<br>
+                 <input type="radio" name="q39" value="C"> C) Second-order questions about the nature, meaning, and justification of moral judgments.<br>
+                 <input type="radio" name="q39" value="D"> D) Applying ethical theories to practical dilemmas.
+             </div>
+             <div class="form-group">
+                 <label>40. Cognitivism in meta-ethics is the view that moral judgments:</label>
+                 <input type="radio" name="q40" value="A" required> A) Express emotions or attitudes.<br>
+                 <input type="radio" name="q40" value="B"> B) Are commands or prescriptions.<br>
+                 <input type="radio" name="q40" value="C"> C) Express beliefs and are capable of being true or false.<br>
+                 <input type="radio" name="q40" value="D"> D) Are meaningless.
+             </div>
+             <div class="form-group">
+                 <label>41. Non-cognitivism holds that moral judgments primarily:</label>
+                 <input type="radio" name="q41" value="A" required> A) State objective facts about the world.<br>
+                 <input type="radio" name="q41" value="B"> B) Express beliefs about moral properties.<br>
+                 <input type="radio" name="q41" value="C"> C) Express non-cognitive states like emotions, desires, or approvals.<br>
+                 <input type="radio" name="q41" value="D"> D) Are based on rational calculation.
+             </div>
+             <div class="form-group">
+                 <label>42. Ethical Naturalism is a form of cognitivism which holds that moral properties are:</label>
+                 <input type="radio" name="q42" value="A" required> A) Non-existent.<br>
+                 <input type="radio" name="q42" value="B"> B) Identical or reducible to natural properties (discoverable by science/psychology).<br>
+                 <input type="radio" name="q42" value="C"> C) Irreducible, non-natural properties.<br>
+                 <input type="radio" name="q42" value="D"> D) Based solely on divine commands.
+             </div>
+             <div class="form-group">
+                 <label>43. G.E. Moore argued for non-naturalism, claiming the property of 'good' is:</label>
+                 <input type="radio" name="q43" value="A" required> A) Reducible to pleasure.<br>
+                 <input type="radio" name="q43" value="B"> B) A complex natural property.<br>
+                 <input type="radio" name="q43" value="C"> C) Simple, unanalysable, and non-natural.<br>
+                 <input type="radio" name="q43" value="D"> D) Defined by social convention.
+             </div>
+             <div class="form-group">
+                 <label>44. Mackie's 'Error Theory' argues that moral judgments are:</label>
+                 <input type="radio" name="q44" value="A" required> A) Always true.<br>
+                 <input type="radio" name="q44" value="B"> B) Expressions of emotion.<br>
+                 <input type="radio" name="q44" value="C"> C) Truth-apt, but systematically false because no objective moral facts exist.<br>
+                 <input type="radio" name="q44" value="D"> D) Commands given by society.
+             </div>
+             <div class="form-group">
+                 <label>45. Emotivism (associated with Ayer) suggests that saying "Stealing is wrong" is akin to:</label>
+                 <input type="radio" name="q45" value="A" required> A) Stating a verifiable fact.<br>
+                 <input type="radio" name="q45" value="B"> B) Expressing a belief about wrongness.<br>
+                 <input type="radio" name="q45" value="C"> C) Saying "Boo to stealing!" or expressing disapproval.<br>
+                 <input type="radio" name="q45" value="D"> D) Issuing a command not to steal.
+             </div>
+             <div class="form-group">
+                 <label>46. The Frege-Geach problem challenges non-cognitivism by pointing out difficulties in explaining:</label>
+                 <input type="radio" name="q46" value="A" required> A) How moral judgments motivate action.<br>
+                 <input type="radio" name="q46" value="B"> B) The meaning of moral terms in simple assertions.<br>
+                 <input type="radio" name="q46" value="C"> C) How moral judgments function in complex sentences (like conditionals).<br>
+                 <input type="radio" name="q46" value="D"> D) Why people disagree about morality.
+             </div>
+             <div class="form-group">
+                 <label>47. Internalism in meta-ethics is the view that there is a necessary connection between:</label>
+                 <input type="radio" name="q47" value="A" required> A) Moral judgment and truth.<br>
+                 <input type="radio" name="q47" value="B"> B) Belief and desire.<br>
+                 <input type="radio" name="q47" value="C"> C) Making a moral judgment and being motivated to act accordingly.<br>
+                 <input type="radio" name="q47" value="D"> D) Reason and emotion.
+             </div>
+             <div class="form-group">
+                 <label>48. Externalism holds that the connection between moral judgment and motivation is:</label>
+                 <input type="radio" name="q48" value="A" required> A) Necessary and conceptual.<br>
+                 <input type="radio" name="q48" value="B"> B) Contingent and external.<br>
+                 <input type="radio" name="q48" value="C"> C) Always based on emotion.<br>
+                 <input type="radio" name="q48" value="D"> D) Non-existent.
+             </div>
+             <div class="form-group">
+                 <label>49. The Humean theory of motivation states that motivation requires:</label>
+                 <input type="radio" name="q49" value="A" required> A) Only beliefs.<br>
+                 <input type="radio" name="q49" value="B"> B) Only desires.<br>
+                 <input type="radio" name="q49" value="C"> C) Both beliefs and desires.<br>
+                 <input type="radio" name="q49" value="D"> D) Reason alone.
+             </div>
+             <div class="form-group">
+                 <label>50. An anti-Humean theory of motivation would suggest that:</label>
+                 <input type="radio" name="q50" value="A" required> A) Desires alone can motivate.<br>
+                 <input type="radio" name="q50" value="B"> B) Beliefs alone can sometimes be intrinsically motivating.<br>
+                 <input type="radio" name="q50" value="C"> C) Motivation is impossible.<br>
+                 <input type="radio" name="q50" value="D"> D) Emotions are irrelevant to motivation.
+             </div>
+            <!-- End of Questions -->
+
+            <button type="button" onclick="showReview()">Submit</button>
+        </form>
+        <div id="error-message" class="hidden">
+            <p>Something went wrong. Please try again.</p>
+        </div>
+    </div>
+
+    <div id="review-section" class="hidden">
+        <h2>Review Your Answers</h2>
+        <div id="review-content"></div>
+        <button onclick="editForm()">Edit</button>
+        <button onclick="downloadResponse()" id="download-response">Download My Response</button>
+        <button onclick="confirmSubmission()">Confirm Submission</button>
+    </div>
+
+    <div id="submission-copy" class="hidden">
+        <h2>Your Submitted Answers (Chapter 2)</h2>
+        <div id="submission-content"></div>
+        <button onclick="proceedToPassword()">Proceed</button>
+    </div>
+
+    <div id="password-section" class="hidden">
+        <h1 id="success-message">Your response has been submitted</h1>
+        <p>You can view your result (score) by entering the password.</p>
+        <input type="password" id="password" placeholder="Enter password">
+        <button onclick="checkPassword()">Submit</button>
+        <p id="password-error" class="hidden">Incorrect password. Please try again.</p>
+    </div>
+
+    <div id="results" class="hidden">
+         <h1>Quiz Results - Chapter 2</h1>
+        <p id="student-info"></p>
+        <div id="answers"></div>
+        <p id="score"></p>
+        <button id="download-pdf" onclick="downloadPDF()">Download Results PDF</button>
+    </div>
+
+    <script>
+        let quizData = null;
+        let formData = null;
+        const { jsPDF } = window.jspdf;
+        const TOTAL_QUESTIONS = 50; // Total number of questions remains 50
+
+        // Valid login credentials
+        const validCredentials = [
+            { username: 'section19', password: '123' },
+            { username: 'section20', password: '123' },
+            { username: 'muzemuza', password: 'moh' },
+            { username: 'section21', password: '123' }
+            // Add more valid credentials as needed
+        ];
+
+        // Structure holding question texts and choices (CHAPTER 2 SET)
+        const allQuestionsData = {
+             q1: { text: 'Normative ethics primarily aims to:', choices: { A: 'Describe how people actually behave morally.', B: 'Analyze the meaning of ethical terms.', C: 'Offer theories or accounts of the best way to live and make moral decisions.', D: 'Investigate the psychological origins of moral feelings.' } },
+             q2: { text: 'Teleological ethical theories determine the rightness or wrongness of an action based on its:', choices: { A: 'Adherence to universal rules.', B: 'Consequences or outcomes.', C: 'Agent\'s intentions.', D: 'Conformity with virtue.' } },
+             q3: { text: 'A core principle of teleological ethics is that the moral quality of an action depends on:', choices: { A: 'The inherent nature of the act itself.', B: 'The non-moral value it produces.', C: 'Its consistency with past actions.', D: 'Divine commands.' } },
+             q4: { text: 'Deontological ethical theories primarily emphasize:', choices: { A: 'The overall happiness produced.', B: 'The character traits of the agent.', C: 'Duties, rules, and the inherent nature of the act itself.', D: 'The pursuit of self-interest.' } },
+             q5: { text: 'Ethical egoism proposes that an action is right if and only if it promotes the greatest good for:', choices: { A: 'Society as a whole.', B: 'A specific group or nation.', C: 'The individual agent performing the action.', D: 'All sentient beings except the agent.' } },
+             q6: { text: 'Psychological egoism is the view that:', choices: { A: 'People ought to act in their own self-interest.', B: 'People always act in ways they perceive to be in their own self-interest.', C: 'Selfishness is morally virtuous.', D: 'Altruism is the primary human motivation.' } },
+             q7: { text: 'A common argument for ethical egoism relies on the premise of:', choices: { A: 'Divine command theory.', B: 'Psychological egoism.', C: 'Kant\'s categorical imperative.', D: 'Virtue ethics.' } },
+             q8: { text: 'Butler\'s critique of psychological egoism suggests that:', choices: { A: 'Self-love is the only human motivation.', B: 'The desire for one\'s own good presupposes more basic desires for specific things (like food, fame).', C: 'We always act altruistically.', D: 'Satisfaction is the object of desire, not a consequence of achieving the object.' } },
+             q9: { text: 'Utilitarianism is best described as:', choices: { A: 'An egoistic teleological theory.', B: 'A universal teleological theory.', C: 'A deontological rights-based theory.', D: 'A virtue-based character theory.' } },
+             q10: { text: 'The principle "the greatest happiness for the greatest number" is most closely associated with:', choices: { A: 'Ethical Egoism', B: 'Kantian Deontology', C: 'Utilitarianism', D: 'Virtue Ethics' } },
+             q11: { text: 'Jeremy Bentham\'s version of utilitarianism emphasizes:', choices: { A: 'The quality of pleasure over quantity.', B: 'The quantitative measurement of pleasure and pain (hedonic calculus).', C: 'Prima facie duties.', D: 'Natural rights.' } },
+             q12: { text: 'John Stuart Mill modified Bentham\'s utilitarianism by introducing a distinction between:', choices: { A: 'Act and rule utilitarianism.', B: 'Perfect and imperfect duties.', C: 'Higher and lower quality pleasures.', D: 'Categorical and hypothetical imperatives.' } },
+             q13: { text: 'Mill\'s eudaimonistic utilitarianism defines happiness more broadly to include:', choices: { A: 'Only sensual gratification.', B: 'Intellectual, aesthetic, and social enjoyments.', C: 'Obedience to divine commands.', D: 'The pursuit of power.' } },
+             q14: { text: 'Act-utilitarianism states that the right action is the one that:', choices: { A: 'Conforms to a set of utility-maximizing rules.', B: 'Directly produces the greatest good in a specific situation.', C: 'Follows divine commands.', D: 'Aligns with the agent\'s self-interest.' } },
+             q15: { text: 'Rule-utilitarianism suggests that an act is right if:', choices: { A: 'It produces the best immediate consequences.', B: 'It is required by a rule whose general acceptance leads to the greatest utility.', C: 'It is performed out of a sense of duty for duty\'s sake.', D: 'It cultivates virtuous character.' } },
+             q16: { text: 'A common criticism of utilitarianism is that it might justify actions that conflict with principles of:', choices: { A: 'Efficiency.', B: 'Self-interest.', C: 'Justice and rights.', D: 'Pleasure maximization.' } },
+             q17: { text: 'The "No-Rest Objection" against utilitarianism argues that:', choices: { A: 'Utilitarianism is too relativistic.', B: 'Utilitarianism might require constant calculation and self-sacrifice, leaving no room for personal pursuits.', C: 'Utilitarian principles cannot be made public.', D: 'It fails to account for future generations.' } },
+             q18: { text: 'Altruism, as an ethical theory, proposes that an action is right if its consequences are favorable to:', choices: { A: 'The agent performing the action.', B: 'The majority of people.', C: 'All affected parties except the agent.', D: 'Those who follow divine laws.' } },
+             q19: { text: 'The Divine Command Theory (DCT) grounds morality in:', choices: { A: 'Human reason.', B: 'The consequences of actions.', C: 'The commands or will of God.', D: 'Social contracts.' } },
+             q20: { text: 'A problem raised against the Divine Command Theory is that:', choices: { A: 'It leads to utilitarianism.', B: 'It makes attributing "goodness" to God potentially redundant or morality arbitrary.', C: 'It denies the existence of God.', D: 'It relies too heavily on consequences.' } },
+             q21: { text: 'Rights theory primarily defines "right" in terms of:', choices: { A: 'Maximizing overall happiness.', B: 'A justified claim against another person\'s behavior.', C: 'Developing virtuous character traits.', D: 'Following prima facie duties.' } },
+             q22: { text: 'John Locke is associated with the idea of natural rights, specifically:', choices: { A: 'Life, liberty, and the pursuit of happiness.', B: 'Life, liberty, and property.', C: 'Equality, fraternity, and liberty.', D: 'Pleasure, power, and knowledge.' } },
+             q23: { text: 'Which of the following is NOT listed as a traditional feature of moral rights?', choices: { A: 'Natural', B: 'Universal', C: 'Equal', D: 'Revocable (easily given up)' } },
+             q24: { text: 'Immanuel Kant\'s ethical theory is a form of:', choices: { A: 'Utilitarianism.', B: 'Ethical Egoism.', C: 'Deontology.', D: 'Virtue Ethics.' } },
+             q25: { text: 'For Kant, the only thing good without qualification is:', choices: { A: 'Happiness.', B: 'Pleasure.', C: 'A good will.', D: 'Intelligence.' } },
+             q26: { text: 'A categorical imperative, according to Kant, is a command that:', choices: { A: 'Depends on personal desires or goals (If you want X, do Y).', B: 'Applies universally and unconditionally (Do Y).', C: 'Aims to maximize happiness.', D: 'Is derived from religious texts.' } },
+             q27: { text: 'Kant\'s first formulation of the Categorical Imperative is based on the principle of:', choices: { A: 'Utility.', B: 'Self-interest.', C: 'Universality (can the maxim of your action become a universal law?).', D: 'Divine command.' } },
+             q28: { text: 'A "perfect duty" in Kantian ethics is one that:', choices: { A: 'Is optional but praiseworthy.', B: 'Allows for exceptions based on circumstances.', C: 'Must always be followed, as its universalization involves a logical contradiction.', D: 'Aims to improve oneself or others.' } },
+             q29: { text: 'Kant\'s second formulation of the Categorical Imperative insists on treating humanity:', choices: { A: 'As a means to achieving the greatest good.', B: 'Primarily based on social utility.', C: 'Always as an end in itself, never merely as a means.', D: 'According to majority opinion.' } },
+             q30: { text: 'Kant\'s concept of "autonomy" refers to:', choices: { A: 'Acting based on external influences or desires.', B: 'The capacity of the will to legislate universal law for itself through reason.', C: 'Maximizing personal freedom without constraints.', D: 'Following the commands of a higher authority.' } },
+             q31: { text: 'A major criticism of Kant\'s ethical system is its perceived:', choices: { A: 'Flexibility.', B: 'Lack of clear principles.', C: 'Overemphasis on consequences.', D: 'Rigidity in handling conflicting duties or extreme situations.' } },
+             q32: { text: 'W.D. Ross proposed a deontological theory based on:', choices: { A: 'A single categorical imperative.', B: 'Maximizing utility.', C: 'Prima facie duties.', D: 'Natural rights alone.' } },
+             q33: { text: 'A "prima facie duty" according to Ross is a duty that:', choices: { A: 'Is absolute and can never be overridden.', B: 'Is binding unless it conflicts with a stronger prima facie duty.', C: 'Is based solely on consequences.', D: 'Only applies to oneself.' } },
+             q34: { text: 'Which of the following is one of Ross\'s categories of prima facie duties?', choices: { A: 'Duty of maximizing pleasure', B: 'Duty of self-preservation', C: 'Duty of gratitude', D: 'Duty of obeying the state' } },
+             q35: { text: 'Virtue ethics primarily focuses on:', choices: { A: 'Rules and obligations.', B: 'The consequences of actions.', C: 'The moral character and virtues of the agent.', D: 'The maximization of rights.' } },
+             q36: { text: 'Aristotle\'s concept of eudaimonia is best translated as:', choices: { A: 'Pleasure or gratification.', B: 'Duty or obligation.', C: 'Flourishing or living well.', D: 'Power or influence.' } },
+             q37: { text: 'According to Aristotle, virtue is typically found as:', choices: { A: 'An extreme point of behavior.', B: 'A mean between two extremes (excess and defect).', C: 'Whatever maximizes pleasure.', D: 'Conformity to divine law.' } },
+             q38: { text: 'Phronesis, in Aristotelian ethics, refers to:', choices: { A: 'Theoretical wisdom.', B: 'Practical wisdom or the ability to discern the right action in context.', C: 'Scientific knowledge.', D: 'Artistic skill.' } },
+             q39: { text: 'Meta-ethics is concerned with:', choices: { A: 'Determining which specific actions are right or wrong.', B: 'Developing principles for moral conduct.', C: 'Second-order questions about the nature, meaning, and justification of moral judgments.', D: 'Applying ethical theories to practical dilemmas.' } },
+             q40: { text: 'Cognitivism in meta-ethics is the view that moral judgments:', choices: { A: 'Express emotions or attitudes.', B: 'Are commands or prescriptions.', C: 'Express beliefs and are capable of being true or false.', D: 'Are meaningless.' } },
+             q41: { text: 'Non-cognitivism holds that moral judgments primarily:', choices: { A: 'State objective facts about the world.', B: 'Express beliefs about moral properties.', C: 'Express non-cognitive states like emotions, desires, or approvals.', D: 'Are based on rational calculation.' } },
+             q42: { text: 'Ethical Naturalism is a form of cognitivism which holds that moral properties are:', choices: { A: 'Non-existent.', B: 'Identical or reducible to natural properties (discoverable by science/psychology).', C: 'Irreducible, non-natural properties.', D: 'Based solely on divine commands.' } },
+             q43: { text: 'G.E. Moore argued for non-naturalism, claiming the property of \'good\' is:', choices: { A: 'Reducible to pleasure.', B: 'A complex natural property.', C: 'Simple, unanalysable, and non-natural.', D: 'Defined by social convention.' } },
+             q44: { text: 'Mackie\'s \'Error Theory\' argues that moral judgments are:', choices: { A: 'Always true.', B: 'Expressions of emotion.', C: 'Truth-apt, but systematically false because no objective moral facts exist.', D: 'Commands given by society.' } },
+             q45: { text: 'Emotivism (associated with Ayer) suggests that saying "Stealing is wrong" is akin to:', choices: { A: 'Stating a verifiable fact.', B: 'Expressing a belief about wrongness.', C: 'Saying "Boo to stealing!" or expressing disapproval.', D: 'Issuing a command not to steal.' } },
+             q46: { text: 'The Frege-Geach problem challenges non-cognitivism by pointing out difficulties in explaining:', choices: { A: 'How moral judgments motivate action.', B: 'The meaning of moral terms in simple assertions.', C: 'How moral judgments function in complex sentences (like conditionals).', D: 'Why people disagree about morality.' } },
+             q47: { text: 'Internalism in meta-ethics is the view that there is a necessary connection between:', choices: { A: 'Moral judgment and truth.', B: 'Belief and desire.', C: 'Making a moral judgment and being motivated to act accordingly.', D: 'Reason and emotion.' } },
+             q48: { text: 'Externalism holds that the connection between moral judgment and motivation is:', choices: { A: 'Necessary and conceptual.', B: 'Contingent and external.', C: 'Always based on emotion.', D: 'Non-existent.' } },
+             q49: { text: 'The Humean theory of motivation states that motivation requires:', choices: { A: 'Only beliefs.', B: 'Only desires.', C: 'Both beliefs and desires.', D: 'Reason alone.' } },
+             q50: { text: 'An anti-Humean theory of motivation would suggest that:', choices: { A: 'Desires alone can motivate.', B: 'Beliefs alone can sometimes be intrinsically motivating.', C: 'Motivation is impossible.', D: 'Emotions are irrelevant to motivation.' } }
+        };
+
+
+        // Correct answers mapped to letters (CHAPTER 2 SET)
+        const correctAnswersMap = {
+            q1: 'C', q2: 'B', q3: 'B', q4: 'C', q5: 'C',
+            q6: 'B', q7: 'B', q8: 'B', q9: 'B', q10: 'C',
+            q11: 'B', q12: 'C', q13: 'B', q14: 'B', q15: 'B',
+            q16: 'C', q17: 'B', q18: 'C', q19: 'C', q20: 'B',
+            q21: 'B', q22: 'B', q23: 'D', q24: 'C', q25: 'C',
+            q26: 'B', q27: 'C', q28: 'C', q29: 'C', q30: 'B',
+            q31: 'D', q32: 'C', q33: 'B', q34: 'C', q35: 'C',
+            q36: 'C', q37: 'B', q38: 'B', q39: 'C', q40: 'C',
+            q41: 'C', q42: 'B', q43: 'C', q44: 'C', q45: 'C',
+            q46: 'C', q47: 'C', q48: 'B', q49: 'C', q50: 'B'
+        };
+
+        // --- Functions (Unchanged core logic, only titles/filenames updated) ---
+
+        function checkLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            const errorMessage = document.getElementById('login-error');
+            const loginSection = document.getElementById('login-section');
+            const quizForm = document.getElementById('quiz-form');
+
+            const isValid = validCredentials.some(cred =>
+                cred.username === username && cred.password === password
+            );
+
+            if (isValid) {
+                errorMessage.classList.add('hidden');
+                loginSection.classList.add('hidden');
+                quizForm.classList.remove('hidden');
+            } else {
+                errorMessage.classList.remove('hidden');
+            }
+        }
+
+        function showReview() {
+            const form = document.getElementById('mcie-quiz');
+            formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+             // Check if all questions are answered
+             let allAnswered = true;
+             for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 if (!data[`q${i}`]) {
+                     allAnswered = false;
+                     break;
+                 }
+             }
+
+             if (!data.name || !data.id_number || !data.section || !data.email || !data.phone || !allAnswered) {
+                 alert('Please fill in all personal information and answer all questions before submitting.');
+                 return; // Stop the function if validation fails
+             }
+
+
+            // Store quiz data temporarily
+            quizData = {
+                name: data.name,
+                id_number: data.id_number,
+                section: data.section,
+                email: data.email,
+                phone: data.phone,
+                answers: {},
+                questions: allQuestionsData // Use the predefined structure
+            };
+
+            // Populate answers dynamically
+            let reviewHTML = `
+                <p><strong>Name:</strong> ${data.name}</p>
+                <p><strong>ID Number:</strong> ${data.id_number}</p>
+                <p><strong>Section:</strong> ${data.section}</p>
+                <p><strong>Email:</strong> ${data.email}</p>
+                <p><strong>Phone Number:</strong> ${data.phone}</p>
+                <hr>
+                <h3>Your Answers:</h3>
+            `;
+
+            for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                const qKey = `q${i}`;
+                const userAnswer = data[qKey];
+                quizData.answers[qKey] = userAnswer; // Store answer
+                const questionInfo = allQuestionsData[qKey];
+                const answerText = questionInfo.choices[userAnswer] || 'Not Answered';
+                reviewHTML += `<p><strong>Question ${i}:</strong> ${questionInfo.text}<br>Your answer: ${userAnswer}) ${answerText}</p>`;
+            }
+
+            // Display review content
+            const reviewContent = document.getElementById('review-content');
+            reviewContent.innerHTML = reviewHTML;
+
+            // Show review section
+            document.getElementById('quiz-form').classList.add('hidden');
+            document.getElementById('review-section').classList.remove('hidden');
+        }
+
+        function editForm() {
+            document.getElementById('review-section').classList.add('hidden');
+            document.getElementById('quiz-form').classList.remove('hidden');
+        }
+
+        function downloadResponse() {
+            if (!quizData) return;
+
+            const doc = new jsPDF();
+            let y = 10;
+            const pageHeight = doc.internal.pageSize.height;
+            const pageWidth = doc.internal.pageSize.width;
+            const margin = 10;
+            const effectiveWidth = pageWidth - margin * 2;
+
+            doc.setFontSize(16);
+            doc.text('MCIE Quiz Response - Chapter 2', pageWidth / 2, y, { align: 'center' });
+            y += 10;
+
+            doc.setFontSize(12);
+            doc.text(`Name: ${quizData.name}`, margin, y); y += 7;
+            doc.text(`ID: ${quizData.id_number}`, margin, y); y += 7;
+            doc.text(`Section: ${quizData.section}`, margin, y); y += 7;
+            doc.text(`Email: ${quizData.email}`, margin, y); y += 7;
+            doc.text(`Phone: ${quizData.phone}`, margin, y); y += 10;
+
+            for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const question = quizData.questions[qKey];
+                 const userAnswer = quizData.answers[qKey];
+                 const answerText = question.choices[userAnswer] || 'Not Answered';
+                 const questionText = question.text;
+
+                 const questionLines = doc.splitTextToSize(`Question ${i}: ${questionText}`, effectiveWidth);
+                 const answerLines = doc.splitTextToSize(`Your answer: ${userAnswer}) ${answerText}`, effectiveWidth);
+                 const spaceNeeded = (questionLines.length * 5) + 2 + (answerLines.length * 5) + 5;
+
+                 if (y + spaceNeeded > pageHeight - margin) {
+                    doc.addPage();
+                    y = margin;
+                 }
+
+                doc.setFont('helvetica', 'bold');
+                doc.text(questionLines, margin, y);
+                y += (questionLines.length * 5) + 2;
+                doc.setFont('helvetica', 'normal');
+
+                if (y > pageHeight - margin) { doc.addPage(); y = margin; }
+
+                doc.text(answerLines, margin, y);
+                y += (answerLines.length * 5) + 5;
+            }
+            doc.save(`quiz_response_${quizData.id_number}_ch2.pdf`);
+        }
+
+        async function confirmSubmission() {
+            // *** CRITICAL: Ensure this function sends data to YOUR backend (/submit-quiz) ***
+            if (confirm('Are you sure you want to submit your answers?')) {
+                if (!quizData || !formData) {
+                     console.error("Quiz data or form data is missing.");
+                     alert("Error: Cannot submit. Please try filling the form again.");
+                     editForm();
+                     return;
+                }
+
+                const data = Object.fromEntries(formData);
+
+                let score = 0;
+                for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                    const qKey = `q${i}`;
+                    if (data[qKey] === correctAnswersMap[qKey]) {
+                        score++;
+                    }
+                }
+                quizData.score = score;
+
+                // Prepare data EXACTLY as the server.js /submit-quiz endpoint expects
+                const submissionData = {
+                    name: data.name,
+                    id_number: data.id_number,    // Ensure keys match server.js req.body destructuring
+                    section: data.section,
+                    email: data.email,
+                    phone: data.phone,
+                    score: score,
+                    totalQuestions: TOTAL_QUESTIONS
+                    // You can add 'submittedAt': new Date().toISOString() if needed, but server adds 'receivedAt'
+                };
+
+                try {
+                    // *** FETCH URL MUST POINT TO YOUR SERVER'S ENDPOINT ***
+                    const response = await fetch('/submit-quiz', { // <--- Corrected URL
+                        method: 'POST',
+                        body: JSON.stringify(submissionData),
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                         // Handle SUCCESS response from YOUR backend
+                        const result = await response.json(); // Expecting { success: true, ... } from server.js
+                        console.log("Backend submission successful:", result);
+
+                        // Display submission copy
+                        const submissionContent = document.getElementById('submission-content');
+                         let submissionHTML = `
+                            <p><strong>Name:</strong> ${quizData.name}</p>
+                            <p><strong>ID Number:</strong> ${quizData.id_number}</p>
+                            <p><strong>Section:</strong> ${quizData.section}</p>
+                            <p><strong>Email:</strong> ${quizData.email}</p>
+                            <p><strong>Phone Number:</strong> ${quizData.phone}</p>
+                            <hr>
+                            <h3>Submitted Answers (Chapter 2):</h3>
+                        `;
+                         for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                             const qKey = `q${i}`;
+                             const questionInfo = quizData.questions[qKey];
+                             const userAnswer = quizData.answers[qKey];
+                             const answerText = questionInfo.choices[userAnswer] || 'Not Answered';
+                             submissionHTML += `<p><strong>Question ${i}:</strong> ${questionInfo.text}<br>Your answer: ${userAnswer}) ${answerText}</p>`;
+                         }
+                        submissionContent.innerHTML = submissionHTML;
+
+                        document.getElementById('review-section').classList.add('hidden');
+                        document.getElementById('submission-copy').classList.remove('hidden');
+
+                    } else {
+                        // Handle ERROR response from YOUR backend
+                        let errorMsg = `Submission failed with status: ${response.status}`;
+                        try {
+                            const errorData = await response.json(); // Expecting { success: false, error: '...' } from server.js
+                            errorMsg = errorData.error || errorMsg;
+                        } catch(e) { /* Ignore if response isn't JSON */ }
+
+                        console.error('Backend submission error:', errorMsg);
+                        document.getElementById('error-message').innerHTML = `<p>Submission failed: ${errorMsg}. Please check server logs and try again.</p>`;
+                        document.getElementById('error-message').classList.remove('hidden');
+                        document.getElementById('review-section').classList.add('hidden');
+                    }
+                } catch (error) {
+                    // Handle NETWORK errors (fetch couldn't reach server)
+                    console.error('Network/Fetch error:', error);
+                    document.getElementById('error-message').innerHTML = `<p>An network error occurred during submission. Is the server running? Please check your connection and try again.</p>`;
+                    document.getElementById('error-message').classList.remove('hidden');
+                    document.getElementById('review-section').classList.add('hidden');
+                } finally {
+                     // Optional: Hide loading indicator
+                }
+            }
+        }
+
+
+        function proceedToPassword() {
+            document.getElementById('submission-copy').classList.add('hidden');
+            document.getElementById('password-section').classList.remove('hidden');
+        }
+
+        function checkPassword() {
+            const passwordInput = document.getElementById('password').value;
+            const correctPassword = 'password'; // Keep the simple password
+            const errorMessage = document.getElementById('password-error');
+            const passwordSection = document.getElementById('password-section');
+            const results = document.getElementById('results');
+
+            if (passwordInput === correctPassword) {
+                errorMessage.classList.add('hidden');
+                passwordSection.classList.add('hidden');
+                results.classList.remove('hidden');
+                displayResults();
+            } else {
+                errorMessage.classList.remove('hidden');
+            }
+        }
+
+        function displayResults() {
+            if (!quizData) {
+                document.getElementById('results').innerHTML = '<p>Error: No quiz data found. Please complete the quiz first.</p>';
+                return;
+            }
+
+             const displayCorrectAnswers = {};
+             for(let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const correctLetter = correctAnswersMap[qKey];
+                 const correctText = allQuestionsData[qKey].choices[correctLetter];
+                 displayCorrectAnswers[qKey] = `${correctLetter}) ${correctText}`;
+             }
+
+            document.getElementById('student-info').innerHTML = `<strong>Name:</strong> ${quizData.name}<br><strong>ID:</strong> ${quizData.id_number}<br><strong>Section:</strong> ${quizData.section}<br><strong>Email:</strong> ${quizData.email}<br><strong>Phone:</strong> ${quizData.phone}`;
+
+            const answersDiv = document.getElementById('answers');
+            let answersHTML = '<h3>Detailed Results (Chapter 2):</h3>';
+
+            for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const question = quizData.questions[qKey];
+                 const userAnswer = quizData.answers[qKey];
+                 const userAnswerText = question.choices[userAnswer] || 'Not Answered';
+                 const isCorrect = userAnswer === correctAnswersMap[qKey];
+
+                 answersHTML += `
+                    <div class="question-result">
+                        <p><strong>Question ${i}:</strong> ${question.text}</p>
+                        <div class="choices" style="font-size:0.9em; margin-left: 15px;">
+                            <p>A) ${question.choices.A}</p>
+                            <p>B) ${question.choices.B}</p>
+                            <p>C) ${question.choices.C}</p>
+                            <p>D) ${question.choices.D}</p>
+                        </div>
+                        <p>Your answer: ${userAnswer}) ${userAnswerText} ${isCorrect ? '<span style="color:green; font-weight:bold;">(Correct)</span>' : '<span style="color:red; font-weight:bold;">(Incorrect)</span>'}</p>
+                        ${!isCorrect ? `<p style="color:blue;">Correct answer: ${displayCorrectAnswers[qKey]}</p>` : ''}
+                    </div>
+                `;
+            }
+            answersDiv.innerHTML = answersHTML;
+
+            document.getElementById('score').textContent = `Final Score: ${quizData.score} / ${TOTAL_QUESTIONS}`;
+        }
+
+        function downloadPDF() {
+            if (!quizData) return;
+
+            const doc = new jsPDF();
+            let y = 10;
+            const pageHeight = doc.internal.pageSize.height;
+            const pageWidth = doc.internal.pageSize.width;
+            const margin = 10;
+            const effectiveWidth = pageWidth - margin * 2;
+
+             const displayCorrectAnswers = {};
+             for(let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const correctLetter = correctAnswersMap[qKey];
+                 const correctText = allQuestionsData[qKey].choices[correctLetter];
+                 displayCorrectAnswers[qKey] = `${correctLetter}) ${correctText}`;
+             }
+
+            doc.setFontSize(16);
+            doc.text('MCIE Quiz Results - Chapter 2', pageWidth / 2, y, { align: 'center' });
+            y += 10;
+
+            doc.setFontSize(12);
+            doc.text(`Name: ${quizData.name}`, margin, y); y += 7;
+            doc.text(`ID: ${quizData.id_number}`, margin, y); y += 7;
+            doc.text(`Section: ${quizData.section}`, margin, y); y += 7;
+            doc.text(`Email: ${quizData.email}`, margin, y); y += 7;
+            doc.text(`Phone: ${quizData.phone}`, margin, y); y += 10;
+
+            doc.setFont('helvetica', 'bold');
+            doc.text(`Final Score: ${quizData.score} / ${TOTAL_QUESTIONS}`, pageWidth / 2, y, { align: 'center' });
+            y += 10;
+            doc.setFont('helvetica', 'normal');
+
+            for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+                 const qKey = `q${i}`;
+                 const question = quizData.questions[qKey];
+                 const userAnswer = quizData.answers[qKey];
+                 const userAnswerText = question.choices[userAnswer] || 'Not Answered';
+                 const isCorrect = userAnswer === correctAnswersMap[qKey];
+                 const questionText = question.text;
+                 const correctAnswerFull = displayCorrectAnswers[qKey];
+
+                 const qLines = doc.splitTextToSize(`Question ${i}: ${questionText}`, effectiveWidth);
+                 const choicesLines = 4 * 5; // Estimate
+                 const yourAnsLines = doc.splitTextToSize(`Your answer: ${userAnswer}) ${userAnswerText} ${isCorrect ? '(Correct)' : '(Incorrect)'}`, effectiveWidth);
+                 const correctAnsLines = isCorrect ? 0 : doc.splitTextToSize(`Correct answer: ${correctAnswerFull}`, effectiveWidth).length * 5;
+                 const spaceNeeded = (qLines.length * 5) + 2 + choicesLines + 7 + (yourAnsLines.length * 5) + 7 + correctAnsLines + 5;
+
+                 if (y + spaceNeeded > pageHeight - margin) {
+                    doc.addPage();
+                    y = margin;
+                }
+
+                doc.setFont('helvetica', 'bold');
+                doc.text(qLines, margin, y);
+                y += (qLines.length * 5) + 2;
+                doc.setFont('helvetica', 'normal');
+
+                if (y > pageHeight - margin * 3) { doc.addPage(); y = margin; }
+
+                doc.setFontSize(10);
+                doc.text(`  A) ${question.choices.A}`, margin + 5, y); y += 5;
+                doc.text(`  B) ${question.choices.B}`, margin + 5, y); y += 5;
+                doc.text(`  C) ${question.choices.C}`, margin + 5, y); y += 5;
+                doc.text(`  D) ${question.choices.D}`, margin + 5, y); y += 7;
+                doc.setFontSize(12);
+
+                if (y > pageHeight - margin * 2) { doc.addPage(); y = margin; }
+
+                doc.text(`Your answer: ${userAnswer}) ${userAnswerText} ${isCorrect ? '(Correct)' : '(Incorrect)'}`, margin, y); y += 7;
+
+                if (!isCorrect) {
+                    doc.setTextColor(0, 0, 255);
+                    doc.text(`Correct answer: ${correctAnswerFull}`, margin, y); y += 7;
+                    doc.setTextColor(0, 0, 0);
+                }
+                y += 5;
+            }
+
+            if (y > pageHeight - margin) { doc.addPage(); y = margin; }
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(14);
+            doc.text(`Final Score: ${quizData.score} / ${TOTAL_QUESTIONS}`, pageWidth / 2, y, { align: 'center' });
+
+            doc.save(`quiz_results_${quizData.id_number}_ch2.pdf`);
+        }
+
+    </script>
+</body>
+</html>

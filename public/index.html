@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCIE Quiz Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto; /* Center content and add top/bottom margin */
+            padding: 20px;
+            text-align: center; /* Center text elements */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        label {
+            display: block; /* Label on its own line */
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        select {
+            width: 80%; /* Adjust width as needed */
+            padding: 10px;
+            margin-bottom: 20px; /* Space below dropdown */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box; /* Include padding/border in width */
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.1em;
+            transition: background-color 0.2s ease; /* Smooth hover effect */
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Moral and Citizenship Education Quiz Portal</h1>
+
+    <p>Please select the chapter quiz you wish to take:</p>
+
+    <div>
+        <label for="chapter-select">Select Chapter:</label>
+        <select id="chapter-select" name="chapter">
+            <option value="" disabled selected>-- Select a Chapter --</option>
+            <!-- *** ADDED Chapter 1 Option *** -->
+            <option value="chap1.html">Chapter 1 Quiz</option>
+            <!-- Existing options -->
+            <option value="chap2.html">Chapter 2 Quiz</option>
+            <option value="chap3.html">Chapter 3 Quiz</option>
+            <option value="chap4.html">Chapter 4 Quiz</option>
+            <option value="chap5.html">Chapter 5 Quiz</option>
+            <!-- Add more chapters here if needed -->
+        </select>
+    </div>
+
+    <button onclick="goToQuiz()">Go to Quiz</button>
+
+    <script>
+        function goToQuiz() {
+            // Get the select element
+            const selectElement = document.getElementById('chapter-select');
+            // Get the selected value (which is the filename)
+            const selectedChapter = selectElement.value;
+
+            // Check if a valid chapter was selected (not the default placeholder)
+            if (selectedChapter) {
+                // Redirect the browser to the selected HTML file
+                window.location.href = selectedChapter;
+            } else {
+                // Optional: Alert the user if they haven't selected anything
+                alert('Please select a chapter from the dropdown menu.');
+            }
+        }
+    </script>
+
+</body>
+</html>
