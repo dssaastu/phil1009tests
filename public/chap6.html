@@ -457,13 +457,20 @@
         <button id="download-pdf" onclick="downloadPDF()">Download Results PDF</button>
     </div>
 
-    <script>
+        <script>
         let quizData = null;
         let formData = null;
         const { jsPDF } = window.jspdf;
         const TOTAL_QUESTIONS = 50; // Total number of questions
 
-        // Valid login credentials
+        // *** ADD/UPDATE THIS LINE - SET CHAPTER TO 6 ***
+        // Define the chapter number for THIS specific quiz file (Chapter 6)
+        const CURRENT_QUIZ_CHAPTER = 6;
+
+        // *** ADD/UPDATE THIS LINE - DEFINE COURSE CODE ***
+        const COURSE_CODE = 'PHIL1009'; // Course code updated to PHIL1009 (or change if needed)
+
+        // Valid login credentials (Remains the same)
         const validCredentials = [
             { username: 'section19', password: '123' },
             { username: 'section20', password: '123' },
@@ -472,7 +479,7 @@
             // Add more valid credentials as needed
         ];
 
-        // Structure holding question texts and choices (NEW SET: CATEGORICAL PROPOSITIONS Ch6)
+        // Structure holding question texts and choices (UPDATED FOR CATEGORICAL PROPOSITIONS Ch6)
         const allQuestionsData = {
              q1: { text: 'A categorical proposition is defined as a proposition that relates:', choices: { A: 'Two individual facts.', B: 'Two classes or categories.', C: 'A premise and a conclusion.', D: 'An argument and its form.' } },
              q2: { text: 'In a categorical proposition, the terms that denote the classes being related are the:', choices: { A: 'Quantifier and Copula.', B: 'Subject term and Predicate term.', C: 'Quality and Quantity.', D: 'Major term and Minor term.' } },
@@ -526,8 +533,7 @@
              q50: { text: 'Applying contraposition to E or I propositions commits the fallacy of:', choices: { A: 'Illicit conversion.', B: 'Illicit obversion.', C: 'Illicit contraposition.', D: 'Existential fallacy.' } }
         };
 
-
-        // Correct answers mapped to letters (NEW SET: CATEGORICAL PROPOSITIONS Ch6)
+        // Correct answers mapped to letters (UPDATED FOR CATEGORICAL PROPOSITIONS Ch6)
         const correctAnswersMap = {
              q1: 'B', q2: 'B', q3: 'D', q4: 'C', q5: 'D',
              q6: 'B', q7: 'A', q8: 'B', q9: 'C', q10: 'D',
@@ -588,8 +594,14 @@
                 email: data.email,
                 phone: data.phone,
                 answers: {},
-                questions: allQuestionsData // Use the predefined structure
+                questions: allQuestionsData, // Use the predefined structure
+                chapter: CURRENT_QUIZ_CHAPTER, // Added chapter to quizData
+                courseCode: COURSE_CODE // Added course code to quizData
             };
+
+            // Construct the formatted chapter string for display
+             const formattedCourseChapter = `${quizData.courseCode} Chapter ${quizData.chapter}`;
+
 
             // Populate answers dynamically
             let reviewHTML = `
@@ -598,6 +610,8 @@
                 <p><strong>Section:</strong> ${data.section}</p>
                 <p><strong>Email:</strong> ${data.email}</p>
                 <p><strong>Phone Number:</strong> ${data.phone}</p>
+                 <p><strong>Chapter:</strong> ${quizData.chapter}</p>
+                 <p><strong>Course & Chapter:</strong> ${formattedCourseChapter}</p> <!-- Added formatted chapter to review display -->
                 <hr>
                 <h3>Your Answers:</h3>
             `;
@@ -635,9 +649,12 @@
             const margin = 10;
             const effectiveWidth = pageWidth - margin * 2;
 
+             const formattedCourseChapter = `${quizData.courseCode} Chapter ${quizData.chapter}`;
+
 
             doc.setFontSize(16);
-            doc.text('Categorical Propositions Quiz Response', pageWidth / 2, y, { align: 'center' }); // Updated Title
+            // Updated Title for PDF
+            doc.text(`Categorical Propositions Quiz Response`, pageWidth / 2, y, { align: 'center' }); // Reflects new quiz topic
             y += 10;
 
             doc.setFontSize(12);
@@ -645,7 +662,10 @@
             doc.text(`ID: ${quizData.id_number}`, margin, y); y += 7;
             doc.text(`Section: ${quizData.section}`, margin, y); y += 7;
             doc.text(`Email: ${quizData.email}`, margin, y); y += 7;
-            doc.text(`Phone: ${quizData.phone}`, margin, y); y += 10;
+            doc.text(`Phone: ${quizData.phone}`, margin, y); y += 7;
+            doc.text(`Chapter: ${quizData.chapter}`, margin, y); y += 7;
+            doc.text(`Course & Chapter: ${formattedCourseChapter}`, margin, y); y += 10; // Added formatted chapter to PDF
+
 
             for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
                  const qKey = `q${i}`;
@@ -666,20 +686,21 @@
 
                 doc.setFont('helvetica', 'bold');
                 doc.text(questionLines, margin, y);
-                y += (questionLines.length * 5) + 2; // Adjust spacing based on lines
+                y += (questionLines.length * 5) + 2;
                 doc.setFont('helvetica', 'normal');
 
-                if (y > pageHeight - margin) { doc.addPage(); y = margin; } // Re-check just for answer part
+                if (y > pageHeight - margin) { doc.addPage(); y = margin; }
 
                 doc.text(answerLines, margin, y);
-                y += (answerLines.length * 5) + 5; // Add space after the answer
+                y += (answerLines.length * 5) + 5;
 
             }
 
-            doc.save(`cat_prop_quiz_response_${quizData.id_number}.pdf`); // Updated filename
+            // Updated filename using formatted chapter string
+            doc.save(`${formattedCourseChapter.replace(/ /g, '_')}_response_${quizData.id_number}.pdf`);
         }
 
-        // --- MODIFIED: Sends data to your backend ---
+        // --- MODIFIED: confirmSubmission Function ---
         async function confirmSubmission() {
             if (confirm('Are you sure you want to submit your answers?')) {
                 if (!quizData || !formData) {
@@ -700,8 +721,12 @@
                     }
                 }
 
-                // Update quizData with score
+                // Update quizData with score (Optional but good practice)
                 quizData.score = score;
+
+                // *** CONSTRUCT THE FORMATTED CHAPTER STRING ***
+                const formattedCourseChapter = `${COURSE_CODE} Chapter ${CURRENT_QUIZ_CHAPTER}`;
+
 
                 // Prepare data for YOUR backend
                 const submissionData = {
@@ -712,16 +737,21 @@
                     phone: data.phone,
                     score: score,
                     totalQuestions: TOTAL_QUESTIONS,
-                    quizTitle: "Categorical Propositions Quiz - Chapter 6", // Added title
-                    submittedAt: new Date().toISOString()
-                    // Add individual answers if needed by backend
-                    // answers: quizData.answers
+                    quizChapter: CURRENT_QUIZ_CHAPTER, // Keep the integer (6)
+                    // *** ADDED SPECIFIC QUIZ TITLE ***
+                    quizTitle: `Categorical Propositions Quiz - Chapter ${CURRENT_QUIZ_CHAPTER}`,
+                    // submittedAt: new Date().toISOString(), // Add if needed by backend
+                    // answers: quizData.answers // Add if needed by backend
+
+                    // *** ADD THE NEW FIELD WITH THE FORMATTED STRING ***
+                    course_chapter_formatted: formattedCourseChapter,
                 };
+
+                console.log("Submitting quiz data:", submissionData);
 
                 try {
                     // Show "Submitting..." message or spinner here if desired
 
-                    // --- MODIFIED FETCH CALL ---
                     const response = await fetch('/submit-quiz', { // Point to your backend endpoint
                         method: 'POST',
                         body: JSON.stringify(submissionData), // Send the data as JSON
@@ -730,14 +760,13 @@
                             'Content-Type': 'application/json' // Important Header!
                         }
                     });
-                    // --- END MODIFIED FETCH CALL ---
 
                     if (response.ok) {
-                        // --- SUCCESS HANDLING (From YOUR backend) ---
-                        const result = await response.json(); // Assuming your backend sends JSON back
-                        console.log("Submission successful:", result);
+                        const result = await response.json();
+                        console.log('Submission successful:', result);
+                        alert("Quiz submitted successfully!"); // Provide feedback to user
 
-                        // Show submission copy (Same as before)
+                        // Show submission copy
                         const submissionContent = document.getElementById('submission-content');
                          let submissionHTML = `
                             <p><strong>Name:</strong> ${quizData.name}</p>
@@ -745,6 +774,8 @@
                             <p><strong>Section:</strong> ${quizData.section}</p>
                             <p><strong>Email:</strong> ${quizData.email}</p>
                             <p><strong>Phone Number:</strong> ${quizData.phone}</p>
+                            <p><strong>Chapter:</strong> ${quizData.chapter}</p>
+                             <p><strong>Course & Chapter:</strong> ${formattedCourseChapter}</p> <!-- Added formatted chapter to submission copy -->
                             <hr>
                             <h3>Submitted Answers:</h3>
                         `;
@@ -759,10 +790,9 @@
 
                         document.getElementById('review-section').classList.add('hidden');
                         document.getElementById('submission-copy').classList.remove('hidden');
-                        // --- END SUCCESS HANDLING ---
+
 
                     } else {
-                        // --- ERROR HANDLING (From YOUR backend) ---
                         let errorMsg = `Submission failed with status: ${response.status}`;
                         try {
                             const errorData = await response.json();
@@ -773,19 +803,12 @@
                         document.getElementById('error-message').innerHTML = `<p>Submission failed: ${errorMsg}. Please try again.</p>`;
                         document.getElementById('error-message').classList.remove('hidden');
                         document.getElementById('review-section').classList.add('hidden');
-                        // editForm(); // Optionally go back to edit
-                        // --- END ERROR HANDLING ---
                     }
                 } catch (error) {
-                     // --- NETWORK/OTHER ERROR HANDLING ---
                     console.error('Network/Fetch error:', error);
                     document.getElementById('error-message').innerHTML = `<p>An network error occurred during submission. Please check your connection and try again.</p>`;
                     document.getElementById('error-message').classList.remove('hidden');
                     document.getElementById('review-section').classList.add('hidden');
-                    // editForm(); // Optionally go back to edit
-                    // --- END NETWORK ERROR HANDLING ---
-                } finally {
-                     // Hide "Submitting..." message or spinner here
                 }
             }
         }
@@ -828,8 +851,11 @@
                  displayCorrectAnswers[qKey] = `${correctLetter}) ${correctText}`; // Changed format slightly
              }
 
+            const formattedCourseChapter = `${quizData.courseCode} Chapter ${quizData.chapter}`;
 
-            document.getElementById('student-info').innerHTML = `<strong>Name:</strong> ${quizData.name}<br><strong>ID:</strong> ${quizData.id_number}<br><strong>Section:</strong> ${quizData.section}<br><strong>Email:</strong> ${quizData.email}<br><strong>Phone:</strong> ${quizData.phone}`;
+            // Added formatted chapter to results display
+            document.getElementById('student-info').innerHTML = `<strong>Name:</strong> ${quizData.name}<br><strong>ID:</strong> ${quizData.id_number}<br><strong>Section:</strong> ${quizData.section}<br><strong>Email:</strong> ${quizData.email}<br><strong>Phone:</strong> ${quizData.phone}<br><strong>Chapter:</strong> ${quizData.chapter}<br><strong>Course & Chapter:</strong> ${formattedCourseChapter}`;
+
 
             const answersDiv = document.getElementById('answers');
             let answersHTML = '<h3>Detailed Results:</h3>';
@@ -861,6 +887,7 @@
             document.getElementById('score').textContent = `Final Score: ${quizData.score} / ${TOTAL_QUESTIONS}`;
         }
 
+        // --- Completed downloadPDF Function ---
         function downloadPDF() {
             if (!quizData) return;
 
@@ -880,8 +907,11 @@
                  displayCorrectAnswers[qKey] = `${correctLetter}) ${correctText}`;
              }
 
+            const formattedCourseChapter = `${quizData.courseCode} Chapter ${quizData.chapter}`;
+
             doc.setFontSize(16);
-            doc.text('Categorical Propositions Quiz Results', pageWidth / 2, y, { align: 'center' }); // Updated Title
+            // Updated Title for PDF
+            doc.text(`Categorical Propositions Quiz Results`, pageWidth / 2, y, { align: 'center' }); // Reflects new topic
             y += 10;
 
             doc.setFontSize(12);
@@ -889,7 +919,10 @@
             doc.text(`ID: ${quizData.id_number}`, margin, y); y += 7;
             doc.text(`Section: ${quizData.section}`, margin, y); y += 7;
             doc.text(`Email: ${quizData.email}`, margin, y); y += 7;
-            doc.text(`Phone: ${quizData.phone}`, margin, y); y += 10;
+            doc.text(`Phone: ${quizData.phone}`, margin, y); y += 7;
+             // Added formatted chapter to PDF
+            doc.text(`Course & Chapter: ${formattedCourseChapter}`, margin, y); y += 10;
+
 
             doc.setFont('helvetica', 'bold');
             doc.text(`Final Score: ${quizData.score} / ${TOTAL_QUESTIONS}`, pageWidth / 2, y, { align: 'center' });
@@ -908,50 +941,59 @@
 
                  // Estimate space needed
                  const qLines = doc.splitTextToSize(`Question ${i}: ${questionText}`, effectiveWidth);
-                 const choicesLines = 4 * 5; // Estimate for 4 choices
+                 const choicesLinesHeight = 4 * 5; // Estimate height for 4 choices
                  const yourAnsLines = doc.splitTextToSize(`Your answer: ${userAnswer}) ${userAnswerText} ${isCorrect ? '(Correct)' : '(Incorrect)'}`, effectiveWidth);
-                 const correctAnsLines = isCorrect ? 0 : doc.splitTextToSize(`Correct answer: ${correctAnswerFull}`, effectiveWidth).length * 5;
-                 const spaceNeeded = (qLines.length * 5) + 2 + choicesLines + 7 + (yourAnsLines.length * 5) + 7 + correctAnsLines + 5;
+                 const correctAnsLinesHeight = isCorrect ? 0 : doc.splitTextToSize(`Correct answer: ${correctAnswerFull}`, effectiveWidth).length * 5; // Height needed for correct answer if wrong
+                 const spaceNeeded = (qLines.length * 5) + 2 + choicesLinesHeight + 7 + (yourAnsLines.length * 5) + 7 + correctAnsLinesHeight + 5;
 
-                 if (y + spaceNeeded > pageHeight - margin) { // Check if content fits
+
+                 if (y + spaceNeeded > pageHeight - margin) {
                     doc.addPage();
                     y = margin;
                 }
 
                 doc.setFont('helvetica', 'bold');
                 doc.text(qLines, margin, y);
-                y += (qLines.length * 5) + 2; // Adjust spacing
+                y += (qLines.length * 5) + 2;
                 doc.setFont('helvetica', 'normal');
 
-                if (y > pageHeight - margin * 3) { doc.addPage(); y = margin; } // Check space for choices/answers
+                 const remainingSpaceAfterQuestion = pageHeight - margin - y;
+                 const answersSectionSpace = choicesLinesHeight + 7 + (yourAnsLines.length * 5) + 7 + correctAnsLinesHeight + 5;
 
-                doc.setFontSize(10); // Slightly smaller for choices if needed
+                 // Prevent choices/answers from being split awkwardly if possible
+                 if (answersSectionSpace > remainingSpaceAfterQuestion) {
+                     doc.addPage();
+                     y = margin;
+                 }
+
+
+                doc.setFontSize(10);
                 doc.text(`  A) ${question.choices.A}`, margin + 5, y); y += 5;
                 doc.text(`  B) ${question.choices.B}`, margin + 5, y); y += 5;
                 doc.text(`  C) ${question.choices.C}`, margin + 5, y); y += 5;
                 doc.text(`  D) ${question.choices.D}`, margin + 5, y); y += 7;
-                doc.setFontSize(12); // Reset font size
+                doc.setFontSize(12);
 
-                if (y > pageHeight - margin * 2) { doc.addPage(); y = margin; } // Check space for answers
 
                 doc.text(`Your answer: ${userAnswer}) ${userAnswerText} ${isCorrect ? '(Correct)' : '(Incorrect)'}`, margin, y); y += 7;
 
                 if (!isCorrect) {
-                    doc.setTextColor(0, 0, 255); // Blue for correct answer when user was wrong
+                    doc.setTextColor(0, 0, 255);
                     doc.text(`Correct answer: ${correctAnswerFull}`, margin, y); y += 7;
-                    doc.setTextColor(0, 0, 0); // Reset color
+                    doc.setTextColor(0, 0, 0);
                 }
-                y += 5; // Add space between questions
+                y += 5; // Space before next question
 
             }
 
-            // Add score again at the end if needed, especially if it spans pages
+            // Add score again at the end if needed
             if (y > pageHeight - margin) { doc.addPage(); y = margin; }
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(14);
             doc.text(`Final Score: ${quizData.score} / ${TOTAL_QUESTIONS}`, pageWidth / 2, y, { align: 'center' });
 
-            doc.save(`cat_prop_quiz_results_${quizData.id_number}.pdf`); // Updated filename
+            // Updated filename to include formatted chapter
+            doc.save(`${formattedCourseChapter.replace(/ /g, '_')}_results_${quizData.id_number}.pdf`);
         }
     </script>
 </body>
